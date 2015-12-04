@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:orientation="horizontal">
+        <ImageView android:id="@+id/dress_img"
+            android:layout_width="match_parent"
+            android:layout_height="300dip"
+            android:src="@drawable/dress"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <Button android:id="@+id/study_btn"
+                android:layout_width="match_parent"
+                android:layout_height="120dip"
+                android:layout_weight="1"
+                android:background="@drawable/study"/>
+            <Button android:id="@+id/sleep_btn"
+                android:layout_width="match_parent"
+                android:layout_height="120dip"
+                android:layout_weight="1"
+                android:background="@drawable/sleep"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <Button android:id="@+id/sports_btn"
+                android:layout_width="match_parent"
+                android:layout_height="120dip"
+                android:layout_weight="1"
+                android:background="@drawable/sports"/>
+            <Button android:id="@+id/date_btn"
+                android:layout_width="match_parent"
+                android:layout_height="120dip"
+                android:layout_weight="1"
+                android:background="@drawable/calender"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
