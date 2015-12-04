@@ -10,15 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_margin="20dp"
         android:orientation="vertical">
-
-        <TextView android:id="@+id/score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@drawable/circle_1"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,12 +27,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_gravity="bottom"
                 android:src="@drawable/score_text"/>
             <TextView android:id="@+id/yesterday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/circle_2"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="top"
+                android:src="@drawable/sleep_text"/>
+            <TextView android:id="@+id/score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/circle_1"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="top"
+                android:src="@drawable/former_text"/>
         </LinearLayout>
     </LinearLayout>
 

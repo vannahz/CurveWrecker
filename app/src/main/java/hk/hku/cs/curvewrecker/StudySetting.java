@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Created by vannahz on 2015/12/3.
  */
 public class StudySetting extends AppCompatActivity {
 
+    private TextView toolbar_title;
     private Toolbar toolbar;
     private Button start_btn;
     @Override
@@ -21,9 +23,10 @@ public class StudySetting extends AppCompatActivity {
         setContentView(R.layout.study_setting);
 
         //设置Toolbar
+        toolbar_title = (TextView)findViewById(R.id.toolbar_title);
+        toolbar_title.setText("Time Setting");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Time Setting");
-        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
