@@ -11,16 +11,20 @@ public class MyUser {
     private int gender;
     private String imgPath;
     private int title;
-    private MyTime sleepTime;
-    private MyTime studyTime;
     private int targetFinished;
     private int targetNotFinished;
-    private List<MyTarget> myTargetList;
-    private List<MyStar> myStarList;
+    private MyTime sleepTime;
+    private MyTime studyTime;
     private MyRank myRank;
     private MyDress myDress;
-    private List<MyPlan> myPlanList;
     private MyMission crtMission;
+    private MyAttributes myAttributes;
+    private List<MyPlan> myPlanList;
+    private List<MyTarget> myTargetList;
+    private List<MyStar> myStarList;
+    private List<MyFriend> myFriendsList;
+
+
 
 
     public MyUser(){
@@ -36,6 +40,7 @@ public class MyUser {
         myRank = new MyRank();
         myDress = new MyDress();
         crtMission = new MyMission();
+        myAttributes = new MyAttributes();
     }
 
     public int getUid(){
@@ -140,5 +145,29 @@ public class MyUser {
 
     public void setCrtMission(MyMission crtMission) {
         this.crtMission = crtMission;
+    }
+
+    public MyAttributes getMyAttributes() {
+        return myAttributes;
+    }
+
+    public void setMyAttributes(MyAttributes myAttributes) {
+        this.myAttributes = myAttributes;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 }
