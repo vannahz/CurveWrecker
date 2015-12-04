@@ -12,9 +12,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     //声明相关变量
+    private TextView toolbar_title;
     private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -30,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         findViews();
 
         //设置Toolbar
-        toolbar.setTitle("Toolbar");
-        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        toolbar_title.setText("Attack On Curve Wrecker");
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void findViews() {
 
+        toolbar_title = (TextView)findViewById(R.id.toolbar_title);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.main);
         menulist = (ListView) findViewById(R.id.left_menu);
