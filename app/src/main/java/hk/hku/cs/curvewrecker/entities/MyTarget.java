@@ -7,11 +7,11 @@ import java.util.Date;
  */
 public class MyTarget {
 
-    private int type;
+    private int type;               // 0 for sleep, 1 for study
     private MyTime targetTime;
     private MyTime actualTime;
     private MyTime date;
-    private int status;  // to indicate if the target is done, 1 means done
+    private int status;             // to indicate if the target is done, 1 means done
 
     public MyTarget(){
         this.type = 0;
@@ -22,9 +22,19 @@ public class MyTarget {
 
     }
 
-    public MyTarget( int type, MyTime date,MyTime targetTime) {
+    public MyTarget(int type){
         this.type = type;
-        this.date = date;
+        this.date = new MyTime();
+        this.date.getCurrentTime();
+        this.targetTime = new MyTime();
+        this.actualTime = new MyTime();
+        this.status = 0;
+    }
+
+    public MyTarget( int type, MyTime targetTime) {
+        this.type = type;
+        this.date = new MyTime();
+        this.date.getCurrentTime();
         this.targetTime = targetTime;
         this.actualTime = new MyTime();
         this.status = 0;

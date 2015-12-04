@@ -27,6 +27,24 @@ public class MyTime{
         year = 0;
     }
 
+    public MyTime(int minute, int hour){
+        this.minute = minute;
+        this.hour = hour;
+        this.second = 0;
+        this.day = 0;
+        this.month = 0;
+        this.year = 0;
+    }
+
+    public MyTime(int day, int month, int year){
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        second = 0;
+        minute = 0;
+        hour = 0;
+    }
+
     public MyTime(int second, int minute, int hour, int day, int month, int year) {
         this.second = second;
         this.minute = minute;
@@ -35,7 +53,6 @@ public class MyTime{
         this.month = month;
         this.year = year;
     }
-
 
 
     public void getCurrentTime(){

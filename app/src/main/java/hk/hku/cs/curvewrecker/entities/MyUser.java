@@ -1,5 +1,6 @@
 package hk.hku.cs.curvewrecker.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,12 +20,13 @@ public class MyUser {
     private MyDress myDress;
     private MyMission crtMission;
     private MyAttributes myAttributes;
-    private List<MyPlan> myPlanList;
-    private List<MyTarget> myTargetList;
-    private List<MyStar> myStarList;
-    private List<MyFriend> myFriendsList;
-
-
+    private ArrayList<MyPlan> myPlanList;                   //used by calender
+    private ArrayList<MyTarget> myTargetList;               //used by setting daily object
+    private ArrayList<MyStar> myStarList;                   //used by counting total star
+    private ArrayList<MyFriend> myFriendsList;
+    private MyTarget sleepTarget;                           //to determine today sleepTarget statues, after today, it will be add to the targetlist
+    private MyTarget studyTarget;                           //similar as the above
+                                                            //Thus, to calculate the total time should be the total target time in list plus today's target
 
 
     public MyUser(){
@@ -41,6 +43,35 @@ public class MyUser {
         myDress = new MyDress();
         crtMission = new MyMission();
         myAttributes = new MyAttributes();
+        myPlanList = new ArrayList<>();
+        myTargetList = new ArrayList<>();
+        myStarList = new ArrayList<>();
+        myFriendsList = new ArrayList<>();
+        sleepTarget = new MyTarget(0);
+        studyTarget = new MyTarget(1);
+
+    }
+
+    public MyUser(String name, String imgPath,  int sleepMin,int sleepHour) {
+        uid = 0;
+        this.name = name;
+        gender = 0;
+        this.imgPath = imgPath;
+        title = 0;
+        sleepTime = new MyTime(sleepMin,sleepHour);
+        studyTime = new MyTime(0,1);
+        targetFinished = 0;
+        targetNotFinished = 0;
+        myRank = new MyRank();
+        myDress = new MyDress();
+        crtMission = new MyMission();
+        myAttributes = new MyAttributes();
+        myPlanList = new ArrayList<>();
+        myTargetList = new ArrayList<>();
+        myStarList = new ArrayList<>();
+        myFriendsList = new ArrayList<>();
+        sleepTarget = new MyTarget(0, new MyTime(sleepMin,sleepHour));
+        studyTarget = new MyTarget(1,new MyTime(0,1));
     }
 
     public int getUid(){
@@ -99,45 +130,6 @@ public class MyUser {
         this.targetNotFinished = targetNotFinished;
     }
 
-    public List<MyTarget> getMyTargetList() {
-        return myTargetList;
-    }
-
-    public void setMyTargetList(List<MyTarget> myTargetList) {
-        this.myTargetList = myTargetList;
-    }
-
-    public List<MyStar> getMyStarList() {
-        return myStarList;
-    }
-
-    public void setMyStarList(List<MyStar> myStarList) {
-        this.myStarList = myStarList;
-    }
-
-    public MyRank getMyRank() {
-        return myRank;
-    }
-
-    public void setMyRank(MyRank myRank) {
-        this.myRank = myRank;
-    }
-
-    public MyDress getMyDress() {
-        return myDress;
-    }
-
-    public void setMyDress(MyDress myDress) {
-        this.myDress = myDress;
-    }
-
-    public List<MyPlan> getMyPlanList() {
-        return myPlanList;
-    }
-
-    public void setMyPlanList(List<MyPlan> myPlanList) {
-        this.myPlanList = myPlanList;
-    }
 
     public MyMission getCrtMission() {
         return crtMission;
@@ -169,5 +161,101 @@ public class MyUser {
 
     public void setImgPath(String imgPath) {
         this.imgPath = imgPath;
+    }
+
+    public MyRank getMyRank() {
+        return myRank;
+    }
+
+    public void setMyRank(MyRank myRank) {
+        this.myRank = myRank;
+    }
+
+    public MyDress getMyDress() {
+        return myDress;
+    }
+
+    public void setMyDress(MyDress myDress) {
+        this.myDress = myDress;
+    }
+
+    public ArrayList<MyPlan> getMyPlanList() {
+        return myPlanList;
+    }
+
+    public void setMyPlanList(ArrayList<MyPlan> myPlanList) {
+        this.myPlanList = myPlanList;
+    }
+
+    public void addMyPlan(MyPlan newPlan){
+        this.myPlanList.add(newPlan);
+    }
+
+    public void addMyPlan(MyPlan newPlan, int index){
+        this.myPlanList.add(index, newPlan);
+    }
+
+    public ArrayList<MyTarget> getMyTargetList() {
+        return myTargetList;
+    }
+
+    public void setMyTargetList(ArrayList<MyTarget> myTargetList) {
+        this.myTargetList = myTargetList;
+    }
+
+    public void addMyTarget(MyTarget newTarget){
+        this.myTargetList.add(newTarget);
+    }
+
+    public void addMyTarget(MyTarget newTarget, int index){
+        this.myTargetList.add(index,newTarget);
+    }
+
+    public ArrayList<MyStar> getMyStarList() {
+        return myStarList;
+    }
+
+    public void setMyStarList(ArrayList<MyStar> myStarList) {
+        this.myStarList = myStarList;
+    }
+
+    public void addMyStar(MyStar newStar){
+        this.myStarList.add(newStar);
+    }
+
+    public void addMyStar(MyStar newStar, int index){
+        this.myStarList.add(index,newStar);
+    }
+
+    public ArrayList<MyFriend> getMyFriendsList() {
+        return myFriendsList;
+    }
+
+    public void setMyFriendsList(ArrayList<MyFriend> myFriendsList) {
+        this.myFriendsList = myFriendsList;
+    }
+
+    public void addMyFriend(MyFriend newFriend){
+        this.myFriendsList.add(newFriend);
+    }
+
+    public void addMyFriend(MyFriend newFriend,int index){
+        this.myFriendsList.add(index, newFriend);
+    }
+
+    public MyTarget getSleepTarget() {
+        return sleepTarget;
+    }
+
+    public void setSleepTarget(MyTarget sleepTarget) {
+        this.sleepTarget = sleepTarget;
+    }
+
+    public MyTarget getStudyTarget() {
+        return studyTarget;
+    }
+
+    public void setStudyTarget(MyTarget studyTarget) {
+        this.studyTarget = studyTarget;
     }
 }
