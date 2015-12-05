@@ -12,7 +12,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     //声明相关变量
@@ -21,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView menulist;
-    private String[] lvs = {"List Item 01", "List Item 02", "List Item 03", "List Item 04"};
-    private ArrayAdapter arrayAdapter;
+    private String[] lvs = {"Daily Record", "Star Calender", "Friends", "Ranks", "Setting"};
     private Button study_btn;
 
     @Override
@@ -41,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
         study_btn.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Log.v("MyTag", "onClick");
                 Intent intent = new Intent(MainActivity.this, StudySetting.class);
                 startActivity(intent);
             }
@@ -65,8 +68,12 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         //设置菜单列表
-        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, lvs);
-        menulist.setAdapter(arrayAdapter);
+        SimpleAdapter adapter = new SimpleAdapter(this,
+                getData(),
+                R.layout.listitem,
+                new String[] { "img", "text"},
+                new int[] { R.id.list_image, R.id.list_text});
+        menulist.setAdapter(adapter);
     }
 
     private void findViews() {
@@ -75,7 +82,36 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.main);
         menulist = (ListView) findViewById(R.id.left_menu);
-
         study_btn = (Button)findViewById(R.id.study_btn);
+    }
+
+    private List<Map<String, Object>> getData() {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("img", R.drawable.icalender);
+        map.put("text", "Daily Record");
+        list.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("img", R.drawable.star);
+        map.put("text", "Star Calender");
+        list.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("img", R.drawable.friend);
+        map.put("text", "Friends");
+        list.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("img", R.drawable.rank);
+        map.put("text", "Ranks");
+        list.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("img", R.drawable.setting);
+        map.put("text", "Setting");
+        list.add(map);
+
+        return list;
     }
 }

@@ -6,16 +6,5 @@
     <!--主布局-->
     <include layout="@layout/main_content" />
     <!--侧滑菜单-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#fff"
-        android:layout_gravity="start">
-        <ListView
-            android:id="@+id/left_menu"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@null"
-            android:text="DrawerLayout" />
-    </LinearLayout>
+    <include layout="@layout/main_leftinfo" />
 </android.support.v4.widget.DrawerLayout>
