@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/../AttackOnCurveWrecker/app/src/main/java/hk/hku/jieying/attackoncurvewrecker/Friends.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/hk/hku/cs/curvewrecker/Friends.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/hk/hku/cs/curvewrecker/Ranking.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/hk/hku/cs/curvewrecker/Register.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/hk/hku/cs/curvewrecker/SignIn.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/backgournd_ranking.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bgcolor.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/img_avatar.jpg" charset="GBK" />
