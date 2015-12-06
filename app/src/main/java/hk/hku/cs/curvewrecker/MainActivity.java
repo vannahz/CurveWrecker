@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -74,6 +75,31 @@ public class MainActivity extends AppCompatActivity {
                 new String[] { "img", "text"},
                 new int[] { R.id.list_image, R.id.list_text});
         menulist.setAdapter(adapter);
+
+        menulist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent;
+                switch (position){
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        intent = new Intent(MainActivity.this,Friends.class);
+                        startActivity(intent);
+                        break;
+                    case 3:
+                        intent = new Intent(MainActivity.this,Ranking.class);
+                        startActivity(intent);
+                        break;
+                    case 4:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }
 
     private void findViews() {
