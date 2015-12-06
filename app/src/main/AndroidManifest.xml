@@ -24,11 +24,6 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".StudyContent"
-            android:label="@string/title_activity_studying"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
             android:name=".StudyResult"
             android:label="@string/title_activity_study_fail"
             android:theme="@style/AppTheme.NoActionBar"  >

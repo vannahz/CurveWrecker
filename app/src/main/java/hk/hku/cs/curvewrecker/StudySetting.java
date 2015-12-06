@@ -28,15 +28,33 @@ public class StudySetting extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //start button
         start_btn = (Button)findViewById(R.id.start_btn);
         start_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StudySetting.this, StudyContent.class);
+                goToStudying();
+            }
+        });
+    }
+
+    //go to time content
+    public void goToStudying() {
+
+        setContentView(R.layout.study_content);
+
+        toolbar_title = (TextView)findViewById(R.id.toolbar_title);
+        toolbar_title.setText("Studying");
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+
+        Button giveup_btn = (Button)findViewById(R.id.giveup_btn);
+        giveup_btn.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+
+                Intent intent = new Intent(StudySetting.this, StudyResult.class);
                 startActivity(intent);
                 finish();
             }
