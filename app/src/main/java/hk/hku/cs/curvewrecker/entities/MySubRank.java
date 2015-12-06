@@ -1,9 +1,11 @@
 package hk.hku.cs.curvewrecker.entities;
 
+import java.io.Serializable;
+
 /**
  * Created by LZ on 15/12/3.
  */
-public class MySubRank {
+public class MySubRank implements Serializable {
     private int uid;
     private String name;
     private int mark;
@@ -53,6 +55,11 @@ public class MySubRank {
 
     public void setRank(int rank) {
         this.rank = rank;
+    }
+
+    public MySubRank copy(){
+        MySubRank newSubRank = new MySubRank(this.uid, this.name, this.mark, this.rank);
+        return newSubRank;
     }
 }
 

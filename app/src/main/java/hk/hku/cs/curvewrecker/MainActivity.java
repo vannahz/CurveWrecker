@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 new int[] { R.id.list_image, R.id.list_text});
         menulist.setAdapter(adapter);
 
-        menulist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      /*  menulist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent;
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             }
-        });
+        });*/
     }
 
     private void findViews() {

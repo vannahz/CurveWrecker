@@ -1,9 +1,11 @@
 package hk.hku.cs.curvewrecker.entities;
 
+import java.io.Serializable;
+
 /**
  * Created by LZ on 15/12/3.
  */
-public class MyDress {
+public class MyDress implements Serializable {
     String name;
     int type;
     int level;
@@ -54,4 +56,10 @@ public class MyDress {
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
+
+    public MyDress copy(){
+        MyDress newDress = new MyDress(this.name, this.type, this.level, this.filePath);
+        return newDress;
+    }
+
 }

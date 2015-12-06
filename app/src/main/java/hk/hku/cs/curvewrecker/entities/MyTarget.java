@@ -1,11 +1,12 @@
 package hk.hku.cs.curvewrecker.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by LZ on 15/12/3.
  */
-public class MyTarget {
+public class MyTarget implements Serializable {
 
     private int type;               // 0 for sleep, 1 for study
     private MyTime targetTime;
@@ -78,5 +79,15 @@ public class MyTarget {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public MyTarget copy(){
+        MyTarget newTarget = new MyTarget();
+        newTarget.setActualTime(this.actualTime.copy());
+        newTarget.setDate(this.date.copy());
+        newTarget.setStatus(this.status);
+        newTarget.setTargetTime(this.targetTime.copy());
+        newTarget.setType(this.type);
+        return newTarget;
     }
 }

@@ -1,12 +1,13 @@
 package hk.hku.cs.curvewrecker.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by LZ on 15/12/3.
  */
-public class MyUser {
+public class MyUser implements Serializable {
     private int uid;
     private String name;
     private int gender;
@@ -26,7 +27,7 @@ public class MyUser {
     private ArrayList<MyFriend> myFriendsList;
     private MyTarget sleepTarget;                           //to determine today sleepTarget statues, after today, it will be add to the targetlist
     private MyTarget studyTarget;                           //similar as the above
-                                                            //Thus, to calculate the total time should be the total target time in list plus today's target
+                                                            //Thus,the total time should be the total target time in list plus today's target
 
 
     public MyUser(){
@@ -73,6 +74,8 @@ public class MyUser {
         sleepTarget = new MyTarget(0, new MyTime(sleepMin,sleepHour));
         studyTarget = new MyTarget(1,new MyTime(0,1));
     }
+
+
 
     public int getUid(){
         return uid;
@@ -179,6 +182,7 @@ public class MyUser {
         this.myDress = myDress;
     }
 
+
     public ArrayList<MyPlan> getMyPlanList() {
         return myPlanList;
     }
@@ -187,6 +191,8 @@ public class MyUser {
         this.myPlanList = myPlanList;
     }
 
+
+    // add a plan to the plan list
     public void addMyPlan(MyPlan newPlan){
         this.myPlanList.add(newPlan);
     }
@@ -203,6 +209,7 @@ public class MyUser {
         this.myTargetList = myTargetList;
     }
 
+    //add a target to my target list
     public void addMyTarget(MyTarget newTarget){
         this.myTargetList.add(newTarget);
     }
@@ -223,6 +230,7 @@ public class MyUser {
         this.myStarList.add(newStar);
     }
 
+    // add a star to my star list
     public void addMyStar(MyStar newStar, int index){
         this.myStarList.add(index,newStar);
     }
@@ -235,6 +243,7 @@ public class MyUser {
         this.myFriendsList = myFriendsList;
     }
 
+    //add a friend to my friend list
     public void addMyFriend(MyFriend newFriend){
         this.myFriendsList.add(newFriend);
     }
@@ -258,4 +267,41 @@ public class MyUser {
     public void setStudyTarget(MyTarget studyTarget) {
         this.studyTarget = studyTarget;
     }
+
+
+    public MyUser copy(){
+        MyUser newUser = new MyUser();
+
+        newUser.setName(this.name);
+        newUser.setCrtMission(this.crtMission.copy());
+        newUser.setGender(this.gender);
+        newUser.setImgPath(this.imgPath);
+        newUser.setMyAttributes(this.myAttributes.copy());
+        newUser.setMyDress(this.myDress.copy());
+        newUser.setMyRank(this.myRank.copy());
+        newUser.setSleepTarget(this.sleepTarget.copy());
+        newUser.setStudyTarget(this.studyTarget.copy());
+        newUser.setSleepTime(this.sleepTime.copy());
+        newUser.setStudyTime(this.studyTime.copy());
+        newUser.setTitle(this.title);
+        newUser.setTargetFinished(this.targetFinished);
+        newUser.setTargetNotFinished(this.targetNotFinished);
+        newUser.setUid(this.uid);
+        for(MyFriend p : this.myFriendsList){
+            newUser.addMyFriend(p);
+        }
+        for(MyPlan p : this.myPlanList){
+            newUser.addMyPlan(p);
+        }
+        for(MyTarget p : this.myTargetList){
+            newUser.addMyTarget(p);
+        }
+        for(MyStar p : this.myStarList){
+            newUser.addMyStar(p);
+        }
+
+        return newUser;
+
+    }
+
 }

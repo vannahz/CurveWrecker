@@ -1,5 +1,6 @@
 package hk.hku.cs.curvewrecker.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -7,7 +8,7 @@ import java.util.Date;
 /**
  * Created by LZ on 15/12/3.
  */
-public class MyRank {
+public class MyRank implements Serializable {
     final int maxSize = 5;
     ArrayList<MySubRank> mySubRankList;
     MyTime myTime;
@@ -58,5 +59,15 @@ public class MyRank {
 
     public int getMaxSize() {
         return maxSize;
+    }
+
+
+    public MyRank copy(){
+        MyRank newRank = new MyRank();
+        newRank.setMyDate(this.myTime.copy());
+        for(MySubRank newSubRank : this.mySubRankList){
+            newRank.addMyRankList(newSubRank.copy());
+        }
+        return newRank;
     }
 }
