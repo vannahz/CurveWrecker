@@ -7,11 +7,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
  * Created by LZ on 15/12/3.
  */
-public class MySystem {
+public class MySystem implements Serializable {
 
     private MyUser myUser;
 
