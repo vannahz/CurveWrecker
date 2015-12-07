@@ -81,7 +81,9 @@ public class MySystem {
     }
 
 
-
+    public boolean connectServer(){
+        return false;
+    }
 
     //uid need to be signed by the system, so need to check database to get the uid value
 
