@@ -23,6 +23,14 @@ public class MyRank implements Serializable {
         this.myTime = newTime;
     }
 
+    public void initialFakeData(){
+        for(int i = 0; i < maxSize; i++){
+            mySubRankList.add(new MySubRank(2110+i,"friend"+i,100-i,i+1));
+        }
+
+        this.myTime = new MyTime(16,12,2015);
+    }
+
     public ArrayList<MySubRank> getMySubRankList() {
         return mySubRankList;
     }
