@@ -77,9 +77,6 @@ public class MySystem implements Serializable {
 
     }
 
-    public int numOfFriends(){
-        return myUser.getMyFriendsList().size();
-    }
 
 
     public boolean connectServer(){

@@ -294,6 +294,10 @@ public class MyUser implements Serializable {
         this.myFriendsList.add(index, newFriend);
     }
 
+    public int getNumOfFriends(){
+        return this.getMyFriendsList().size();
+    }
+
     public MyTarget getSleepTarget() {
         return sleepTarget;
     }
