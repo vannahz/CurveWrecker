@@ -24,9 +24,11 @@ public class Ranking extends Activity {
 
         SimpleAdapter adapter = new SimpleAdapter(this,
                 getData(),
-                R.layout.listitem
-                new String[] { "img", "text"},
-                new int[] { R.id.list_image, R.id.list_text});
+                R.layout.item_ranking,
+                new String[] { "rank", "img", "username", "time"},
+                new int[] { R.id.txt_item_ranking_number, R.id.txt_item_ranking_img, R.id.txt_item_ranking_user_name, R.id.txt_item_ranking_time});
+
+        lv_ranking.setAdapter(adapter);
     }
 
     private List<Map<String,Object>> getData() {
@@ -71,8 +73,6 @@ public class Ranking extends Activity {
         map.put("time", "130min");
 
         list.add(map);
-
-
 
         return list;
     }

@@ -59,19 +59,18 @@
                 android:padding="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true">
                 <Button
+                    android:layout_marginLeft="110dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/btn_friends_follow"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:text="互相关注"
-                    android:layout_marginLeft="15dp"
                     />
-                <Button
-                    android:layout_marginLeft="20dp"
-                    android:layout_width="180dp"
-                    android:layout_height="wrap_content"
-                    android:text="传纸条"/>
             </LinearLayout>
+
             <LinearLayout
                 android:paddingLeft="14dp"
                 android:paddingTop="14dp"
@@ -80,10 +79,13 @@
                 android:layout_width="fill_parent"
                 android:layout_height="300dp"
                 android:orientation="vertical">
+
                 <ListView
-                    android:id="@+id/list_inofrmation"
+                    android:id="@+id/lv_friends_information"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:divider="#000000"
+                    android:dividerHeight="1sp">
                 </ListView>
             </LinearLayout>
             

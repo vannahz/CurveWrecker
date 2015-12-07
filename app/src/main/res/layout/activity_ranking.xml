@@ -4,22 +4,26 @@
     >
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
     <TextView
+        android:background="@drawable/backgournd_ranking"
+        android:id="@+id/txt_ranking_occupied"
+        android:text="Some one occupies the cover"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:textAlignment="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_centerHorizontal="true"/>
-    <ImageView
-        android:id="@+id/img_ranking"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/backgournd_ranking"/>
         <ListView
-            android:layout_below="@id/img_ranking"
+            android:layout_below="@id/txt_ranking_occupied"
             android:id="@+id/lv_ranking"
             android:background="#ffffff"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"></ListView>
+            android:layout_height="wrap_content"
+            android:divider="#000000"
+            android:dividerHeight="1sp"/>
     </RelativeLayout>
 
 </RelativeLayout>

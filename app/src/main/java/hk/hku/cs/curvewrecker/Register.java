@@ -25,7 +25,7 @@ public class Register extends Activity implements View.OnClickListener{
         btn_submit = (Button)findViewById(R.id.btn_submit);
         edt_birthday = (EditText)findViewById(R.id.edt_birthday);
         edt_grade = (EditText)findViewById(R.id.edt_grade);
-
+ 
         btn_birthday.setOnClickListener(this);
         btn_grade.setOnClickListener(this);
         btn_submit.setOnClickListener(this);
