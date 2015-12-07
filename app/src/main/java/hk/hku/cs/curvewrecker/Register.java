@@ -1,6 +1,7 @@
 package hk.hku.cs.curvewrecker;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +42,8 @@ public class Register extends Activity implements View.OnClickListener{
         }
         else if(v.getId() == R.id.btn_submit){
             /**Add submit code here**/
+            Intent intent = new Intent(this, Register.class);
+            startActivity(intent);
         }
     }
 }
