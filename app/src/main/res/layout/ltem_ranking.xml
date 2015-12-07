@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="60dp"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/item_ranking_number"
+        android:layout_width="45dp"
+        android:layout_height="60dp"
+        android:text="1"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:paddingTop="4dp"
+        android:textColor="#000000"
+        />
+
+    <ImageView
+        android:layout_toRightOf="@id/item_ranking_number"
+        android:id="@+id/item_ranking_img"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/img_avatar"
+        android:gravity="center_vertical"/>
+
+    <TextView
+        android:textColor="#000000"
+        android:text="Angel"
+        android:layout_toRightOf="@id/item_ranking_img"
+        android:id="@+id/ltem_ranking_user_name"
+        android:layout_gravity="center_vertical"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="7dp"
+        android:gravity="center_vertical"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id="@+id/item_ranking_time"
+        android:textColor="#FFC125"
+        android:text="130min"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:textSize="40sp"
+        android:layout_width="70dp"
+        android:layout_height="40dp" />
+
+</RelativeLayout>

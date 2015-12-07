@@ -16,7 +16,7 @@
         android:background="@drawable/backgournd_ranking"/>
         <ListView
             android:layout_below="@id/img_ranking"
-            android:id="@+id/list_rank"
+            android:id="@+id/lv_ranking"
             android:background="#ffffff"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"></ListView>

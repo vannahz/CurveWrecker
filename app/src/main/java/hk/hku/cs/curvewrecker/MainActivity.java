@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 R.layout.listitem,
                 new String[] { "img", "text"},
                 new int[] { R.id.list_image, R.id.list_text});
+
         menulist.setAdapter(adapter);
 
         menulist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -103,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void findViews() {
-
         toolbar_title = (TextView)findViewById(R.id.toolbar_title);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.main);
