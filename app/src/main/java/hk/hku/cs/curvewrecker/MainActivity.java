@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView menulist;
     private String[] lvs = {"Daily Record", "Star Calender", "Friends", "Ranks", "Setting"};
-    private Button study_btn;
+    private Button study_btn, sleep_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +44,26 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        study_btn.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, StudySetting.class);
-                startActivity(intent);
+
+        View.OnClickListener handler = new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent;
+                switch (v.getId()) {
+                    case R.id.study_btn:
+                        intent = new Intent(MainActivity.this, StudySetting.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.sleep_btn:
+                        intent = new Intent(MainActivity.this, SleepSetting.class);
+                        startActivity(intent);
+                        break;
+                }
             }
-        });
+        };
+
+        study_btn.setOnClickListener(handler);
+        sleep_btn.setOnClickListener(handler);
 
         //创建返回键，并实现打开关/闭监听
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close) {
@@ -109,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.main);
         menulist = (ListView) findViewById(R.id.left_menu);
         study_btn = (Button)findViewById(R.id.study_btn);
+        sleep_btn = (Button) findViewById(R.id.sleep_btn);
     }
 
     private List<Map<String, Object>> getData() {

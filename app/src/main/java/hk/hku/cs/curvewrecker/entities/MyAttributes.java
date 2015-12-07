@@ -1,9 +1,11 @@
 package hk.hku.cs.curvewrecker.entities;
 
+import java.io.Serializable;
+
 /**
  * Created by LZ on 15/12/3.
  */
-public class MyAttributes {
+public class MyAttributes implements Serializable{
     private int profession;
     private long exp;
     private int level;
@@ -80,4 +82,17 @@ public class MyAttributes {
     public void setForce(int force) {
         this.force = force;
     }
+
+    public MyAttributes copy(){
+        MyAttributes newAtt = new MyAttributes();
+        newAtt.setEndurance(this.endurance);
+        newAtt.setExp(this.exp);
+        newAtt.setForce(this.force);
+        newAtt.setIntelligence(this.intelligence);
+        newAtt.setLevel(this.level);
+        newAtt.setProfession(this.profession);
+        return newAtt;
+    }
+
+
 }

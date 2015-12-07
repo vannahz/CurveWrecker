@@ -1,9 +1,11 @@
 package hk.hku.cs.curvewrecker.entities;
 
+import java.io.Serializable;
+
 /**
  * Created by LZ on 15/12/3.
  */
-public class MyMission {
+public class MyMission implements Serializable {
 // mission is the object which contains the information about thing you are doing
     String name;
     int type;
@@ -66,5 +68,15 @@ public class MyMission {
 
     public void setCurrentTime(MyTime currentTime) {
         this.currentTime = currentTime;
+    }
+
+    public MyMission copy(){
+        MyMission newMission = new MyMission();
+        newMission.setName(this.name);
+        newMission.setCurrentTime(this.currentTime.copy());
+        newMission.setEndTime(this.endTime.copy());
+        newMission.setStrTime(this.strTime.copy());
+        newMission.setType(this.type);
+        return newMission;
     }
 }

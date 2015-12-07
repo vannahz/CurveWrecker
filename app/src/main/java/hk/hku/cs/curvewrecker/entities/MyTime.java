@@ -1,14 +1,13 @@
 package hk.hku.cs.curvewrecker.entities;
 
 import org.joda.time.DateTime;
-import org.joda.time.JodaTimePermission;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.io.Serializable;
+
 /**
  * Created by LZ on 15/12/3.
  */
-public class MyTime{
+public class MyTime implements Serializable {
     private int second;
     private int minute;
     private int hour;
@@ -115,5 +114,16 @@ public class MyTime{
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public MyTime copy(){
+        MyTime newTime = new MyTime();
+        newTime.setSecond(this.second);
+        newTime.setMinute(this.minute);
+        newTime.setHour(this.hour);
+        newTime.setDay(this.day);
+        newTime.setMonth(this.month);
+        newTime.setYear(this.year);
+        return newTime;
     }
 }

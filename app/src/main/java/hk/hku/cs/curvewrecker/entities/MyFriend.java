@@ -1,9 +1,11 @@
 package hk.hku.cs.curvewrecker.entities;
 
+import java.io.Serializable;
+
 /**
  * Created by LZ on 15/12/3.
  */
-public class MyFriend {
+public class MyFriend implements Serializable {
     //the class store all the information about friends
     private int uid;
     private String name;
@@ -123,4 +125,28 @@ public class MyFriend {
     public void setMyAttributes(MyAttributes myAttributes) {
         this.myAttributes = myAttributes;
     }
+
+    public MyFriend copy(){
+        MyFriend newFriend = new MyFriend(this.uid, this.name, this.gender, this.imgPath,
+                                            this.title, this.targetFinished, this.targetNotFinished,
+                                            this.sleepTime.copy(),this.studyTime.copy(),this.myAttributes.copy());
+        return newFriend;
+    }
+
+    @Override
+    public String toString() {
+        return "MyFriend{" +
+                "uid=" + uid +
+                ", name='" + name + '\'' +
+                ", gender=" + gender +
+                ", imgPath='" + imgPath + '\'' +
+                ", title=" + title +
+                ", targetFinished=" + targetFinished +
+                ", targetNotFinished=" + targetNotFinished +
+                ", sleepTime=" + sleepTime +
+                ", studyTime=" + studyTime +
+                ", myAttributes=" + myAttributes +
+                '}';
+    }
+
 }
