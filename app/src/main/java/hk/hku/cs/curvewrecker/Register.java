@@ -42,7 +42,7 @@ public class Register extends Activity implements View.OnClickListener{
         }
         else if(v.getId() == R.id.btn_submit){
             /**Add submit code here**/
-            Intent intent = new Intent(this, Register.class);
+            Intent intent = new Intent(Register.this, MainActivity.class);
             startActivity(intent);
         }
     }
