@@ -61,11 +61,13 @@ public class MainActivity extends AppCompatActivity {
                 switch (v.getId()) {
                     case R.id.study_btn:
                         intent = new Intent(MainActivity.this, StudySetting.class);
+                        //passing data by this method
                         intent.putExtra("MySystem",mySystem);
                         startActivity(intent);
                         break;
                     case R.id.sleep_btn:
                         intent = new Intent(MainActivity.this, SleepSetting.class);
+                        //passing data by this method
                         intent.putExtra("MySystem",mySystem);
                         startActivity(intent);
                         break;
