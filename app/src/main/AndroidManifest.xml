@@ -25,6 +25,24 @@
         </activity>
 
         <activity
+            android:name=".StudyResult"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+
+        <activity
+            android:name=".SleepSetting"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+
+        <activity
+            android:name=".SleepResult"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+
+        <activity
             android:name=".Friends"
             android:label="Friends"
             android:theme="@style/AppTheme.NoActionBar"  >
