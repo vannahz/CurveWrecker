@@ -7,20 +7,28 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
  * Created by LZ on 15/12/3.
  */
-public class MySystem {
+public class MySystem implements Serializable {
 
     private MyUser myUser;
 
     public MySystem(){
         myUser = new MyUser();
     }
+
     public MySystem(MyUser newUser){
         myUser = newUser.copy();
     }
+
+
+    public void initialFakeData(){
+        myUser.initialFakeData();
+    }
+
 
     public MyUser getMyUser() {
         return myUser;
@@ -31,13 +39,13 @@ public class MySystem {
     }
 
     public boolean loadFile(){
-        File fileCheck = new File("/player/data.bin");
+        File fileCheck = new File("./player/data.bin");
         if(!fileCheck.exists()){
             return false;
         }
         else{
             try {
-                FileInputStream fileInputStream = new FileInputStream("/player/data.bin");
+                FileInputStream fileInputStream = new FileInputStream("./player/data.bin");
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                 MyUser newUser = (MyUser) objectInputStream.readObject();
                 this.myUser = newUser.copy();
@@ -56,7 +64,7 @@ public class MySystem {
 
     public void saveFile() {
         try{
-            FileOutputStream fileOutputStream = new FileOutputStream("/player/data.bin");
+            FileOutputStream fileOutputStream = new FileOutputStream("./player/data.bin");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(this.myUser);
             objectOutputStream.close();
@@ -67,9 +75,13 @@ public class MySystem {
             e.printStackTrace();
         }
 
-
     }
 
+
+
+    public boolean connectServer(){
+        return false;
+    }
 
     //uid need to be signed by the system, so need to check database to get the uid value
 

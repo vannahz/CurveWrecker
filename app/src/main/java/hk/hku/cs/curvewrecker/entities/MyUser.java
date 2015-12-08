@@ -10,13 +10,13 @@ import java.util.List;
 public class MyUser implements Serializable {
     private int uid;
     private String name;
-    private int gender;
+    private int gender;                                     // 0 for male, 1 for female
     private String imgPath;
     private int title;
     private int targetFinished;
     private int targetNotFinished;
-    private MyTime sleepTime;
-    private MyTime studyTime;
+    private MyTime sleepTime;                               //current target time of sleep per day
+    private MyTime studyTime;                               //current target time of study per day
     private MyRank myRank;
     private MyDress myDress;
     private MyMission crtMission;
@@ -75,7 +75,34 @@ public class MyUser implements Serializable {
         studyTarget = new MyTarget(1,new MyTime(0,1));
     }
 
+    public void initialFakeData(){
 
+        uid = 1111;
+        name = "testUser";
+        gender = 0;
+        imgPath = "";
+        title = 0;
+        sleepTime = new MyTime(0,8);
+        studyTime = new MyTime(0,2);
+        targetFinished = 3;
+        targetNotFinished = 2;
+        myRank = new MyRank();
+        myRank.initialFakeData();
+        myDress = new MyDress();
+        crtMission = new MyMission();
+        myAttributes = new MyAttributes(0,10,1,2,2,2);
+        myPlanList = new ArrayList<>();
+        myTargetList = new ArrayList<>();
+        myStarList = new ArrayList<>();
+        myFriendsList = new ArrayList<>();
+        MyFriend tempF1 = new MyFriend(2111,"friend1",1,"",1,3,3,sleepTime.copy(),studyTime.copy(),myAttributes.copy());
+        MyFriend tempF2 = new MyFriend(2112,"friend2",0,"",2,5,4,sleepTime.copy(),studyTime.copy(),myAttributes.copy());
+        myFriendsList.add(tempF1);
+        myFriendsList.add(tempF2);
+        sleepTarget = new MyTarget(0, new MyTime(0,8));
+        studyTarget = new MyTarget(1, new MyTime(0,2));
+
+    }
 
     public int getUid(){
         return uid;
@@ -91,6 +118,21 @@ public class MyUser implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTitleName(){
+        switch (this.title){
+            case 0:
+                return "Rank 0";
+            case 1:
+                return "Rank 1";
+            case 2:
+                return "Rank 2";
+            case 3:
+                return "Rank 3";
+            default:
+                return "Error";
+        }
     }
 
     public int getTitle() {
@@ -250,6 +292,10 @@ public class MyUser implements Serializable {
 
     public void addMyFriend(MyFriend newFriend,int index){
         this.myFriendsList.add(index, newFriend);
+    }
+
+    public int getNumOfFriends(){
+        return this.getMyFriendsList().size();
     }
 
     public MyTarget getSleepTarget() {

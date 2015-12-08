@@ -22,6 +22,7 @@
             <!-- border_inside_color 内部部圆圈的颜色 -->
             <!-- border_thickness 外圆和内圆的宽度 -->
             <hk.hku.cs.curvewrecker.RoundImageView
+                android:id="@+id/portrait"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center|center_horizontal"
@@ -30,13 +31,13 @@
                 imagecontrol:border_outside_color="#6fbdef"
                 imagecontrol:border_thickness="1dp"
                 />
-            <TextView
+            <TextView android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal"
                 android:text="vannahz"
                 android:textSize="20sp"/>
-            <TextView
+            <TextView android:id="@+id/userno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal"

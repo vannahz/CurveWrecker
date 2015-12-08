@@ -36,7 +36,7 @@
                 android:layout_height="80dp"
                 android:layout_margin="15dp"
                 android:src="@drawable/average"/>
-            <TextView
+            <TextView android:id="@+id/average"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center|center_horizontal|center_vertical"
@@ -53,7 +53,7 @@
                 android:layout_height="80dp"
                 android:layout_margin="15dp"
                 android:src="@drawable/stoday"/>
-            <TextView
+            <TextView android:id="@+id/today_sleep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center|center_horizontal|center_vertical"

@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import hk.hku.cs.curvewrecker.entities.MySystem;
+
 public class MainActivity extends AppCompatActivity {
     //声明相关变量
     private TextView toolbar_title;
@@ -30,12 +32,19 @@ public class MainActivity extends AppCompatActivity {
     private ListView menulist;
     private String[] lvs = {"Daily Record", "Star Calender", "Friends", "Ranks", "Setting"};
     private Button study_btn, sleep_btn;
+    private MySystem mySystem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         findViews();
+
+
+        //initial mySystem
+        mySystem = new MySystem();
+        //do a fake data initial
+        mySystem.initialFakeData();
 
         //设置Toolbar
         toolbar_title.setText("Attack On Curve Wrecker");
@@ -52,10 +61,14 @@ public class MainActivity extends AppCompatActivity {
                 switch (v.getId()) {
                     case R.id.study_btn:
                         intent = new Intent(MainActivity.this, StudySetting.class);
+                        //passing data by this method
+                        intent.putExtra("MySystem",mySystem);
                         startActivity(intent);
                         break;
                     case R.id.sleep_btn:
                         intent = new Intent(MainActivity.this, SleepSetting.class);
+                        //passing data by this method
+                        intent.putExtra("MySystem",mySystem);
                         startActivity(intent);
                         break;
                 }
@@ -101,10 +114,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 2:
                         intent = new Intent(MainActivity.this,Friends.class);
+                        intent.putExtra("MySystem",mySystem);
                         startActivity(intent);
                         break;
                     case 3:
                         intent = new Intent(MainActivity.this,Ranking.class);
+                        intent.putExtra("MySystem",mySystem);
                         startActivity(intent);
                         break;
                     case 4:
