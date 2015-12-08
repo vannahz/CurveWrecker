@@ -108,6 +108,14 @@ public class MySystem implements Serializable {
     }
 
     public int getCurrentMark(){
+        int mark = 0;
+        int targetSleepTime = this.myUser.getSleepTime().getHour() * 60 + this.myUser.getSleepTime().getMinute();
+        int targetStudyTime = this.myUser.getStudyTime().getHour() * 60 + this.myUser.getStudyTime().getMinute();
+        int currentSleepTime = this.myUser.getSleepTarget().getActualTime().getHour() * 60
+                                + this.myUser.getSleepTarget().getActualTime().getMinute();
+        int currentStudyTime = this.myUser.getStudyTarget().getActualTime().getHour() * 60
+                                + this.myUser.getStudyTarget().getActualTime().getMinute();
+
         return 0;
     }
 

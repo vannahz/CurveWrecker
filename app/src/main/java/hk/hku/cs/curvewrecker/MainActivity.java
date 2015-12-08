@@ -48,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         //check if there is data stored
-        if(!mySystem.loadFile()){
+   /*     if(!mySystem.loadFile()){
             Intent intent = new Intent(MainActivity.this, Register.class);
             intent.putExtra("MySystem", mySystem);
             startActivity(intent);
         }
-        mySystem.saveFile();
+        mySystem.saveFile();*/
 
         //设置Toolbar
         toolbar_title.setText("Attack On Curve Wrecker");
