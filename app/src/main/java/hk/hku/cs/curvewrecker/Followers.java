@@ -30,12 +30,12 @@ public class Followers extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_followers);
-        lv_follower = (ListView)findViewById(R.id.lv_ranking);
+        lv_follower = (ListView)findViewById(R.id.lv_followers);
 
         SimpleAdapter adapter = new SimpleAdapter(this,
                 getData(),
-                R.layout.item_ranking,
-                new String[] { "value"},
+                R.layout.item_followers,
+                new String[] {"value"},
                 new int[] { R.id.txt_item_followers_name });
 
         lv_follower.setAdapter(adapter);

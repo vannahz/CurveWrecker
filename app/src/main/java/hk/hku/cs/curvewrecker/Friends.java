@@ -30,6 +30,7 @@ public class Friends extends Activity implements View.OnClickListener {
                 new int[] { R.id.txt_item_friends_attribute, R.id.txt_item_friends_information});
 
         lv_friends_information.setAdapter(adapter);
+
     }
     @Override
     public void onClick(View v) {
