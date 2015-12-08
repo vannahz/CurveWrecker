@@ -35,11 +35,11 @@ public class MySystem implements Serializable {
     }
 
 
-    public MyTime getlastLoginDate() {
+    public MyTime getLastLoginDate() {
         return lastLoginDate;
     }
 
-    public void setlastLoginDate(MyTime lastLoginDate) {
+    public void setLastLoginDate(MyTime lastLoginDate) {
         this.lastLoginDate = lastLoginDate;
     }
 
