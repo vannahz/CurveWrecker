@@ -9,6 +9,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -23,14 +24,13 @@ import java.util.Map;
 public class Followers extends AppCompatActivity implements View.OnClickListener{
 
     ListView lv_follower;
-    Button btn_followers_followed;
-    Button btn_followers_fans;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_followers);
         lv_follower = (ListView)findViewById(R.id.lv_followers);
+
 
         SimpleAdapter adapter = new SimpleAdapter(this,
                 getData(),
@@ -46,6 +46,7 @@ public class Followers extends AppCompatActivity implements View.OnClickListener
                 Intent intent;
                 switch (position) {
                     case 0:
+                        Log.v("msg","click");
                         intent = new Intent(Followers.this,Friends.class);
                         startActivity(intent);
                         break;
