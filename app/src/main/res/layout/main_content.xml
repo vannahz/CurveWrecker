@@ -91,12 +91,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
-            <Button android:id="@+id/sports_btn"
+            <Button android:id="@+id/rank_btn"
                 android:layout_width="match_parent"
                 android:layout_height="120dip"
                 android:layout_weight="1"
                 android:background="@drawable/sports"/>
-            <Button android:id="@+id/date_btn"
+            <Button android:id="@+id/calender_btn"
                 android:layout_width="match_parent"
                 android:layout_height="120dip"
                 android:layout_weight="1"

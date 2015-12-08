@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <TextView
+            <TextView android:id="@+id/sleep_hour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="23"
@@ -30,7 +30,7 @@
                 android:text="h"
                 android:textSize="30sp"
                 android:textColor="@color/colorPrimary"/>
-            <TextView
+            <TextView android:id="@+id/sleep_minute"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="34"
