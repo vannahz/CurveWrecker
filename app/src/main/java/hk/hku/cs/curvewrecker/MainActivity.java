@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                     case 1:
                         break;
                     case 2:
-                        intent = new Intent(MainActivity.this,Friends.class);
+                        intent = new Intent(MainActivity.this,Followers.class);
                         intent.putExtra("MySystem",mySystem);
                         startActivity(intent);
                         break;

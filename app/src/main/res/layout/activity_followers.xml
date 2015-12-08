@@ -5,24 +5,17 @@
     android:orientation="vertical">
 
 
-    <LinearLayout
+    <LinearLayout 
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal">
-    <Button
+    <TextView
 
-        android:id="@+id/btn_followers_followed"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Followed"/>
-        <Button
-            android:id="@+id/btn_followers_fans"
-            android:layout_marginLeft="30dp"
-            android:layout_width="150dp"
-            android:text="fans"
-            android:layout_height="wrap_content" />
+        android:text="Friends List"/>
 
     </LinearLayout>
 
