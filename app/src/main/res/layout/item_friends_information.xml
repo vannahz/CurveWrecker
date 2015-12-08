@@ -7,7 +7,7 @@
         android:id="@+id/txt_item_friends_attribute"
         android:layout_width="100dp"
         android:layout_height="30dp"
-        android:text="备注名:"
+        android:text="Name:"
         android:gravity="center_vertical"
         android:textAlignment="center"
         android:textSize="15sp"

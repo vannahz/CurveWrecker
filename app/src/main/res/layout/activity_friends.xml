@@ -32,7 +32,7 @@
                 android:id="@+id/txt_follower"
                 android:layout_below="@id/img_friendavatar"
                 android:layout_toLeftOf="@id/img_friendavatar"
-                android:text="follower 3"
+                android:text="followed 3"
                 android:layout_width="wrap_content"
                 android:layout_height="15dp"
                 android:layout_centerHorizontal="true"
