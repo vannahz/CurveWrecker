@@ -108,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case 4:
+                        intent = new Intent(MainActivity.this,Setting.class);
+                        startActivity(intent);
                         break;
                     default:
                         break;

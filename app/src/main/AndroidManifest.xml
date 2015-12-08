@@ -24,12 +24,11 @@
         <activity
             android:name=".StudyResult"
             android:label="@string/title_activity_study_fail"
-            android:theme="@style/AppTheme.NoActionBar"  >
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".Register"
-            android:label="@string/title_activity_register"
-            >
+            android:label="@string/title_activity_register" >
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -41,6 +40,11 @@
         <activity
             android:name=".Ranking"
             android:label="@string/title_activity_ranking" >
+        </activity>
+        <activity
+            android:name=".Setting"
+            android:label="@string/title_activity_setting"
+            android:theme="@style/AppTheme" >
         </activity>
     </application>
 
