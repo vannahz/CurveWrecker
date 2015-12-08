@@ -40,9 +40,6 @@ public class Followers extends AppCompatActivity implements View.OnClickListener
 
         lv_follower.setAdapter(adapter);
 
-        btn_followers_fans = (Button) findViewById(R.id.btn_followers_fans);
-        btn_followers_followed = (Button) findViewById(R.id.btn_followers_followed);
-
         lv_follower.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
