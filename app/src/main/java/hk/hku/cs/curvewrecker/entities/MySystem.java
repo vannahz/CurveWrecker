@@ -15,13 +15,18 @@ import java.io.Serializable;
 public class MySystem implements Serializable {
 
     private MyUser myUser;
+    private MyTime lastLoginDate;
 
     public MySystem(){
         myUser = new MyUser();
+        lastLoginDate = new MyTime();
+        lastLoginDate.getCurrentTime();
     }
 
     public MySystem(MyUser newUser){
         myUser = newUser.copy();
+        lastLoginDate = new MyTime();
+        lastLoginDate.getCurrentTime();
     }
 
 
@@ -29,6 +34,18 @@ public class MySystem implements Serializable {
         myUser.initialFakeData();
     }
 
+
+    public MyTime getlastLoginDate() {
+        return lastLoginDate;
+    }
+
+    public void setlastLoginDate(MyTime lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
+
+    public void updateLoginData(){
+        this.lastLoginDate.getCurrentTime();
+    }
 
     public MyUser getMyUser() {
         return myUser;
@@ -77,7 +94,24 @@ public class MySystem implements Serializable {
 
     }
 
+    public int getTotalHour(){
+        int totalHour = 0;
+        int totalMin = 0;
+        totalHour =myUser.getSleepTarget().getActualTime().getHour() + myUser.getStudyTarget().getActualTime().getHour();
+        totalMin = myUser.getSleepTarget().getActualTime().getMinute() +  myUser.getStudyTarget().getActualTime().getMinute();
+        for(MyTarget tempT :myUser.getMyTargetList()){
+            totalHour += tempT.getActualTime().getHour();
+            totalMin += tempT.getActualTime().getMinute();
+        }
 
+        return totalHour+totalMin/60;
+    }
+
+    public int getCurrentMark(){
+        return 0;
+    }
+
+    
 
     public boolean connectServer(){
         return false;

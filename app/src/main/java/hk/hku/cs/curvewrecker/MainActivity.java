@@ -46,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
         //do a fake data initial
         mySystem.initialFakeData();
 
+
+        //check if there is data stored
+        if(!mySystem.loadFile()){
+            Intent intent = new Intent(MainActivity.this, Register.class);
+            intent.putExtra("MySystem", mySystem);
+            startActivity(intent);
+        }
+        mySystem.saveFile();
+
         //设置Toolbar
         toolbar_title.setText("Attack On Curve Wrecker");
         toolbar.setTitle("");
