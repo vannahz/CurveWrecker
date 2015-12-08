@@ -43,7 +43,7 @@ public class Followers extends AppCompatActivity implements View.OnClickListener
 
 
     }
-
+ 
     private List<Map<String,Object>> getData() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
