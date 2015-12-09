@@ -24,6 +24,16 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
+            android:name=".SleepSetting"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".SleepResult"
+            android:label="@string/title_activity_study_fail"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
             android:name=".Register"
             android:label="@string/title_activity_register" >
             <intent-filter>
