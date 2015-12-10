@@ -96,7 +96,7 @@
                 android:layout_height="120dip"
                 android:layout_weight="1"
                 android:background="@drawable/sports"/>
-            <Button android:id="@+id/calender_btn"
+            <Button android:id="@+id/calendar_btn"
                 android:layout_width="match_parent"
                 android:layout_height="120dip"
                 android:layout_weight="1"

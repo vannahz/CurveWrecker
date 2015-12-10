@@ -80,6 +80,14 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("MySystem",mySystem);
                         startActivity(intent);
                         break;
+                    case R.id.calendar_btn:
+                        intent = new Intent(MainActivity.this, Calendar.class);
+                        //passing data by this method
+                        intent.putExtra("MySystem",mySystem);
+                        startActivity(intent);
+                        break;
+                    default:
+                        break;
                 }
             }
         };
@@ -120,6 +128,9 @@ public class MainActivity extends AppCompatActivity {
                     case 0:
                         break;
                     case 1:
+                        intent = new Intent(MainActivity.this,Calendar.class);
+                        intent.putExtra("MySystem",mySystem);
+                        startActivity(intent);
                         break;
                     case 2:
                         intent = new Intent(MainActivity.this,Followers.class);
