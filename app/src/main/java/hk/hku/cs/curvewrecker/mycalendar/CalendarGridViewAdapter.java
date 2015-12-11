@@ -76,6 +76,7 @@ public class CalendarGridViewAdapter extends BaseAdapter {
 				is_first.setImageResource(R.drawable.first);
 				is_star.setImageResource(R.drawable.starr);
 				is_moon.setImageResource(R.drawable.sleepp);
+
 			}// TODO 在非周末时候设置颜色
 			else {
 				if (((mDataList.get(position).year == 2015 && mDataList.get(position).month <= 8)

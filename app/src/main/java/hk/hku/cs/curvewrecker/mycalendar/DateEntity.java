@@ -29,5 +29,6 @@ public class DateEntity implements Serializable {
 	public boolean isStar;
 
 	//是否有月亮 -- 睡觉到足够时间
+	
 	public boolean isMoon;
 }

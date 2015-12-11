@@ -45,7 +45,7 @@ public class SleepSetting extends AppCompatActivity {
         setContentView(R.layout.sleeping);
 
         toolbar_title = (TextView)findViewById(R.id.toolbar_title);
-        toolbar_title.setText("Sleeping");
+        toolbar_title.setText("Sleeping  ");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
