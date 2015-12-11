@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private String[] lvs = {"Daily Record", "Star Calender", "Friends", "Ranks", "Setting"};
     private Button study_btn, sleep_btn;
     private MySystem mySystem;
+    private TextView currentMark;
+    private TextView sleepTime;
+    private TextView preStudyTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +43,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
         findViews();
 
-
         //initial mySystem
         mySystem = new MySystem();
         //do a fake data initial
         mySystem.initialFakeData();
 
 
-        //check if there is data stored
-   /*     if(!mySystem.loadFile()){
+        /*//check if there is data stored
+        if(!mySystem.loadFile()){
+            Log.d("loadFile()","cannot find file!!!!!");
             Intent intent = new Intent(MainActivity.this, Register.class);
             intent.putExtra("MySystem", mySystem);
             startActivity(intent);
         }
-        mySystem.saveFile();*/
-
+        Log.d("MySystem","Next to save file!!!!!");
+        mySystem.saveFile();
+*/
         //设置Toolbar
         toolbar_title.setText("Attack On Curve Wrecker");
         toolbar.setTitle("");
@@ -62,6 +66,12 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //currentMark.setText(mySystem.getCurrentMark());
+        currentMark.setText(String.format("%d", mySystem.getCurrentMark()));
+        float tempSleepTime = mySystem.getMyUser().getSleepTarget().getActualTime().getTotalHour();
+        sleepTime.setText(String.format("%.1f", tempSleepTime));
+        float tempStudyTime = mySystem.getMyUser().getStudyTarget().getActualTime().getTotalHour();
+        preStudyTime.setText(String.format("%.1f", tempStudyTime));
 
 
         View.OnClickListener handler = new View.OnClickListener(){
@@ -160,6 +170,10 @@ public class MainActivity extends AppCompatActivity {
         menulist = (ListView) findViewById(R.id.left_menu);
         study_btn = (Button)findViewById(R.id.study_btn);
         sleep_btn = (Button) findViewById(R.id.sleep_btn);
+        currentMark = (TextView) findViewById(R.id.score);
+        sleepTime = (TextView) findViewById(R.id.sleep);
+        preStudyTime = (TextView) findViewById(R.id.yesterday);
+
     }
 
     private List<Map<String, Object>> getData() {

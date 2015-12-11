@@ -3,6 +3,7 @@ package hk.hku.cs.curvewrecker;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,13 @@ public class Register extends Activity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+       /* Log.d("Register:", "Register test!!!!!");
+        if(mySystem.loadFile()){
+            Log.d("loadFile()","find file!!!!!");
+            Intent intent = new Intent(Register.this, MainActivity.class);
+            intent.putExtra("MySystem", mySystem);
+            startActivity(intent);
+        }*/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         Intent tempIntent = getIntent();
@@ -37,6 +45,7 @@ public class Register extends Activity implements View.OnClickListener{
         btn_birthday.setOnClickListener(this);
         btn_grade.setOnClickListener(this);
         btn_submit.setOnClickListener(this);
+
     }
 
     @Override

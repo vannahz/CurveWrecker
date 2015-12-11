@@ -101,6 +101,9 @@ public class MyUser implements Serializable {
         myFriendsList.add(tempF2);
         sleepTarget = new MyTarget(0, new MyTime(0,8));
         studyTarget = new MyTarget(1, new MyTime(0,2));
+        sleepTarget.setActualTime(new MyTime(0,8));
+        studyTarget.setActualTime(new MyTime(0,1));
+
 
     }
 

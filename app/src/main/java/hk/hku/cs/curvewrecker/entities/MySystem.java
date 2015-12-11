@@ -1,5 +1,7 @@
 package hk.hku.cs.curvewrecker.entities;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -111,12 +113,29 @@ public class MySystem implements Serializable {
         int mark = 0;
         int targetSleepTime = this.myUser.getSleepTime().getHour() * 60 + this.myUser.getSleepTime().getMinute();
         int targetStudyTime = this.myUser.getStudyTime().getHour() * 60 + this.myUser.getStudyTime().getMinute();
+        //Log.d("######MySystem:check1", String.format("sleepHour:%d, sleepMin:%d, tarSleep:%d", this.myUser.getSleepTime().getHour(), this.myUser.getSleepTime().getMinute(),targetSleepTime));
+        //Log.d("######MySystem:check1", String.format("StudyHour:%d, StudyMin:%d, tarStudy:%d", this.myUser.getStudyTime().getHour(), this.myUser.getStudyTime().getMinute(),targetStudyTime));
         int currentSleepTime = this.myUser.getSleepTarget().getActualTime().getHour() * 60
                                 + this.myUser.getSleepTarget().getActualTime().getMinute();
         int currentStudyTime = this.myUser.getStudyTarget().getActualTime().getHour() * 60
                                 + this.myUser.getStudyTarget().getActualTime().getMinute();
+        //Log.d("######MySystem:check2", String.format("sleepHour:%d, sleepMin:%d, tarSleep:%d", this.myUser.getSleepTime().getHour(), this.myUser.getSleepTime().getMinute(),targetSleepTime));
+        //Log.d("######MySystem:check2", String.format("StudyHour:%d, StudyMin:%d, tarStudy:%d", this.myUser.getStudyTime().getHour(), this.myUser.getStudyTime().getMinute(),targetStudyTime));
+        if((currentSleepTime > targetSleepTime -30) && (currentSleepTime < targetSleepTime +30)){
+            mark+=10;
+        }
 
-        return 0;
+        mark += currentStudyTime/60;
+
+        //Log.d("######MySystem:check3", String.format("sleepHour:%d, sleepMin:%d, tarSleep:%d", this.myUser.getSleepTime().getHour(), this.myUser.getSleepTime().getMinute(),targetSleepTime));
+        //Log.d("######MySystem:check3", String.format("StudyHour:%d, StudyMin:%d, tarStudy:%d", this.myUser.getStudyTime().getHour(), this.myUser.getStudyTime().getMinute(),targetStudyTime));
+        if(currentStudyTime >= targetStudyTime){
+            mark += 10;
+        }
+
+        //Log.d("######MySystem:", String.format("mark:%d, crtStudy:%d, crtSleep:%d", mark, currentStudyTime, currentSleepTime));
+        //Log.d("######MySystem:", String.format("tarStudy:%d, tarSleep:%d",targetStudyTime, targetSleepTime));
+        return mark;
     }
 
     

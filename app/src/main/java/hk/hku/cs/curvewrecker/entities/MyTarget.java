@@ -62,7 +62,11 @@ public class MyTarget implements Serializable {
     }
 
     public void setActualTime(MyTime actualTime) {
+
         this.actualTime = actualTime;
+        if(this.actualTime.getTotalHour()>this.targetTime.getTotalHour()){
+            this.status = 1;
+        }
     }
 
     public MyTime getDate() {

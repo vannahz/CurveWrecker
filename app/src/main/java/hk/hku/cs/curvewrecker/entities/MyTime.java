@@ -90,6 +90,12 @@ public class MyTime implements Serializable {
         this.hour = hour;
     }
 
+    public float getTotalHour(){
+
+
+        return (getHour()+getMinute()/60);
+    }
+
     public int getDay() {
         return day;
     }
