@@ -21,4 +21,13 @@ public class DateEntity implements Serializable {
 	public boolean isNowDate;
 	/** 是否为本月日期 */
 	public boolean isSelfMonthDate;
+
+	//是否是第一名
+	public boolean isFirst;
+
+	//是否有星星 -- 学习到足够时间
+	public boolean isStar;
+
+	//是否有月亮 -- 睡觉到足够时间
+	public boolean isMoon;
 }
