@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import hk.hku.cs.curvewrecker.entities.MySystem;
+import hk.hku.cs.curvewrecker.entities.MyTime;
 
 public class MainActivity extends AppCompatActivity {
     //声明相关变量
@@ -50,12 +51,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         findViews();
+        mySystem = new MySystem(this.getFilesDir());
 
         //initial mySystem
-        mySystem = new MySystem();
-        //do a fake data initial
-        mySystem.initialFakeData();
+        if(!mySystem.loadFile()){
+            Log.d("####MainActivity:","cant find file");
+            //do a fake data initial
+            mySystem.initialFakeData();
+            mySystem.saveFile();
 
+        }
+        else
+        {
+            Intent tempI = getIntent();
+            mySystem = (MySystem)tempI.getSerializableExtra("MySystem");
+        }
 
         /*//check if there is data stored
         if(!mySystem.loadFile()){

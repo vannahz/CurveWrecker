@@ -133,6 +133,7 @@ public class StudySetting extends AppCompatActivity {
                 intent = new Intent(StudySetting.this, StudyResult.class);
                 mySystem.getMyUser().getCrtMission().getEndTime().getCurrentTime();
                 mySystem.addMissionToTarget(mySystem.getMyUser().getCrtMission());
+                mySystem.saveFile();
                 intent.putExtra("MySystem", mySystem);
                 startActivity(intent);
                 finish();
@@ -208,6 +209,7 @@ public class StudySetting extends AppCompatActivity {
             intent = new Intent(StudySetting.this, StudyResult.class);
             mySystem.getMyUser().getCrtMission().getEndTime().getCurrentTime();
             mySystem.addMissionToTarget(mySystem.getMyUser().getCrtMission());
+            mySystem.saveFile();
             intent.putExtra("MySystem", mySystem);
             startActivity(intent);
             finish();
@@ -218,7 +220,7 @@ public class StudySetting extends AppCompatActivity {
            // Log.d("####StudySeting:secs-", String.format("%d", millisUntilFinished));
 
             //mySystem.getMyUser().getCrtMission().decreaseRemainTime();
-            mySystem.getMyUser().getCrtMission().getRemainTime().resetTimeBySec((int)(millisUntilFinished /1000)-1);
+            mySystem.getMyUser().getCrtMission().getRemainTime().resetTimeBySec((int) (millisUntilFinished /1000)-1);
             //toolbar_title.setText("Studying" + mySystem.getMyUser().getCrtMission().getRemainTime().getTotalSeconds());
             String tempS = "";
             tempS = String.format("%d:%02d:%02d",mySystem.getMyUser().getCrtMission().getRemainTime().getHour(),

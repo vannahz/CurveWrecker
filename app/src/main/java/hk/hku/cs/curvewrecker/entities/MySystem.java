@@ -19,6 +19,7 @@ public class MySystem implements Serializable {
 
     private MyUser myUser;
     private MyTime lastLoginDate;
+    private File filePath;
 
     public MySystem(){
         myUser = new MyUser();
@@ -32,6 +33,12 @@ public class MySystem implements Serializable {
         lastLoginDate.getCurrentTime();
     }
 
+    public MySystem(File tempPath){
+        myUser = new MyUser();
+        lastLoginDate = new MyTime();
+        lastLoginDate.getCurrentTime();
+        this.filePath = tempPath;
+    }
 
     public void initialFakeData(){
         myUser.initialFakeData();
@@ -60,13 +67,13 @@ public class MySystem implements Serializable {
     }
 
     public boolean loadFile(){
-        File fileCheck = new File("./player/data.bin");
+        File fileCheck = new File(this.filePath+"/","data.bin");
         if(!fileCheck.exists()){
             return false;
         }
         else{
             try {
-                FileInputStream fileInputStream = new FileInputStream("./player/data.bin");
+                FileInputStream fileInputStream = new FileInputStream(fileCheck);
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                 MyUser newUser = (MyUser) objectInputStream.readObject();
                 this.myUser = newUser.copy();
@@ -85,7 +92,11 @@ public class MySystem implements Serializable {
 
     public void saveFile() {
         try{
-            FileOutputStream fileOutputStream = new FileOutputStream("./player/data.bin");
+            File fileCheck = new File(this.filePath+"/","data.bin");
+            if(!fileCheck.exists()){
+                fileCheck.createNewFile();
+            }
+            FileOutputStream fileOutputStream = new FileOutputStream(fileCheck);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(this.myUser);
             objectOutputStream.close();
@@ -219,12 +230,14 @@ public class MySystem implements Serializable {
         int preS = 0;
         int crtS = 0;
         if(myMission.getType() == 0){
-
+            Log.d("####MySystem:", "0");
             preS = this.getMyUser().getSleepTarget().getActualTime().getTotalSeconds();
             if(myMission.isDone()) {
+                Log.d("####MySystem:", "00");
                 crtS = myMission.getTargetTime().getTotalSeconds();
             }
             else{
+                Log.d("####MySystem:", "01");
                 crtS = myMission.getTargetTime().getTotalSeconds() - myMission.getRemainTime().getTotalSeconds();
 
             }
@@ -232,16 +245,20 @@ public class MySystem implements Serializable {
             this.getMyUser().getSleepTarget().getActualTime().resetTimeBySec(preS+crtS);
         }
         else{
-
+            Log.d("MySystem:", "1");
             preS = this.getMyUser().getStudyTarget().getActualTime().getTotalSeconds();
 
             if(myMission.isDone()) {
+                Log.d("####MySystem:", "10");
                 crtS = myMission.getTargetTime().getTotalSeconds();
             }
             else{
+                Log.d("####MySystem:", "11");
                 crtS = myMission.getTargetTime().getTotalSeconds() - myMission.getRemainTime().getTotalSeconds();
             }
+
             this.getMyUser().getStudyTarget().getActualTime().resetTimeBySec(preS+crtS);
+            Log.d("####MySystem: total-", String.format("%d", this.getMyUser().getStudyTarget().getActualTime().getTotalSeconds()));
         }
     }
 
