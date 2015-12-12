@@ -37,6 +37,7 @@ public class StudySetting extends AppCompatActivity {
     int myHour;
     int myMin;
     MyCount myCount;
+    private TextView myRemainTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +115,12 @@ public class StudySetting extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
-
+        myRemainTime = (TextView) findViewById(R.id.study_time);
+        String tempS = "";
+        tempS = String.format("%d:%02d:%02d",mySystem.getMyUser().getCrtMission().getRemainTime().getHour(),
+                                mySystem.getMyUser().getCrtMission().getRemainTime().getMinute(),
+                                mySystem.getMyUser().getCrtMission().getRemainTime().getSecond());
+        myRemainTime.setText(tempS);
         myCount = new MyCount(mySystem.getMyUser().getCrtMission().getRemainTime().getTotalSeconds());
 
         Button giveup_btn = (Button)findViewById(R.id.giveup_btn);
@@ -198,8 +204,8 @@ public class StudySetting extends AppCompatActivity {
             //if (mySystem.getMyUser().getCrtMission().isDone()) {
             mySystem.getMyUser().getCrtMission().getRemainTime().resetTimeBySec(0);
             mySystem.getMyUser().getCrtMission().setStatus(true);
-            Log.d("StudySetting: secs-", String.format("%d", mySystem.getMyUser().getCrtMission().getTargetTime().getTotalSeconds()));
-            Intent intent = new Intent(StudySetting.this, StudyResult.class);
+           // Log.d("StudySetting: secs-", String.format("%d", mySystem.getMyUser().getCrtMission().getTargetTime().getTotalSeconds()));
+            intent = new Intent(StudySetting.this, StudyResult.class);
             mySystem.getMyUser().getCrtMission().getEndTime().getCurrentTime();
             mySystem.addMissionToTarget(mySystem.getMyUser().getCrtMission());
             intent.putExtra("MySystem", mySystem);
@@ -209,12 +215,17 @@ public class StudySetting extends AppCompatActivity {
         }
         @Override
         public void onTick(long millisUntilFinished) {
-            Log.d("####StudySeting:secs-", String.format("%d", millisUntilFinished));
+           // Log.d("####StudySeting:secs-", String.format("%d", millisUntilFinished));
 
             //mySystem.getMyUser().getCrtMission().decreaseRemainTime();
             mySystem.getMyUser().getCrtMission().getRemainTime().resetTimeBySec((int)(millisUntilFinished /1000)-1);
-            toolbar_title.setText("Studying" + mySystem.getMyUser().getCrtMission().getRemainTime().getTotalSeconds());
-            Log.d("####StudySeting:secs-", String.format("%d", mySystem.getMyUser().getCrtMission().getRemainTime().getTotalSeconds()));
+            //toolbar_title.setText("Studying" + mySystem.getMyUser().getCrtMission().getRemainTime().getTotalSeconds());
+            String tempS = "";
+            tempS = String.format("%d:%02d:%02d",mySystem.getMyUser().getCrtMission().getRemainTime().getHour(),
+                    mySystem.getMyUser().getCrtMission().getRemainTime().getMinute(),
+                    mySystem.getMyUser().getCrtMission().getRemainTime().getSecond());
+            myRemainTime.setText(tempS);
+          //  Log.d("####StudySeting:secs-", String.format("%d", mySystem.getMyUser().getCrtMission().getRemainTime().getTotalSeconds()));
         }
     }
 }
