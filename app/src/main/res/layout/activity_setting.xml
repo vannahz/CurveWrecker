@@ -4,70 +4,98 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
-    <TextView
-        android:paddingTop="15dp"
-        android:paddingLeft="150dp"
-        android:textSize="30dp"
-        android:text="Profile"
-        android:layout_width="fill_parent"
-        android:layout_height="70dp" />
+    <include layout="@layout/custom_toolbar"/>
+
     <LinearLayout
         android:layout_marginTop="20dp"
         android:background="@drawable/shape_border"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp"
-        >
+        android:padding="8dp">
         <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:textSize="20sp"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="Avatar"/>
-
-        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_weight="1"
+            android:text="Portrait"
+            android:textSize="20sp"/>
+        <ImageView android:id="@+id/portrait_set"
             android:clickable="true"
-            android:layout_marginLeft="230dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/img_avatar"/>
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/portrait"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <TextView
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_marginTop="20dp"
             android:background="@drawable/shape_border"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/txt_setting_name"
-            android:padding="4dp"
-            android:textSize="20sp"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:text="Name"/>
-        <TextView
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:layout_weight="1"
+                android:text="Username"
+                android:textSize="20sp"/>
+            <TextView android:id="@+id/username_set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:text="vannahz"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:background="@drawable/shape_border"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/txt_setting_userid"
-            android:padding="4dp"
-            android:textSize="20sp"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:text="UserID"/>
-        <TextView
-            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:layout_weight="1"
+                android:text="Userno"
+                android:textSize="20sp"/>
+            <TextView android:id="@+id/userno_set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:text="3035234"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:background="@drawable/shape_border"
-            android:id="@+id/txt_setting_message"
-            android:padding="4dp"
-            android:textSize="20sp"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:text="Message"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:layout_weight="1"
+                android:text="Sleeptime"
+                android:textSize="20sp"/>
+            <TextView android:id="@+id/sleeptime_set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:text="8h"
+                android:textSize="20sp"/>
+        </LinearLayout>
     </LinearLayout>
 
 
@@ -75,11 +103,9 @@
         android:layout_marginTop="40dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
         <TextView
             android:background="@drawable/shape_border"
-            android:layout_marginLeft="10dp"
             android:id="@+id/txt_setting_sex"
             android:padding="4dp"
             android:textSize="20sp"
@@ -88,7 +114,6 @@
             android:text="Sex"/>
         <TextView
             android:background="@drawable/shape_border"
-            android:layout_marginLeft="10dp"
             android:id="@+id/txt_setting_age"
             android:padding="4dp"
             android:textSize="20sp"
@@ -98,7 +123,6 @@
 
         <TextView
             android:background="@drawable/shape_border"
-            android:layout_marginLeft="10dp"
             android:id="@+id/txt_setting_grade"
             android:padding="4dp"
             android:textSize="20sp"
@@ -108,7 +132,6 @@
 
         <TextView
             android:background="@drawable/shape_border"
-            android:layout_marginLeft="10dp"
             android:id="@+id/txt_setting_school"
             android:padding="4dp"
             android:textSize="20sp"
