@@ -29,6 +29,7 @@ import java.net.URL;
 
 import hk.hku.cs.curvewrecker.entities.MySystem;
 import hk.hku.cs.curvewrecker.ChangeSleepTimeDialog;
+import hk.hku.cs.curvewrecker.entities.MyUser;
 
 
 public class Register extends AppCompatActivity {
@@ -48,6 +49,8 @@ public class Register extends AppCompatActivity {
     public String userId = "";
     public String id = "";
     public int mark = 0;
+
+    MyUser myUser = new MyUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
