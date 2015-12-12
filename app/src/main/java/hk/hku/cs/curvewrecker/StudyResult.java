@@ -49,6 +49,7 @@ public class StudyResult extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(StudyResult.this, MainActivity.class);
+                intent.putExtra("MySystem",mySystem);
                 startActivity(intent);
                 finish();
             }
@@ -71,6 +72,7 @@ public class StudyResult extends AppCompatActivity {
     {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
             intent = new Intent(StudyResult.this, MainActivity.class);
+            intent.putExtra("MySystem",mySystem);
             startActivity(intent);
             finish();
         }
