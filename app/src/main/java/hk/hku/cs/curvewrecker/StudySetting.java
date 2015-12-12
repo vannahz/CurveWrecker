@@ -66,10 +66,10 @@ public class StudySetting extends AppCompatActivity {
         studySetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ChangeBirthDialog mChangeBirthDialog = new ChangeBirthDialog(StudySetting.this);
+                ChangeTimeDialog mChangeBirthDialog = new ChangeTimeDialog(StudySetting.this);
                 mChangeBirthDialog.setDate(1, 0);
                 mChangeBirthDialog.show();
-                mChangeBirthDialog.setTimeListener(new ChangeBirthDialog.OnTimeListener() {
+                mChangeBirthDialog.setTimeListener(new ChangeTimeDialog.OnTimeListener() {
                     @Override
                     public void onClick(String hour, String minute) {
                         myHour = Integer.parseInt(hour);
@@ -103,11 +103,11 @@ public class StudySetting extends AppCompatActivity {
     //go to time content
     public void goToStudying() {
 
+        setContentView(R.layout.studying);
         mySystem.getMyUser().setCrtMission(new MyMission(1, new MyTime(myMin, myHour)));
         //Log.d("####StudySeting:secs-", String.format("%d", mySystem.getMyUser().getCrtMission().getRemainTime().getTotalSeconds()));
-        setContentView(R.layout.study_content);
 
-        toolbar_title = (TextView) findViewById(R.id.toolbar_title);
+        toolbar_title = (TextView)findViewById(R.id.toolbar_title);
         toolbar_title.setText("Studying");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
@@ -115,7 +115,7 @@ public class StudySetting extends AppCompatActivity {
 
         myCount = new MyCount(mySystem.getMyUser().getCrtMission().getRemainTime().getTotalSeconds());
 
-        Button giveup_btn = (Button) findViewById(R.id.giveup_btn);
+        Button giveup_btn = (Button)findViewById(R.id.giveup_btn);
         giveup_btn.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 myCount.cancel();
