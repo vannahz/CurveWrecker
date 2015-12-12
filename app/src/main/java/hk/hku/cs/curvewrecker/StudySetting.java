@@ -84,7 +84,6 @@ public class StudySetting extends AppCompatActivity {
                             minute = "0" + minute;
                         study_minute.setText(minute);
 
-
                     }
                 });
             }

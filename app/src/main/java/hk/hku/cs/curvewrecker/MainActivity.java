@@ -51,13 +51,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         findViews();
+
         mySystem = new MySystem(this.getFilesDir());
 
         //initial mySystem
         if(!mySystem.loadFile()){
             Log.d("####MainActivity:","cant find file");
             //do a fake data initial
-            mySystem.initialFakeData();
+       //     mySystem.initialFakeData();
             mySystem.saveFile();
 
         }

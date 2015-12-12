@@ -29,13 +29,13 @@ import java.net.URL;
 
 import hk.hku.cs.curvewrecker.entities.MySystem;
 import hk.hku.cs.curvewrecker.ChangeSleepTimeDialog;
+import hk.hku.cs.curvewrecker.entities.MyTime;
 import hk.hku.cs.curvewrecker.entities.MyUser;
 
 
 public class Register extends AppCompatActivity {
 
     RoundImageView btn_submit;
-    MySystem mySystem;
     Button next_btn_name;
     Button next_btn_portrait;
     TextView sleeptime_set;
@@ -50,22 +50,33 @@ public class Register extends AppCompatActivity {
     public String id = "";
     public int mark = 0;
 
-    MyUser myUser = new MyUser();
+    MySystem mySystem;
+    int myHour;
+    int myMin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-       /* Log.d("Register:", "Register test!!!!!");
+
+        mySystem = new MySystem(this.getFilesDir());
+
         if(mySystem.loadFile()){
             Log.d("loadFile()","find file!!!!!");
             Intent intent = new Intent(Register.this, MainActivity.class);
             intent.putExtra("MySystem", mySystem);
             startActivity(intent);
-        }*/
+            finish();
+        }
+
+        //initial
+        mySystem.initialFakeData();
+        myHour = 0;
+        myMin = 0;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Intent tempIntent = getIntent();
-        Serializable tempExtra = tempIntent.getSerializableExtra("MySystem");
-        mySystem = (MySystem) tempExtra;
+    //    Intent tempIntent = getIntent();
+    //    Serializable tempExtra = tempIntent.getSerializableExtra("MySystem");
+   //     mySystem = (MySystem) tempExtra;
 
         btn_submit = (RoundImageView)findViewById(R.id.btn_submit);
         btn_submit.setOnClickListener(new Button.OnClickListener() {
@@ -84,6 +95,7 @@ public class Register extends AppCompatActivity {
         next_btn_name = (Button)findViewById(R.id.next_btn_name);
         next_btn_name.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+                mySystem.getMyUser().setName(edit_name.getText().toString());
                 register();
                 setPortrait();
             }
@@ -118,6 +130,9 @@ public class Register extends AppCompatActivity {
                  m.setTimeListener(new ChangeSleepTimeDialog.OnTimeListener() {
                      @Override
                      public void onClick(String hour, String minute) {
+                         myHour = Integer.parseInt(hour);
+                         myMin = Integer.parseInt(minute);
+
                          sleeptime_set.setText(hour + " hour " + minute + " min");
                      }
                  });
@@ -128,7 +143,9 @@ public class Register extends AppCompatActivity {
         next_btn_sleeptime = (Button)findViewById(R.id.next_btn_sleeptime);
         next_btn_sleeptime.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-
+                mySystem.getMyUser().setSleepTime(new MyTime(myMin,myHour));
+                mySystem.getMyUser().setUid( Integer.parseInt(userId));
+                mySystem.saveFile();
                 Intent intent = new Intent(Register.this, MainActivity.class);
                 startActivity(intent);
                 finish();
