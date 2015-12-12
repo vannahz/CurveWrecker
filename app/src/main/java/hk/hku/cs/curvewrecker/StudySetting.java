@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -20,6 +21,7 @@ public class StudySetting extends AppCompatActivity {
     private Button start_btn;
     private LinearLayout studySetting;
     private TextView study_hour, study_minute;
+    private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,10 +85,21 @@ public class StudySetting extends AppCompatActivity {
         giveup_btn.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
-                Intent intent = new Intent(StudySetting.this, StudyResult.class);
+                intent = new Intent(StudySetting.this, StudyResult.class);
                 startActivity(intent);
                 finish();
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            intent = new Intent(StudySetting.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return false;
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ public class SleepSetting extends AppCompatActivity {
     private TextView toolbar_title;
     private Toolbar toolbar;
     private Button sleepnow_btn;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +56,22 @@ public class SleepSetting extends AppCompatActivity {
         wakeup_btn.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
-                Intent intent = new Intent(SleepSetting.this, SleepResult.class);
+                intent = new Intent(SleepSetting.this, SleepResult.class);
                 startActivity(intent);
                 finish();
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            intent = new Intent(SleepSetting.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return false;
     }
 
 

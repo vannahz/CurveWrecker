@@ -36,7 +36,7 @@ public class Ranking extends Activity {
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("rank", "1");
-        map.put("img", R.drawable.img_avatar);
+        map.put("img", R.drawable.portrait);
         map.put("username", "Angel");
         map.put("time", "200min");
 
@@ -44,7 +44,7 @@ public class Ranking extends Activity {
 
         map = new HashMap<String, Object>();
         map.put("rank", "2");
-        map.put("img", R.drawable.img_avatar);
+        map.put("img", R.drawable.portrait);
         map.put("username", "Tom");
         map.put("time", "190min");
 
@@ -52,7 +52,7 @@ public class Ranking extends Activity {
 
         map = new HashMap<String, Object>();
         map.put("rank", "3");
-        map.put("img", R.drawable.img_avatar);
+        map.put("img", R.drawable.portrait);
         map.put("username", "Jane");
         map.put("time", "170min");
 
@@ -60,7 +60,7 @@ public class Ranking extends Activity {
 
         map = new HashMap<String, Object>();
         map.put("rank", "4");
-        map.put("img", R.drawable.img_avatar);
+        map.put("img", R.drawable.portrait);
         map.put("username", "Kara");
         map.put("time", "150min");
 
@@ -68,7 +68,7 @@ public class Ranking extends Activity {
 
         map = new HashMap<String, Object>();
         map.put("rank", "5");
-        map.put("img", R.drawable.img_avatar);
+        map.put("img", R.drawable.portrait);
         map.put("username", "Sara");
         map.put("time", "130min");
 
