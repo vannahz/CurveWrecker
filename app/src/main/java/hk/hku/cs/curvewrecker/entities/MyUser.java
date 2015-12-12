@@ -398,6 +398,7 @@ public class MyUser implements Serializable {
             newUser.addMyStar(p);
         }
         newUser.setTotalStudyTime(this.totalStudyTime);
+        newUser.setTotalDay(this.totalDay);
 
         return newUser;
 

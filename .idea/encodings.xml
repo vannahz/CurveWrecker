@@ -5,11 +5,9 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/hk/hku/cs/curvewrecker/Ranking.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/hk/hku/cs/curvewrecker/Register.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bgcolor.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/img_avatar.jpg" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_friends.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_ranking.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_sign_in.xml" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
