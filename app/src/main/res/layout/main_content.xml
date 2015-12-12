@@ -144,7 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dip"
                 android:layout_weight="1"
-                android:background="@drawable/sports"/>
+                android:background="@drawable/ranks"/>
             <Button android:id="@+id/calendar_btn"
                 android:layout_width="match_parent"
                 android:layout_height="120dip"
