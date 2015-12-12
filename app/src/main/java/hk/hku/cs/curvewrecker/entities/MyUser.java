@@ -54,7 +54,7 @@ public class MyUser implements Serializable {
         sleepTarget = new MyTarget(0);
         studyTarget = new MyTarget(1);
         totalStudyTime = 0;
-        totalDay = 0;
+        totalDay = 1;
 
     }
 
@@ -79,7 +79,7 @@ public class MyUser implements Serializable {
         sleepTarget = new MyTarget(0, new MyTime(sleepMin,sleepHour));
         studyTarget = new MyTarget(1,new MyTime(0,1));
         totalStudyTime = 0;
-        totalDay = 0;
+        totalDay = 1;
     }
 
     public void initialFakeData(){

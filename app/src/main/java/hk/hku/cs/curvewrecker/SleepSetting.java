@@ -69,10 +69,10 @@ public class SleepSetting extends AppCompatActivity {
         sleepSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ChangeTimeDialog mChangeBirthDialog = new ChangeTimeDialog(SleepSetting.this);
+                ChangeSleepTimeDialog mChangeBirthDialog = new ChangeSleepTimeDialog(SleepSetting.this);
                 mChangeBirthDialog.setDate(myHour, myMin);
                 mChangeBirthDialog.show();
-                mChangeBirthDialog.setTimeListener(new ChangeTimeDialog.OnTimeListener() {
+                mChangeBirthDialog.setTimeListener(new ChangeSleepTimeDialog.OnTimeListener() {
                     @Override
                     public void onClick(String hour, String minute) {
                         myHour = Integer.parseInt(hour);
@@ -102,7 +102,7 @@ public class SleepSetting extends AppCompatActivity {
     public void goToSleeping() {
 
         setContentView(R.layout.sleeping);
-        mySystem.getMyUser().setCrtMission(new MyMission(1, new MyTime(myMin, myHour)));
+        mySystem.getMyUser().setCrtMission(new MyMission(0, new MyTime(myMin, myHour)));
 
         toolbar_title = (TextView)findViewById(R.id.toolbar_title);
         toolbar_title.setText("Sleeping  ");
@@ -133,6 +133,8 @@ public class SleepSetting extends AppCompatActivity {
                 finish();
             }
         });
+
+        myCount.start();
     }
 
     @Override

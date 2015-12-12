@@ -23,7 +23,7 @@ public class SleepResult extends AppCompatActivity {
     private TextView toolbar_title;
     private MySystem mySystem;
     private Intent intent;
-    private TextView todayTime;
+    private TextView averageTime;
     private TextView currentTime;
 
     @Override
@@ -36,6 +36,7 @@ public class SleepResult extends AppCompatActivity {
         Intent tempI = getIntent();
         mySystem = (MySystem)tempI.getSerializableExtra("MySystem");
 
+
         toolbar_title = (TextView)findViewById(R.id.toolbar_title);
         if(mySystem.getMyUser().getCrtMission().isDone()){
             toolbar_title.setText("Sleep Success");
@@ -43,6 +44,7 @@ public class SleepResult extends AppCompatActivity {
         else {
             toolbar_title.setText("Sleep Fail");
         }
+        Log.d("###SleepResult","checkpoint3");
         toolbar_title.setText("Morning");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
@@ -52,17 +54,18 @@ public class SleepResult extends AppCompatActivity {
             public void onClick(View v) {
 
                 intent = new Intent(SleepResult.this, MainActivity.class);
-                intent.putExtra("MySystem",mySystem);
+                intent.putExtra("MySystem", mySystem);
                 startActivity(intent);
                 finish();
             }
         });
-
-        todayTime = (TextView) findViewById(R.id.today_hour);
-        todayTime.setText(mySystem.getMyUser().getStudyTarget().getActualTime().getHour() + "h"
-                + mySystem.getMyUser().getStudyTarget().getActualTime().getMinute() + "min");
-        currentTime = (TextView) findViewById(R.id.current_hour);
+        Log.d("###SleepResult", "checkpoint1");
+        averageTime = (TextView) findViewById(R.id.average);
+        averageTime.setText(mySystem.getAverageSleep().getHour() + "h"
+                + mySystem.getAverageSleep().getMinute() + "min");
+        currentTime = (TextView) findViewById(R.id.today_sleep);
         MyTime tempT = new MyTime();
+        Log.d("###SleepResult","checkpoint2");
         Log.d("SleepResult:", String.format("%d, %d", mySystem.getMyUser().getCrtMission().getTargetTime().getTotalSeconds(), mySystem.getMyUser().getCrtMission().getRemainTime().getTotalSeconds()));
         tempT.resetTimeBySec(mySystem.getMyUser().getCrtMission().getTargetTime().getTotalSeconds()
                 - mySystem.getMyUser().getCrtMission().getRemainTime().getTotalSeconds());

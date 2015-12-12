@@ -20,6 +20,7 @@ public class MySystem implements Serializable {
     private MyUser myUser;
     private MyTime lastLoginDate;
     private File filePath;
+    private MyTime firstLoginDate;
 
     public MySystem(){
         myUser = new MyUser();
@@ -38,6 +39,8 @@ public class MySystem implements Serializable {
         lastLoginDate = new MyTime();
         lastLoginDate.getCurrentTime();
         this.filePath = tempPath;
+        firstLoginDate = new MyTime();
+        firstLoginDate.getCurrentTime();
     }
 
     public void initialFakeData(){
@@ -289,8 +292,33 @@ public class MySystem implements Serializable {
                 int newExp = crtMark;
                 addExp(newExp);
             }
+            updateTotalDay();
 
         }
+    }
+
+    public MyTime getAverageSleep(){
+        MyTime aveSleep = new MyTime();
+
+        for(MyTarget tempT: this.getMyUser().getMyTargetList()){
+            if(tempT.getType() == 0) {
+                aveSleep.resetTimeBySec(aveSleep.getTotalSeconds() + tempT.getActualTime().getTotalSeconds());
+            }
+        }
+        aveSleep.resetTimeBySec(aveSleep.getTotalSeconds()/this.getMyUser().getTotalDay());
+        return aveSleep;
+    }
+
+    public void updateTotalDay(){
+        updateLoginData();
+
+        long tempD = this.getMyUser().getTotalDay();
+
+        tempD = this.lastLoginDate.getTotalSeconds() - this.firstLoginDate.getTotalSeconds();
+
+        this.getMyUser().setTotalDay((int)tempD/(24*60*60));
+
+
     }
 
     public void addTotalDay(){
