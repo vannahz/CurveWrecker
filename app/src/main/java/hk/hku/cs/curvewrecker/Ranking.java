@@ -26,7 +26,7 @@ public class Ranking extends Activity {
                 getData(),
                 R.layout.item_ranking,
                 new String[] { "rank", "img", "username", "time"},
-                new int[] { R.id.txt_item_ranking_number, R.id.txt_item_ranking_img, R.id.txt_item_ranking_user_name, R.id.txt_item_ranking_time});
+                new int[] { R.id.txt_item_ranking_number, R.id.portrait, R.id.txt_item_ranking_user_name, R.id.txt_item_ranking_time});
 
         lv_ranking.setAdapter(adapter);
     }
