@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView menulist;
     private String[] lvs = {"Daily Record", "Star Calender", "Friends", "Ranks", "Setting"};
-    private Button study_btn, sleep_btn;
+    private Button study_btn, sleep_btn, calendar_btn, rank_btn;
     private MySystem mySystem;
     private TextView currentMark;
     private TextView sleepTime;
@@ -102,6 +102,11 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("MySystem",mySystem);
                         startActivity(intent);
                         break;
+                    case R.id.rank_btn:
+                        intent = new Intent(MainActivity.this, Ranking.class);
+                        intent.putExtra("MySystem", mySystem);
+                        startActivity(intent);
+                        break;
                     default:
                         break;
                 }
@@ -110,6 +115,9 @@ public class MainActivity extends AppCompatActivity {
 
         study_btn.setOnClickListener(handler);
         sleep_btn.setOnClickListener(handler);
+        calendar_btn.setOnClickListener(handler);
+        rank_btn.setOnClickListener(handler);
+
 
         //创建返回键，并实现打开关/闭监听
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close) {
@@ -188,6 +196,8 @@ public class MainActivity extends AppCompatActivity {
         menulist = (ListView) findViewById(R.id.left_menu);
         study_btn = (Button)findViewById(R.id.study_btn);
         sleep_btn = (Button) findViewById(R.id.sleep_btn);
+        calendar_btn = (Button) findViewById(R.id.calendar_btn);
+        rank_btn = (Button)findViewById(R.id.rank_btn);
         currentMark = (TextView) findViewById(R.id.score);
         sleepTime = (TextView) findViewById(R.id.sleep);
         preStudyTime = (TextView) findViewById(R.id.yesterday);
