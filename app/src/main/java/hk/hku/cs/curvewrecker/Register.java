@@ -69,7 +69,7 @@ public class Register extends AppCompatActivity {
 
         //initial
         mySystem.initialFakeData();
-        myHour = 0;
+        myHour = 8;
         myMin = 0;
 
         super.onCreate(savedInstanceState);
@@ -125,7 +125,7 @@ public class Register extends AppCompatActivity {
              @Override
              public void onClick(View v) {
                  ChangeSleepTimeDialog m = new ChangeSleepTimeDialog(Register.this);
-                 m.setDate(8, 0);
+                 m.setDate(myHour, myMin);
                  m.show();
                  m.setTimeListener(new ChangeSleepTimeDialog.OnTimeListener() {
                      @Override
@@ -143,6 +143,7 @@ public class Register extends AppCompatActivity {
         next_btn_sleeptime = (Button)findViewById(R.id.next_btn_sleeptime);
         next_btn_sleeptime.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+                Log.d("Register: sleep-", String.format("%d:%02d", myHour,myMin));
                 mySystem.getMyUser().setSleepTime(new MyTime(myMin,myHour));
                 mySystem.getMyUser().setUid( Integer.parseInt(userId));
                 mySystem.saveFile();

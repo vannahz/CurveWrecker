@@ -27,7 +27,7 @@ public class SleepSetting extends AppCompatActivity {
     private Button sleepnow_btn;
     private LinearLayout sleepSetting;
     private TextView sleep_hour, sleep_minute;
-    Intent intent;
+    private Intent intent;
     private MySystem mySystem;
     MyTime preTime;
     MyTime crtTime;
@@ -60,7 +60,9 @@ public class SleepSetting extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         sleep_hour = (TextView)findViewById(R.id.sleep_hour);
+        sleep_hour.setText(String.format("%d", myHour));
         sleep_minute = (TextView)findViewById(R.id.sleep_minute);
+        sleep_minute.setText(String.format("%02d", myMin));
 
 //change time
         sleepSetting = (LinearLayout)findViewById(R.id.sleepSetting);
@@ -108,7 +110,7 @@ public class SleepSetting extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
-        myRemainTime = (TextView) findViewById(R.id.study_time);
+        myRemainTime = (TextView) findViewById(R.id.sleep_time);
         String tempS = "";
         tempS = String.format("%d:%02d:%02d",mySystem.getMyUser().getCrtMission().getRemainTime().getHour(),
                 mySystem.getMyUser().getCrtMission().getRemainTime().getMinute(),

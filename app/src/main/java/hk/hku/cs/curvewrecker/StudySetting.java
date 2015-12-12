@@ -62,7 +62,9 @@ public class StudySetting extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         study_hour = (TextView)findViewById(R.id.study_hour);
+        study_hour.setText(String.format("%d", myHour));
         study_minute = (TextView)findViewById(R.id.study_minute);
+        study_minute.setText(String.format("%02d", myMin));
 
         //change time
         studySetting = (LinearLayout)findViewById(R.id.studySetting);
