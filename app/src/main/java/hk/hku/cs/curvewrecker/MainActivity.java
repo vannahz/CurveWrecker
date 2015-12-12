@@ -61,12 +61,12 @@ public class MainActivity extends AppCompatActivity {
             mySystem.saveFile();
 
         }
-        else
+    /*    else
         {
             Intent tempI = getIntent();
             mySystem = (MySystem)tempI.getSerializableExtra("MySystem");
         }
-
+*/
         /*//check if there is data stored
         if(!mySystem.loadFile()){
             Log.d("loadFile()","cannot find file!!!!!");
