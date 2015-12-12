@@ -69,13 +69,25 @@ public class CalendarGridViewAdapter extends BaseAdapter {
 
 		if (mDataList != null) {
 			textView.setText(mDataList.get(position).day + "");
+
+			if(mDataList.get(position).isSelfMonthDate && mDataList.get(position).isFirst){
+				is_first.setImageResource(R.drawable.first);
+			}
+			if(mDataList.get(position).isSelfMonthDate && mDataList.get(position).isStar){
+				is_star.setImageResource(R.drawable.starr);
+			}
+			if(mDataList.get(position).isSelfMonthDate && mDataList.get(position).isMoon){
+				is_moon.setImageResource(R.drawable.sleepp);
+			}
+
+
 			if ((TextUtils.equals(CalendarTool.SATURDAY, mDataList.get(position).weekDay))
 					|| TextUtils.equals(CalendarTool.SUNDAY, mDataList.get(position).weekDay)) {
 				// 周末背景为白，字体为灰色
 				textView.setTextColor(mRes.getColor(R.color.weekend_day_txt));
-				is_first.setImageResource(R.drawable.first);
-				is_star.setImageResource(R.drawable.starr);
-				is_moon.setImageResource(R.drawable.sleepp);
+			//	is_first.setImageResource(R.drawable.first);
+			//	is_star.setImageResource(R.drawable.starr);
+			//	is_moon.setImageResource(R.drawable.sleepp);
 
 			}// TODO 在非周末时候设置颜色
 			else {

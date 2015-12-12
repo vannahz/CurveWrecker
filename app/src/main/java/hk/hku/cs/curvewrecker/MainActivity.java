@@ -36,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
     private TextView currentMark;
     private TextView sleepTime;
     private TextView preStudyTime;
+    private TextView userName;
+    private TextView userID;
+    private TextView friendNo;
+    private TextView totalHour;
+    private TextView rank;
+    private RoundImageView avatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,32 +134,34 @@ public class MainActivity extends AppCompatActivity {
                 new String[] { "img", "text"},
                 new int[] { R.id.list_image, R.id.list_text});
 
+
+
         menulist.setAdapter(adapter);
 
         menulist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent;
-                switch (position){
+                switch (position) {
                     case 0:
                         break;
                     case 1:
-                        intent = new Intent(MainActivity.this,Calendar.class);
-                        intent.putExtra("MySystem",mySystem);
+                        intent = new Intent(MainActivity.this, Calendar.class);
+                        intent.putExtra("MySystem", mySystem);
                         startActivity(intent);
                         break;
                     case 2:
-                        intent = new Intent(MainActivity.this,Followers.class);
-                        intent.putExtra("MySystem",mySystem);
+                        intent = new Intent(MainActivity.this, Followers.class);
+                        intent.putExtra("MySystem", mySystem);
                         startActivity(intent);
                         break;
                     case 3:
-                        intent = new Intent(MainActivity.this,Ranking.class);
-                        intent.putExtra("MySystem",mySystem);
+                        intent = new Intent(MainActivity.this, Ranking.class);
+                        intent.putExtra("MySystem", mySystem);
                         startActivity(intent);
                         break;
                     case 4:
-                        intent = new Intent(MainActivity.this,Setting.class);
+                        intent = new Intent(MainActivity.this, Setting.class);
                         startActivity(intent);
                         break;
                     default:
@@ -161,6 +169,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        mySystem.checkLevelInfo();
+
+        findMenuListView();
+        userName.setText(mySystem.getMyUser().getName());
+        userID.setText(String.format("%d", mySystem.getMyUser().getUid()));
+        friendNo.setText(String.format("%d", mySystem.getMyUser().getMyFriendsList().size()));
+        totalHour.setText(String.format("%d", mySystem.getTotalHour()));
+        rank.setText(String.format("%d", mySystem.getMyUser().getTitle()));
+        Log.d("######MainActivity:exp:", String.format("%d", mySystem.getMyUser().getMyAttributes().getExp()));
     }
 
     private void findViews() {
@@ -174,6 +192,15 @@ public class MainActivity extends AppCompatActivity {
         sleepTime = (TextView) findViewById(R.id.sleep);
         preStudyTime = (TextView) findViewById(R.id.yesterday);
 
+    }
+
+    private void findMenuListView(){
+        userName = (TextView) findViewById(R.id.username);
+        userID = (TextView) findViewById(R.id.userno);
+        friendNo = (TextView) findViewById(R.id.friend_no);
+        totalHour = (TextView) findViewById(R.id.total_hour);
+        rank = (TextView) findViewById(R.id.rank);
+        avatar = (RoundImageView) findViewById(R.id.portrait);
     }
 
     private List<Map<String, Object>> getData() {

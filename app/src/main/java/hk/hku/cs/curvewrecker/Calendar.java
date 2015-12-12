@@ -1,6 +1,8 @@
 package hk.hku.cs.curvewrecker;
 
 import java.util.List;
+
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
@@ -12,6 +14,9 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import hk.hku.cs.curvewrecker.entities.MyStar;
+import hk.hku.cs.curvewrecker.entities.MySystem;
+import hk.hku.cs.curvewrecker.entities.MyTarget;
 import hk.hku.cs.curvewrecker.mycalendar.CalendarGridView;
 import hk.hku.cs.curvewrecker.mycalendar.CalendarGridViewAdapter;
 import hk.hku.cs.curvewrecker.mycalendar.CalendarTool;
@@ -33,12 +38,15 @@ public class Calendar extends AppCompatActivity {
     private TextView mCalendarTv;
     private TextView toolbar_title;
     private Toolbar toolbar;
+    private MySystem mySystem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
+        Intent tempI = getIntent();
+        mySystem = (MySystem)tempI.getSerializableExtra("MySystem");
         initView();
     }
 
@@ -63,6 +71,8 @@ public class Calendar extends AppCompatActivity {
         mCalendarTv.setText(mNowCalendarPoint.x + "." + mNowCalendarPoint.y);
         mDateEntityList = mCalendarTool.getDateEntityList(mNowCalendarPoint.x,mNowCalendarPoint.y);
         mAdapter = new CalendarGridViewAdapter(this, getResources());
+
+        updateCalendar();
         mAdapter.setDateList(mDateEntityList);
         mGridView.setAdapter(mAdapter);
     }
@@ -84,7 +94,7 @@ public class Calendar extends AppCompatActivity {
                             mDateEntityList = mCalendarTool.getDateEntityList(
                                     mNowCalendarPoint.x, mNowCalendarPoint.y - 1);
                         }
-
+                        updateCalendar();
                         mAdapter.setDateList(mDateEntityList);
                         mAdapter.notifyDataSetChanged();
                         mNowCalendarPoint = mCalendarTool.getNowCalendar();
@@ -103,6 +113,7 @@ public class Calendar extends AppCompatActivity {
                             mDateEntityList = mCalendarTool.getDateEntityList(
                                     mNowCalendarPoint.x, mNowCalendarPoint.y + 1);
                         }
+                        updateCalendar();
                         mAdapter.setDateList(mDateEntityList);
                         mAdapter.notifyDataSetChanged();
                         mNowCalendarPoint = mCalendarTool.getNowCalendar();
@@ -113,6 +124,35 @@ public class Calendar extends AppCompatActivity {
         }
 
     }
+
+    private void updateCalendar(){
+        for(DateEntity tempD: mDateEntityList){
+            //check champion
+            for(MyStar tempS: mySystem.getMyUser().getMyStarList()){
+                if(tempS.getMyTime().getDay() == tempD.day
+                        && tempS.getMyTime().getMonth() == tempD.month
+                        && tempS.getMyTime().getYear() == tempD.year){
+                    tempD.isFirst = true;
+                }
+            }
+
+            //check study&sleep
+            for(MyTarget tempT: mySystem.getMyUser().getMyTargetList()){
+                if(tempT.getStatus() == 1){
+                    if(tempT.getDate().getDay() == tempD.day
+                            && tempT.getDate().getMonth() == tempD.month
+                            && tempT.getDate().getYear() == tempD.year){
+                        if(tempT.getType() == 0){
+                            tempD.isMoon = true;
+                        }else{
+                            tempD.isStar = true;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     @Override
     public void onDestroy() {

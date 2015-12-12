@@ -41,6 +41,8 @@ public class MyTarget implements Serializable {
         this.status = 0;
     }
 
+
+
     public int getType() {
         return type;
     }

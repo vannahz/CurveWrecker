@@ -93,7 +93,25 @@ public class MyUser implements Serializable {
         myAttributes = new MyAttributes(0,10,1,2,2,2);
         myPlanList = new ArrayList<>();
         myTargetList = new ArrayList<>();
+        MyTarget tempT1 = new MyTarget(0);
+        tempT1.setTargetTime(new MyTime(0, 7));
+        tempT1.setActualTime(new MyTime(0, 8));
+        tempT1.setDate(new MyTime(1, 12, 2015));
+        tempT1.setStatus(1);
+        MyTarget tempT2 = new MyTarget(1);
+        tempT2.setTargetTime(new MyTime(0, 2));
+        tempT2.setActualTime(new MyTime(0, 3));
+        tempT2.setDate(new MyTime(2, 12, 2015));
+        tempT2.setStatus(1);
+
+        myTargetList.add(tempT1);
+        myTargetList.add(tempT2);
+
+
         myStarList = new ArrayList<>();
+
+        MyStar tempS = new MyStar(new MyTime(3,12,2015));
+        myStarList.add(tempS);
         myFriendsList = new ArrayList<>();
         MyFriend tempF1 = new MyFriend(2111,"friend1",1,"",1,3,3,sleepTime.copy(),studyTime.copy(),myAttributes.copy());
         MyFriend tempF2 = new MyFriend(2112,"friend2",0,"",2,5,4,sleepTime.copy(),studyTime.copy(),myAttributes.copy());
@@ -125,21 +143,27 @@ public class MyUser implements Serializable {
 
     public String getTitleName(){
         switch (this.title){
-            case 0:
-                return "Rank 0";
             case 1:
                 return "Rank 1";
             case 2:
                 return "Rank 2";
             case 3:
                 return "Rank 3";
+            case 4:
+                return "Rank 4";
             default:
                 return "Error";
         }
     }
 
     public int getTitle() {
+
         return title;
+
+    }
+
+    public void updateTitle(){
+        this.title = this.getMyAttributes().getLevel()/10+1;
     }
 
     public void setTitle(int title) {

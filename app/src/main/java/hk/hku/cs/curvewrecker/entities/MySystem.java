@@ -15,6 +15,7 @@ import java.io.Serializable;
  * Created by LZ on 15/12/3.
  */
 public class MySystem implements Serializable {
+    final private int basicExp = 50;
 
     private MyUser myUser;
     private MyTime lastLoginDate;
@@ -102,6 +103,7 @@ public class MySystem implements Serializable {
         totalHour =myUser.getSleepTarget().getActualTime().getHour() + myUser.getStudyTarget().getActualTime().getHour();
         totalMin = myUser.getSleepTarget().getActualTime().getMinute() +  myUser.getStudyTarget().getActualTime().getMinute();
         for(MyTarget tempT :myUser.getMyTargetList()){
+
             totalHour += tempT.getActualTime().getHour();
             totalMin += tempT.getActualTime().getMinute();
         }
@@ -138,6 +140,48 @@ public class MySystem implements Serializable {
         return mark;
     }
 
+
+    public long getCurrentMaxExp(){
+        return ((long) (basicExp * Math.pow(2,myUser.getMyAttributes().getLevel())));
+    }
+
+    public boolean checkLevelUp(){
+        long currentExp = myUser.getMyAttributes().getExp();
+        int currentLevel = myUser.getMyAttributes().getLevel();
+        if( currentExp >= getCurrentMaxExp()){
+            myUser.getMyAttributes().setExp(currentExp-getCurrentMaxExp());
+            myUser.getMyAttributes().setLevel(currentLevel+1);
+            return true;
+        }
+        return false;
+    }
+
+    public void checkLevelInfo(){
+        double exp = 0;
+        int level = 0;
+        long tempMax = basicExp;
+        for(MyTarget tempT: this.myUser.getMyTargetList()){
+            if(tempT.getStatus() == 1){
+                exp += 10;
+            }
+            if(tempT.getType() == 1){
+                exp += tempT.getActualTime().getTotalHour();
+            }
+        }
+
+      //  Log.d("MySystem: ", String.format("%f",(exp/tempMax)));
+        while((int)(exp/tempMax) != 0){
+
+            exp -= tempMax;
+            level++;
+            tempMax = ((long) (basicExp * Math.pow(2,level)));
+
+        }
+
+        myUser.getMyAttributes().setExp((long) exp);
+        myUser.getMyAttributes().setLevel(level);
+
+    }
     
 
     public boolean connectServer(){
