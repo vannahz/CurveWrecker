@@ -74,12 +74,20 @@ public class MyTime implements Serializable {
         this.second = second;
     }
 
+    public int getTotalSeconds(){
+        return (this.hour * 60 + this.minute)*60 + this.second;
+    }
+
     public int getMinute() {
         return minute;
     }
 
     public void setMinute(int minute) {
         this.minute = minute;
+    }
+
+    public int getTotalMinute(){
+        return this.hour*60 + this.minute;
     }
 
     public int getHour() {
@@ -104,6 +112,7 @@ public class MyTime implements Serializable {
         this.day = day;
     }
 
+
     public int getMonth() {
         return month;
     }
@@ -113,6 +122,11 @@ public class MyTime implements Serializable {
         this.month = month;
     }
 
+    public void resetTimeBySec(int newSec){
+        this.hour = newSec/3600;
+        this.minute = newSec/60 - this.hour * 60;
+        this.second = newSec%60;
+    }
 
     public int getYear() {
         return year;
@@ -122,6 +136,22 @@ public class MyTime implements Serializable {
         this.year = year;
     }
 
+
+    public boolean equal(MyTime tempT){
+
+        return (this.getYear() == tempT.getYear()
+                && this.getMonth() == tempT.getMonth()
+                && this.getDay() == tempT.getDay()
+                && this.getHour() == tempT.getHour()
+                && this.getMinute() == tempT.getMinute()
+                && this.getSecond() == tempT.getSecond());
+    }
+
+    public boolean equalDate(MyTime tempT){
+        return (this.getYear() == tempT.getYear()
+                && this.getMonth() == tempT.getMonth()
+                && this.getDay() == tempT.getDay());
+    }
     public MyTime copy(){
         MyTime newTime = new MyTime();
         newTime.setSecond(this.second);

@@ -29,6 +29,9 @@ public class MyUser implements Serializable {
     private MyTarget studyTarget;                           //similar as the above
                                                             //Thus,the total time should be the total target time in list plus today's target
 
+    private float totalStudyTime;                           //study time from the first day to last day
+    private int totalDay;                                   //day from the first day
+
 
     public MyUser(){
         uid = 0;
@@ -50,6 +53,8 @@ public class MyUser implements Serializable {
         myFriendsList = new ArrayList<>();
         sleepTarget = new MyTarget(0);
         studyTarget = new MyTarget(1);
+        totalStudyTime = 0;
+        totalDay = 0;
 
     }
 
@@ -73,6 +78,8 @@ public class MyUser implements Serializable {
         myFriendsList = new ArrayList<>();
         sleepTarget = new MyTarget(0, new MyTime(sleepMin,sleepHour));
         studyTarget = new MyTarget(1,new MyTime(0,1));
+        totalStudyTime = 0;
+        totalDay = 0;
     }
 
     public void initialFakeData(){
@@ -117,10 +124,12 @@ public class MyUser implements Serializable {
         MyFriend tempF2 = new MyFriend(2112,"friend2",0,"",2,5,4,sleepTime.copy(),studyTime.copy(),myAttributes.copy());
         myFriendsList.add(tempF1);
         myFriendsList.add(tempF2);
-        sleepTarget = new MyTarget(0, new MyTime(0,8));
-        studyTarget = new MyTarget(1, new MyTime(0,2));
+        sleepTarget = new MyTarget(0, sleepTime.copy());
+        studyTarget = new MyTarget(1, studyTime.copy());
         sleepTarget.setActualTime(new MyTime(0,8));
         studyTarget.setActualTime(new MyTime(0,1));
+
+        totalDay = 11;
 
 
     }
@@ -342,6 +351,22 @@ public class MyUser implements Serializable {
     }
 
 
+    public float getTotalStudyTime() {
+        return totalStudyTime;
+    }
+
+    public void setTotalStudyTime(float totalStudyTime) {
+        this.totalStudyTime = totalStudyTime;
+    }
+
+    public int getTotalDay() {
+        return totalDay;
+    }
+
+    public void setTotalDay(int totalDay) {
+        this.totalDay = totalDay;
+    }
+
     public MyUser copy(){
         MyUser newUser = new MyUser();
 
@@ -372,6 +397,7 @@ public class MyUser implements Serializable {
         for(MyStar p : this.myStarList){
             newUser.addMyStar(p);
         }
+        newUser.setTotalStudyTime(this.totalStudyTime);
 
         return newUser;
 

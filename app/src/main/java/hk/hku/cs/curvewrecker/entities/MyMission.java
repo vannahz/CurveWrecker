@@ -19,11 +19,23 @@ public class MyMission implements Serializable {
         name = "";
         type = 0;
         strTime = new MyTime();
+        strTime.getCurrentTime();
         targetTime = new MyTime();
-        remainTime = this.targetTime;
+        remainTime = this.targetTime.copy();
         endTime = new MyTime();
         status = false;
 
+    }
+
+    public MyMission(int type, MyTime targetTime){
+        this.name = "";
+        this.type = type;
+        this.strTime = new MyTime();
+        strTime.getCurrentTime();
+        this.targetTime = targetTime;
+        this.remainTime = this.targetTime.copy();
+        this.endTime = new MyTime();
+        status = false;
     }
 
     public MyMission(String name, int type, MyTime strTime, MyTime targetTime) {
@@ -31,7 +43,7 @@ public class MyMission implements Serializable {
         this.type = type;
         this.strTime = strTime;
         this.targetTime = targetTime;
-        this.remainTime = this.targetTime;
+        this.remainTime = this.targetTime.copy();
         this.endTime = new MyTime();
         status = false;
     }
@@ -80,7 +92,7 @@ public class MyMission implements Serializable {
 
     //when time is over, it will return false, otherwise it will return true
     public boolean decreaseRemainTime(){
-            //time is 00:00:00
+    /*        //time is 00:00:00
         if(this.remainTime.getHour() == 0 && this.remainTime.getMinute() == 0 && this.remainTime.getSecond() == 0){
             status = true;
             return false;
@@ -103,7 +115,24 @@ public class MyMission implements Serializable {
         //time is 01:01:32
         else{
             this.remainTime.setSecond(this.remainTime.getSecond() - 1);
+        }*/
+        int totalS = this.getRemainTime().getTotalSeconds();
+        totalS--;
+        if(totalS < 0){
+            return false;
         }
+
+        if(totalS == 0){
+            status = true;
+            this.getRemainTime().setHour(0);
+            this.getRemainTime().setMinute(0);
+            this.getRemainTime().setSecond(0);
+        }else{
+            this.getRemainTime().setHour(totalS/3600);
+            this.getRemainTime().setMinute(totalS/60 - this.getRemainTime().getHour() * 60);
+            this.getRemainTime().setSecond(totalS%60);
+        }
+
 
         return true;
 

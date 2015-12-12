@@ -35,6 +35,7 @@ public class MySystem implements Serializable {
 
     public void initialFakeData(){
         myUser.initialFakeData();
+        updateTotalStudyTime();
     }
 
 
@@ -97,6 +98,8 @@ public class MySystem implements Serializable {
 
     }
 
+
+    //the total hour for sleep + study
     public int getTotalHour(){
         int totalHour = 0;
         int totalMin = 0;
@@ -182,7 +185,100 @@ public class MySystem implements Serializable {
         myUser.getMyAttributes().setLevel(level);
 
     }
-    
+
+    public void updateTotalStudyTime(){
+        float tempTotal = 0;
+        for(MyTarget tempT:this.getMyUser().getMyTargetList()){
+            if(tempT.getType() == 1){
+                tempTotal += tempT.getActualTime().getTotalHour();
+            }
+        }
+
+        this.getMyUser().setTotalStudyTime(tempTotal);
+    }
+
+    public void addTotalStudyTime(MyTarget studyTarget){
+        float tempTotal = this.getMyUser().getTotalStudyTime();
+        if(studyTarget.getType() == 1){
+            tempTotal += studyTarget.getActualTime().getTotalHour();
+        }
+
+        this.getMyUser().setTotalStudyTime(tempTotal);
+    }
+
+    public float getAverageStudyTime(){
+        return this.getMyUser().getTotalStudyTime()/this.getMyUser().getTotalDay();
+    }
+
+    private void addExp(int addedV){
+        this.myUser.getMyAttributes().setExp(this.myUser.getMyAttributes().getExp() + addedV);
+        checkLevelUp();
+    }
+
+    private void convertMission(MyMission myMission){
+        int preS = 0;
+        int crtS = 0;
+        if(myMission.getType() == 0){
+
+            preS = this.getMyUser().getSleepTarget().getActualTime().getTotalSeconds();
+            if(myMission.isDone()) {
+                crtS = myMission.getTargetTime().getTotalSeconds();
+            }
+            else{
+                crtS = myMission.getTargetTime().getTotalSeconds() - myMission.getRemainTime().getTotalSeconds();
+
+            }
+
+            this.getMyUser().getSleepTarget().getActualTime().resetTimeBySec(preS+crtS);
+        }
+        else{
+
+            preS = this.getMyUser().getStudyTarget().getActualTime().getTotalSeconds();
+
+            if(myMission.isDone()) {
+                crtS = myMission.getTargetTime().getTotalSeconds();
+            }
+            else{
+                crtS = myMission.getTargetTime().getTotalSeconds() - myMission.getRemainTime().getTotalSeconds();
+            }
+            this.getMyUser().getStudyTarget().getActualTime().resetTimeBySec(preS+crtS);
+        }
+    }
+
+    public void addMissionToTarget(MyMission myMission){
+        int preMark = getCurrentMark();
+        int crtMark = 0;
+
+        if(myMission.getStrTime().equalDate(myMission.getEndTime())){
+            convertMission(myMission);
+            crtMark = getCurrentMark();
+            int newExp = crtMark - preMark;
+            addExp(newExp);
+        }
+        else{
+            if(myMission.getType() == 0){
+                this.myUser.getMyTargetList().add(this.myUser.getSleepTarget().copy());
+                this.myUser.setSleepTarget(new MyTarget(0, this.myUser.getSleepTime().copy()));
+                convertMission(myMission);
+                crtMark = getCurrentMark();
+                int newExp = crtMark;
+                addExp(newExp);
+            }
+            else{
+                this.myUser.getMyTargetList().add(this.myUser.getStudyTarget().copy());
+                this.myUser.setStudyTarget(new MyTarget(1, this.myUser.getStudyTime().copy()));
+                convertMission(myMission);
+                crtMark = getCurrentMark();
+                int newExp = crtMark;
+                addExp(newExp);
+            }
+
+        }
+    }
+
+    public void addTotalDay(){
+        this.getMyUser().setTotalDay(this.getMyUser().getTotalDay()+1);
+    }
 
     public boolean connectServer(){
         return false;

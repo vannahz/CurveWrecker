@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView friendNo;
     private TextView totalHour;
     private TextView rank;
+    private TextView studyTime;
     private RoundImageView avatar;
 
     @Override
@@ -76,9 +77,10 @@ public class MainActivity extends AppCompatActivity {
         currentMark.setText(String.format("%d", mySystem.getCurrentMark()));
         float tempSleepTime = mySystem.getMyUser().getSleepTarget().getActualTime().getTotalHour();
         sleepTime.setText(String.format("%.1f", tempSleepTime));
-        float tempStudyTime = mySystem.getMyUser().getStudyTarget().getActualTime().getTotalHour();
-        preStudyTime.setText(String.format("%.1f", tempStudyTime));
-
+        int tempStudyTime = mySystem.getMyUser().getStudyTarget().getActualTime().getTotalMinute();
+        studyTime.setText(String.format("%d min", tempStudyTime));
+        float tempPreStudy = mySystem.getAverageStudyTime();
+        preStudyTime.setText(String.format("%.1f", tempPreStudy));
 
         View.OnClickListener handler = new View.OnClickListener(){
             public void onClick(View v){
@@ -191,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
         currentMark = (TextView) findViewById(R.id.score);
         sleepTime = (TextView) findViewById(R.id.sleep);
         preStudyTime = (TextView) findViewById(R.id.yesterday);
+        studyTime = (TextView) findViewById(R.id.studyTime);
 
     }
 
