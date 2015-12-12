@@ -51,8 +51,8 @@ public class StudySetting extends AppCompatActivity {
         crtTime = new MyTime();
 
         //initial string
-        myHour = 1;
-        myMin = 0;
+        myHour = mySystem.getMyUser().getStudyTime().getHour();
+        myMin = mySystem.getMyUser().getStudyTime().getMinute();
 
         //设置Toolbar
         toolbar_title = (TextView)findViewById(R.id.toolbar_title);
@@ -70,7 +70,7 @@ public class StudySetting extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ChangeTimeDialog mChangeBirthDialog = new ChangeTimeDialog(StudySetting.this);
-                mChangeBirthDialog.setDate(1, 0);
+                mChangeBirthDialog.setDate(myHour, myMin);
                 mChangeBirthDialog.show();
                 mChangeBirthDialog.setTimeListener(new ChangeTimeDialog.OnTimeListener() {
                     @Override
