@@ -40,10 +40,10 @@ public class StudySetting extends AppCompatActivity {
         studySetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ChangeBirthDialog mChangeBirthDialog = new ChangeBirthDialog(StudySetting.this);
+                ChangeTimeDialog mChangeBirthDialog = new ChangeTimeDialog(StudySetting.this);
                 mChangeBirthDialog.setDate(1, 0);
                 mChangeBirthDialog.show();
-                mChangeBirthDialog.setTimeListener(new ChangeBirthDialog.OnTimeListener() {
+                mChangeBirthDialog.setTimeListener(new ChangeTimeDialog.OnTimeListener() {
                     @Override
                     public void onClick(String hour, String minute) {
                         Toast.makeText(StudySetting.this,hour + ":" + minute,Toast.LENGTH_LONG).show();

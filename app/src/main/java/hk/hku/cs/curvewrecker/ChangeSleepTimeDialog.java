@@ -1,13 +1,13 @@
 package hk.hku.cs.curvewrecker;
 
-import java.util.ArrayList;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import hk.hku.cs.curvewrecker.wheel.widget.adapters.AbstractWheelTextAdapter;
 import hk.hku.cs.curvewrecker.wheel.widget.views.OnWheelChangedListener;
@@ -20,7 +20,7 @@ import hk.hku.cs.curvewrecker.wheel.widget.views.WheelView;
  * @author vannahz
  *
  */
-public class ChangeBirthDialog extends Dialog implements View.OnClickListener {
+public class ChangeSleepTimeDialog extends Dialog implements View.OnClickListener {
 
 	private Context context;
 	private WheelView wvHour;
@@ -38,7 +38,7 @@ public class ChangeBirthDialog extends Dialog implements View.OnClickListener {
 
 	private int minute;
 
-	private int currentHour = 1;
+	private int currentHour = 8;
 	private int currentMinute = 0;
 
 	private int maxTextSize = 24;
@@ -51,7 +51,7 @@ public class ChangeBirthDialog extends Dialog implements View.OnClickListener {
 
 	private OnTimeListener onTimeListener;
 
-	public ChangeBirthDialog(Context context) {
+	public ChangeSleepTimeDialog(Context context) {
 		super(context, R.style.ShareDialog);
 		this.context = context;
 	}
@@ -145,7 +145,7 @@ public class ChangeBirthDialog extends Dialog implements View.OnClickListener {
 	}
 
 	public void initHours() {
-		for (int i = 0; i <= 4; i++) {
+		for (int i = 4; i <= 14; i++) {
 			arry_hours.add(i + "");
 		}
 	}
@@ -231,7 +231,7 @@ public class ChangeBirthDialog extends Dialog implements View.OnClickListener {
 	}
 
 	public void initData() {
-		setDate(1, 0);
+		setDate(8, 0);
 		this.currentMinute = 0;
 	}
 
@@ -256,7 +256,7 @@ public class ChangeBirthDialog extends Dialog implements View.OnClickListener {
 	 */
 	public int setHour(int hour) {
 		int hourIndex = 0;
-		for (int i = 0; i<=4; i++) {
+		for (int i = 4; i<=14; i++) {
 			if (i == hour) {
 				return hourIndex;
 			}
