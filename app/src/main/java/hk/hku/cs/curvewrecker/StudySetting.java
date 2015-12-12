@@ -71,7 +71,7 @@ public class StudySetting extends AppCompatActivity {
     //go to time content
     public void goToStudying() {
 
-        setContentView(R.layout.study_content);
+        setContentView(R.layout.studying);
 
         toolbar_title = (TextView)findViewById(R.id.toolbar_title);
         toolbar_title.setText("Studying");
