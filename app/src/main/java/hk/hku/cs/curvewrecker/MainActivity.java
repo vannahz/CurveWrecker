@@ -91,12 +91,14 @@ public class MainActivity extends AppCompatActivity {
                         //passing data by this method
                         intent.putExtra("MySystem",mySystem);
                         startActivity(intent);
+                        finish();
                         break;
                     case R.id.sleep_btn:
                         intent = new Intent(MainActivity.this, SleepSetting.class);
                         //passing data by this method
                         intent.putExtra("MySystem",mySystem);
                         startActivity(intent);
+                        finish();
                         break;
                     case R.id.calendar_btn:
                         intent = new Intent(MainActivity.this, Calendar.class);

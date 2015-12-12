@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -29,6 +30,7 @@ public class StudySetting extends AppCompatActivity {
     private Button start_btn;
     private LinearLayout studySetting;
     private TextView study_hour, study_minute;
+    private Intent intent;
     private MySystem mySystem;
     MyTime preTime;
     MyTime crtTime;
@@ -118,9 +120,11 @@ public class StudySetting extends AppCompatActivity {
         Button giveup_btn = (Button)findViewById(R.id.giveup_btn);
         giveup_btn.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+
+
                 myCount.cancel();
                 mySystem.getMyUser().getCrtMission().setStatus(true);
-                Intent intent = new Intent(StudySetting.this, StudyResult.class);
+                intent = new Intent(StudySetting.this, StudyResult.class);
                 mySystem.getMyUser().getCrtMission().getEndTime().getCurrentTime();
                 mySystem.addMissionToTarget(mySystem.getMyUser().getCrtMission());
                 intent.putExtra("MySystem", mySystem);
@@ -172,6 +176,17 @@ public class StudySetting extends AppCompatActivity {
             }
         });
         newThread.start();*/
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            intent = new Intent(StudySetting.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return false;
     }
 
     class MyCount extends CountDownTimer {

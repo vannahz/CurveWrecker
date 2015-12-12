@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ public class StudyResult extends AppCompatActivity {
     private Button return_btn;
     private Toolbar toolbar;
     private TextView toolbar_title;
+    private Intent intent;
     private MySystem mySystem;
     private TextView todayTime;
     private TextView currentTime;
@@ -46,6 +48,8 @@ public class StudyResult extends AppCompatActivity {
         return_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                intent = new Intent(StudyResult.this, MainActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -59,6 +63,18 @@ public class StudyResult extends AppCompatActivity {
                 - mySystem.getMyUser().getCrtMission().getRemainTime().getTotalSeconds());
         currentTime.setText(tempT.getHour() + "h"
                 + tempT.getMinute() + "min");
+
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            intent = new Intent(StudyResult.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return false;
     }
 
 }
