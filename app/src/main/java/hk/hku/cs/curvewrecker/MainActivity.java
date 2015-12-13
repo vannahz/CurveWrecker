@@ -371,6 +371,7 @@ public class MainActivity extends AppCompatActivity {
     public void postMethod(final String params)
     {
         new Thread(new Runnable() {
+
             @Override
             public void run() {
                 try {
@@ -403,6 +404,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }).start();
+
     }
 
     public void getMethod(final String params)
