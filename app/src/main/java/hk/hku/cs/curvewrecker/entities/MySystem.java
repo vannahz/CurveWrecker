@@ -278,15 +278,15 @@ public class MySystem implements Serializable {
             addExp(newExp);
         }
         else{
+            updateStar();
             if(myMission.getType() == 0){
-                updateStar(0);
                 convertMission(myMission);
                 crtMark = getCurrentMark();
                 int newExp = crtMark;
                 addExp(newExp);
             }
             else{
-                updateStar(1);
+
                 convertMission(myMission);
                 crtMark = getCurrentMark();
                 int newExp = crtMark;
@@ -297,16 +297,20 @@ public class MySystem implements Serializable {
         }
     }
 
-    private void updateStar(int type) {
-        if(type == 0){
-            this.myUser.getMyTargetList().add(this.myUser.getSleepTarget().copy());
-            this.myUser.setSleepTarget(new MyTarget(0, this.myUser.getSleepTime().copy()));
+    private void updateStar() {
+
+        if(this.myUser.getSleepTarget().getActualTime().getTotalSeconds() > this.myUser.getSleepTarget().getTargetTime().getTotalSeconds()){
+
         }
-        else
-        {
-            this.myUser.getMyTargetList().add(this.myUser.getStudyTarget().copy());
-            this.myUser.setStudyTarget(new MyTarget(1, this.myUser.getStudyTime().copy()));
-        }
+        this.myUser.getMyTargetList().add(this.myUser.getSleepTarget().copy());
+
+        this.myUser.setSleepTarget(new MyTarget(0, this.myUser.getSleepTime().copy()));
+
+
+
+        this.myUser.getMyTargetList().add(this.myUser.getStudyTarget().copy());
+        this.myUser.setStudyTarget(new MyTarget(1, this.myUser.getStudyTime().copy()));
+
     }
 
     public MyTime getAverageSleep(){
