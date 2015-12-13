@@ -262,7 +262,7 @@ public class MySystem implements Serializable {
                 crtS = myMission.getTargetTime().getTotalSeconds() - myMission.getRemainTime().getTotalSeconds();
             }
 
-            this.getMyUser().getStudyTarget().getActualTime().resetTimeBySec(preS+crtS);
+            this.getMyUser().getStudyTarget().getActualTime().resetTimeBySec(preS + crtS);
          //   Log.d("####MySystem: total-", String.format("%d", this.getMyUser().getStudyTarget().getActualTime().getTotalSeconds()));
         }
     }
@@ -279,16 +279,14 @@ public class MySystem implements Serializable {
         }
         else{
             if(myMission.getType() == 0){
-                this.myUser.getMyTargetList().add(this.myUser.getSleepTarget().copy());
-                this.myUser.setSleepTarget(new MyTarget(0, this.myUser.getSleepTime().copy()));
+                updateStar(0);
                 convertMission(myMission);
                 crtMark = getCurrentMark();
                 int newExp = crtMark;
                 addExp(newExp);
             }
             else{
-                this.myUser.getMyTargetList().add(this.myUser.getStudyTarget().copy());
-                this.myUser.setStudyTarget(new MyTarget(1, this.myUser.getStudyTime().copy()));
+                updateStar(1);
                 convertMission(myMission);
                 crtMark = getCurrentMark();
                 int newExp = crtMark;
@@ -296,6 +294,18 @@ public class MySystem implements Serializable {
             }
             updateTotalDay();
 
+        }
+    }
+
+    private void updateStar(int type) {
+        if(type == 0){
+            this.myUser.getMyTargetList().add(this.myUser.getSleepTarget().copy());
+            this.myUser.setSleepTarget(new MyTarget(0, this.myUser.getSleepTime().copy()));
+        }
+        else
+        {
+            this.myUser.getMyTargetList().add(this.myUser.getStudyTarget().copy());
+            this.myUser.setStudyTarget(new MyTarget(1, this.myUser.getStudyTime().copy()));
         }
     }
 

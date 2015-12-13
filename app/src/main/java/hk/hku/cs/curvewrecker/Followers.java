@@ -60,6 +60,8 @@ public class Followers extends AppCompatActivity{
     public String id = "";
     public String name = "";
     public String mark = "";
+    private MyFriend myFriend;
+    Intent intent;
 
     List<Map<String, Object>> list;
 
@@ -78,6 +80,7 @@ public class Followers extends AppCompatActivity{
 
         Intent tempI = getIntent();
         mySystem = (MySystem)tempI.getSerializableExtra("MySystem");
+        myFriend = new MyFriend();
         handlerTest();
 
         lv_follower = (ListView)findViewById(R.id.lv_followers);
@@ -92,7 +95,18 @@ public class Followers extends AppCompatActivity{
         search_btn.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 addFriends();
-                adapter.notifyDataSetChanged();
+              //  adapter.notifyDataSetChanged();
+
+                intent = new Intent(Followers.this, Friends.class);
+                intent.putExtra("MySystem", mySystem);
+                while(myFriend.getName() == "") {
+
+                }
+                intent.putExtra("MyFriend", myFriend.copy());
+                startActivity(intent);
+                finish();
+
+
             }
         });
 
@@ -100,13 +114,13 @@ public class Followers extends AppCompatActivity{
         lv_follower.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent;
                 //Log.v("msg", "click");
                 intent = new Intent(Followers.this, Friends.class);
                 intent.putExtra("MySystem", mySystem);
-                intent.putExtra("Position", String.valueOf(position));
+                intent.putExtra("MyFriend", mySystem.getMyUser().getMyFriendsList().get(position).copy());
                 //System.out.println(String.valueOf(position));
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -208,7 +222,9 @@ public class Followers extends AppCompatActivity{
                 result = msg;
                 //System.out.println(result);
                 getJason(result);
-                mySystem.getMyUser().addMyFriend(new MyFriend(Integer.parseInt(id), name, Integer.parseInt(mark)));
+                myFriend = new MyFriend(Integer.parseInt(id), name, Integer.parseInt(mark));
+                //Log.d("Followers:", myFriend.toString());
+                mySystem.getMyUser().addMyFriend(myFriend.copy());
                 mySystem.saveFile();
                 Message message = new Message();
                 message.what=1;

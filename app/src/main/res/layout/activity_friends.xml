@@ -49,6 +49,13 @@
                 android:text="90 marks"
                 android:textColor="#f00"
                 android:textSize="30sp"/>
+            <Button android:id="@+id/add_friends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal"
+                android:layout_margin="10dp"
+                android:text="add me"
+                android:textColor="@color/colorPrimary"/>
         </LinearLayout>
     </LinearLayout>
 
