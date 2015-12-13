@@ -22,6 +22,7 @@ public class StudyResult extends AppCompatActivity {
     private MySystem mySystem;
     private TextView todayTime;
     private TextView currentTime;
+    private TextView resultS;
 
 
     @Override
@@ -29,6 +30,7 @@ public class StudyResult extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.study_result);
         return_btn = (Button) findViewById(R.id.return_btn);
+        resultS = (TextView) findViewById(R.id.dress_img);
 
         //get mysystem
         Intent tempI = getIntent();
@@ -37,9 +39,11 @@ public class StudyResult extends AppCompatActivity {
 
         toolbar_title = (TextView)findViewById(R.id.toolbar_title);
         if(mySystem.getMyUser().getCrtMission().isDone()){
+            resultS.setText("Success!^.^");
             toolbar_title.setText("Study Success");
         }
         else {
+            resultS.setText("Failed!T.T");
             toolbar_title.setText("Study Fail");
         }
         toolbar = (Toolbar) findViewById(R.id.toolbar);
