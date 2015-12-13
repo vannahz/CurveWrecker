@@ -155,8 +155,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.rank_btn:
                         mySystem.getMyUser().setMyRank(new MyRank());
                         getRank();
-                        while(mySystem.getMyUser().getMyRank().getMySubRankList().size() <5 ){
-
+                        while(mySystem.getMyUser().getMyRank().getMySubRankList().size() < 5 ){
+                             //Log.d("!!!", "!!!!!!");
                         }
                         intent = new Intent(hk.hku.cs.curvewrecker.MainActivity.this, Ranking.class);
                         intent.putExtra("MySystem", mySystem);
@@ -208,25 +208,29 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent;
                 switch (position) {
+
                     case 0:
-                        break;
-                    case 1:
                         intent = new Intent(hk.hku.cs.curvewrecker.MainActivity.this, Calendar.class);
                         intent.putExtra("MySystem", mySystem);
                         startActivity(intent);
                         break;
-                    case 2:
+                    case 1:
                         intent = new Intent(hk.hku.cs.curvewrecker.MainActivity.this, Followers.class);
                         intent.putExtra("MySystem", mySystem);
                         startActivity(intent);
                         finish();
                         break;
-                    case 3:
+                    case 2:
+                        mySystem.getMyUser().setMyRank(new MyRank());
+                        getRank();
+                        while(mySystem.getMyUser().getMyRank().getMySubRankList().size() < 5 ){
+                            //Log.d("!!!", "!!!!!!");
+                        }
                         intent = new Intent(hk.hku.cs.curvewrecker.MainActivity.this, Ranking.class);
                         intent.putExtra("MySystem", mySystem);
                         startActivity(intent);
                         break;
-                    case 4:
+                    case 3:
                         intent = new Intent(hk.hku.cs.curvewrecker.MainActivity.this, Setting.class);
                         intent.putExtra("MySystem", mySystem);
                         startActivity(intent);
@@ -303,9 +307,6 @@ public class MainActivity extends AppCompatActivity {
     private List<Map<String, Object>> getData() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("img", R.drawable.icalender);
-        map.put("text", "Daily Record");
-        list.add(map);
 
         map = new HashMap<String, Object>();
         map.put("img", R.drawable.star);
@@ -354,13 +355,13 @@ public class MainActivity extends AppCompatActivity {
                 {
                     //Register successfully!
                     case 1:
-                        Toast.makeText(hk.hku.cs.curvewrecker.MainActivity.this, msg.getData().getString("msg"),
-                                Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(hk.hku.cs.curvewrecker.MainActivity.this, msg.getData().getString("msg"),
+                                //Toast.LENGTH_SHORT).show();
                         break;
                     //Register Failure!
                     case 2:
-                        Toast.makeText(hk.hku.cs.curvewrecker.MainActivity.this, msg.getData().getString("msg"),
-                                Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(hk.hku.cs.curvewrecker.MainActivity.this, msg.getData().getString("msg"),
+                                //Toast.LENGTH_SHORT).show();
                         break;
 
                 }

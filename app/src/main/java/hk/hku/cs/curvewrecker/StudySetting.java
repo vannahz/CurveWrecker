@@ -79,7 +79,7 @@ public class StudySetting extends AppCompatActivity {
                     public void onClick(String hour, String minute) {
                         myHour = Integer.parseInt(hour);
                         myMin = Integer.parseInt(minute);
-                        Toast.makeText(StudySetting.this, hour + ":" + minute, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(StudySetting.this, hour + ":" + minute, Toast.LENGTH_LONG).show();
                         study_hour.setText("0" + hour);
 
                         if (Integer.parseInt(minute) < 10)

@@ -84,52 +84,66 @@ public class MyUser implements Serializable {
 
     public void initialFakeData(){
 
-        uid = 1111;
-        name = "testUser";
-        gender = 0;
-        imgPath = 0;
-        title = 0;
-        sleepTime = new MyTime(0,8);
-        studyTime = new MyTime(0,2);
-        targetFinished = 3;
-        targetNotFinished = 2;
-        myRank = new MyRank();
-        myRank.initialFakeData();
-        myDress = new MyDress();
-        crtMission = new MyMission();
-        myAttributes = new MyAttributes(0,10,1,2,2,2);
-        myPlanList = new ArrayList<>();
-        myTargetList = new ArrayList<>();
-        MyTarget tempT1 = new MyTarget(0);
-        tempT1.setTargetTime(new MyTime(0, 7));
-        tempT1.setActualTime(new MyTime(0, 8));
-        tempT1.setDate(new MyTime(1, 12, 2015));
-        tempT1.setStatus(1);
-        MyTarget tempT2 = new MyTarget(1);
-        tempT2.setTargetTime(new MyTime(0, 2));
-        tempT2.setActualTime(new MyTime(0, 3));
-        tempT2.setDate(new MyTime(2, 12, 2015));
-        tempT2.setStatus(1);
-
-        myTargetList.add(tempT1);
-        myTargetList.add(tempT2);
+    //        uid = 1111;
+    //        name = "testUser";
+    //        gender = 0;
+    //        imgPath = 0;
+    //        title = 0;
+    //        sleepTime = new MyTime(0,8);
+    //        studyTime = new MyTime(0,2);
+    //        targetFinished = 3;
+    //        targetNotFinished = 2;
+    //        myRank = new MyRank();
+    //        myRank.initialFakeData();
+    //        myDress = new MyDress();
+    //        crtMission = new MyMission();
+    //        myAttributes = new MyAttributes(0,10,1,2,2,2);
+    //        myPlanList = new ArrayList<>();
+    //        myTargetList = new ArrayList<>();
 
 
-        myStarList = new ArrayList<>();
+            MyTarget tempT1;
+            for(int d = 1; d < 14; d++){
+                tempT1 = new MyTarget(0);
+                tempT1.setTargetTime(new MyTime(0, 0));
+                tempT1.setActualTime(new MyTime(0, 0));
+                tempT1.setDate(new MyTime(d, 12, 2015));
+                tempT1.setStatus(1);
+                myTargetList.add(tempT1.copy());
+            }
 
-        MyStar tempS = new MyStar(new MyTime(3,12,2015));
-        myStarList.add(tempS);
-        myFriendsList = new ArrayList<>();
-        MyFriend tempF1 = new MyFriend(2111,"friend1",1,0,1,3,3,sleepTime.copy(),studyTime.copy(),myAttributes.copy(),34);
-        MyFriend tempF2 = new MyFriend(2112,"friend2",0,0,2,5,4,sleepTime.copy(),studyTime.copy(),myAttributes.copy(),23);
-        myFriendsList.add(tempF1);
-        myFriendsList.add(tempF2);
-        sleepTarget = new MyTarget(0, sleepTime.copy());
-        studyTarget = new MyTarget(1, studyTime.copy());
-        sleepTarget.setActualTime(new MyTime(0,8));
-        studyTarget.setActualTime(new MyTime(0,1));
+            MyTarget tempT2 = new MyTarget(1);
+            for(int d = 5; d < 11; d++){
+                tempT2 = new MyTarget(1);
+                tempT2.setTargetTime(new MyTime(0, 0));
+                tempT2.setActualTime(new MyTime(0, 0));
+                tempT2.setDate(new MyTime(d, 12, 2015));
+                tempT2.setStatus(1);
+                myTargetList.add(tempT2.copy());
+            }
 
-        totalDay = 11;
+
+            //myTargetList.add(tempT2);
+
+
+            myStarList = new ArrayList<>();
+           // MyStar tempS1 = new MyStar(new MyTime(3,12,2015));
+           // myStarList.add(tempS1.copy());
+            MyStar tempS2 = new MyStar(new MyTime(8,12,2015));
+            myStarList.add(tempS2.copy());
+            MyStar tempS3 = new MyStar(new MyTime(11,12,2015));
+            myStarList.add(tempS3.copy());
+    //        myFriendsList = new ArrayList<>();
+    //        MyFriend tempF1 = new MyFriend(2111,"friend1",1,0,1,3,3,sleepTime.copy(),studyTime.copy(),myAttributes.copy(),34);
+    //        MyFriend tempF2 = new MyFriend(2112,"friend2",0,0,2,5,4,sleepTime.copy(),studyTime.copy(),myAttributes.copy(),23);
+    //        myFriendsList.add(tempF1);
+    //        myFriendsList.add(tempF2);
+    //        sleepTarget = new MyTarget(0, sleepTime.copy());
+    //        studyTarget = new MyTarget(1, studyTime.copy());
+    //        sleepTarget.setActualTime(new MyTime(0,8));
+    //        studyTarget.setActualTime(new MyTime(0,1));
+    //
+    //        totalDay = 11;
 
 
     }

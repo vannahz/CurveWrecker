@@ -355,7 +355,7 @@ public class MySystem implements Serializable {
 
 
     public void addTotalDay() {
-        this.getMyUser().setTotalDay(this.getMyUser().getTotalDay()+1);
+        this.getMyUser().setTotalDay(this.getMyUser().getTotalDay() + 1);
     }
 
     public boolean connectServer(){
@@ -378,6 +378,20 @@ public class MySystem implements Serializable {
 
     }
 
+    public MyTime getFirstLoginDate(){
+        return this.firstLoginDate;
+    }
+
+    public void setFirstLoginDate(MyTime tempD){
+        this.firstLoginDate = tempD.copy();
+    }
+
+  /*  public MySystem copy(){
+        MySystem newSystem = new MySystem();
+        newSystem.setMyUser(this.getMyUser().copy());
+        newSystem.setLastLoginDate(this.getLastLoginDate().copy());
+        newSystem.firstLoginDate
+    }*/
     //uid need to be signed by the system, so need to check database to get the uid value
 
 }

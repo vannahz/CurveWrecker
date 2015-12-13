@@ -39,11 +39,11 @@ public class StudyResult extends AppCompatActivity {
 
         toolbar_title = (TextView)findViewById(R.id.toolbar_title);
         if(mySystem.getMyUser().getCrtMission().isDone()){
-            resultS.setText("Success!^.^");
+            resultS.setText("Success!\n^.^");
             toolbar_title.setText("Study Success");
         }
         else {
-            resultS.setText("Failed!T.T");
+            resultS.setText("Failed!\nT.T");
             toolbar_title.setText("Study Fail");
         }
         toolbar = (Toolbar) findViewById(R.id.toolbar);

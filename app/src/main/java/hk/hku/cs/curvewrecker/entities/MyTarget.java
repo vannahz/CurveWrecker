@@ -36,7 +36,7 @@ public class MyTarget implements Serializable {
         this.type = type;
         this.date = new MyTime();
         this.date.getCurrentTime();
-        this.targetTime = targetTime;
+        this.targetTime = targetTime.copy();
         this.actualTime = new MyTime();
         this.status = 0;
     }

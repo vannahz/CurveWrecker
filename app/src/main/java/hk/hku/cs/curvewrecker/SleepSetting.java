@@ -77,7 +77,7 @@ public class SleepSetting extends AppCompatActivity {
                     public void onClick(String hour, String minute) {
                         myHour = Integer.parseInt(hour);
                         myMin = Integer.parseInt(minute);
-                        Toast.makeText(SleepSetting.this, hour + ":" + minute, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(SleepSetting.this, hour + ":" + minute, Toast.LENGTH_LONG).show();
                         sleep_hour.setText("0" + hour);
 
                         if (Integer.parseInt(minute) < 10)

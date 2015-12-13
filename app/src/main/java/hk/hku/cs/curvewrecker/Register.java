@@ -70,8 +70,11 @@ public class Register extends AppCompatActivity {
             finish();
         }
 
+       // MyTime tempT = new MyTime();
+       // tempT.getCurrentTime();
+       // mySystem.setFirstLoginDate(tempT);
         //initial
-        mySystem.initialFakeData();
+        //mySystem.initialFakeData();
         myHour = 8;
         myMin = 0;
 
@@ -159,10 +162,10 @@ public class Register extends AppCompatActivity {
                 mySystem.initialMyUser();
 
                 //for test
-                mySystem.getMyUser().getSleepTarget().getActualTime().setHour(8);
-                mySystem.getMyUser().getStudyTarget().getActualTime().setHour(1);
+                mySystem.getMyUser().getSleepTarget().getTargetTime().setHour(8);
+                mySystem.getMyUser().getStudyTarget().getTargetTime().setHour(1);
                 //
-
+                mySystem.initialFakeData();
                 mySystem.saveFile();
                 Intent intent = new Intent(Register.this, MainActivity.class);
                 startActivity(intent);
@@ -189,13 +192,13 @@ public class Register extends AppCompatActivity {
                 {
                     //Register successfully!
                     case 1:
-                        Toast.makeText(Register.this, msg.getData().getString("msg"),
-                                Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Register.this, msg.getData().getString("msg"),
+                               // Toast.LENGTH_SHORT).show();
                         break;
                     //Register Failure!
                     case 2:
-                        Toast.makeText(Register.this, msg.getData().getString("msg"),
-                                Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Register.this, msg.getData().getString("msg"),
+                                //Toast.LENGTH_SHORT).show();
                         break;
 
                 }
