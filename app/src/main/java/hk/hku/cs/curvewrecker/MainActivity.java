@@ -207,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 4:
                         intent = new Intent(MainActivity.this, Setting.class);
+                        intent.putExtra("MySystem", mySystem);
                         startActivity(intent);
                         break;
                     default:

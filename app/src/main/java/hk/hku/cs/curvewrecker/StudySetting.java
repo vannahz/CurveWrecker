@@ -199,7 +199,9 @@ public class StudySetting extends AppCompatActivity {
 
     class MyCount extends CountDownTimer {
         public MyCount(int remainT) {
-            super((remainT+1) * 1000, 1000);
+            //super((remainT+1) * 1000, 1000);
+            //###########################
+            super((5) * 1000, 1000);
         }
         @Override
         public void onFinish() {
@@ -209,6 +211,10 @@ public class StudySetting extends AppCompatActivity {
            // Log.d("StudySetting: secs-", String.format("%d", mySystem.getMyUser().getCrtMission().getTargetTime().getTotalSeconds()));
             intent = new Intent(StudySetting.this, StudyResult.class);
             mySystem.getMyUser().getCrtMission().getEndTime().getCurrentTime();
+
+            //###########change it for test
+            mySystem.getMyUser().getCrtMission().setTargetTime(new MyTime(30,4));
+
             mySystem.addMissionToTarget(mySystem.getMyUser().getCrtMission());
             mySystem.saveFile();
             intent.putExtra("MySystem", mySystem);

@@ -145,7 +145,12 @@ public class Register extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("Register: sleep-", String.format("%d:%02d", myHour,myMin));
                 mySystem.getMyUser().setSleepTime(new MyTime(myMin,myHour));
-                mySystem.getMyUser().setUid( Integer.parseInt(userId));
+                if( userId != "") {
+                    mySystem.getMyUser().setUid(Integer.parseInt(userId));
+                }
+                else{
+                    mySystem.getMyUser().setUid(0);
+                }
                 mySystem.saveFile();
                 Intent intent = new Intent(Register.this, MainActivity.class);
                 startActivity(intent);
