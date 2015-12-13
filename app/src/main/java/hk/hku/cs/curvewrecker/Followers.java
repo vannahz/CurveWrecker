@@ -101,15 +101,12 @@ public class Followers extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent;
-                switch (position) {
-                    case 0:
-                        Log.v("msg", "click");
-                        intent = new Intent(Followers.this, Friends.class);
-                        startActivity(intent);
-                        break;
-                    default:
-                        break;
-                }
+                //Log.v("msg", "click");
+                intent = new Intent(Followers.this, Friends.class);
+                intent.putExtra("MySystem", mySystem);
+                intent.putExtra("Position", String.valueOf(position));
+                //System.out.println(String.valueOf(position));
+                startActivity(intent);
             }
         });
     }

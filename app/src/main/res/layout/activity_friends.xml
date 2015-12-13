@@ -52,12 +52,4 @@
         </LinearLayout>
     </LinearLayout>
 
-    <Button android:id="@+id/btn_friends_follow"
-        android:layout_gravity="center|center_horizontal"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_primary"
-        android:layout_marginBottom="20dp"
-        android:text="互相关注"/>
-
 </LinearLayout>
