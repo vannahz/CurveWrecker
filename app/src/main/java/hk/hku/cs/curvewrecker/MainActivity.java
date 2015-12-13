@@ -4,6 +4,9 @@ package hk.hku.cs.curvewrecker;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +19,18 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
     private TextView rank;
     private TextView studyTime;
     private RoundImageView avatar;
+
+    private static String url="http://i.cs.hku.hk/~jzyan/servertest/updateMark.php";
+    public URL http_url;
+    public String data;
+    public Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
         calendar_btn.setOnClickListener(handler);
         rank_btn.setOnClickListener(handler);
 
+        handlerTest();
+        updateMark();
 
         //创建返回键，并实现打开关/闭监听
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close) {
@@ -258,5 +279,108 @@ public class MainActivity extends AppCompatActivity {
         list.add(map);
 
         return list;
+    }
+
+    public void updateMark()
+    {
+        String params = "uid=" + mySystem.getMyUser().getUid() + "&mark=" + mySystem.getCurrentMark() + "";
+        postMethod(params);
+    }
+
+    public void handlerTest()
+    {
+        handler = new Handler(Looper.getMainLooper())
+        {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                super.handleMessage(msg);
+                switch(msg.what)
+                {
+                    //Register successfully!
+                    case 1:
+                        Toast.makeText(MainActivity.this, msg.getData().getString("msg"),
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    //Register Failure!
+                    case 2:
+                        Toast.makeText(MainActivity.this, msg.getData().getString("msg"),
+                                Toast.LENGTH_SHORT).show();
+                        break;
+
+                }
+            }
+        };
+    }
+
+    public void postMethod(final String params)
+    {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    http_url = new URL(url);
+                    if (http_url != null) {
+                        HttpURLConnection conn = (HttpURLConnection) http_url.openConnection();
+                        conn.setConnectTimeout(5 * 1000);
+                        conn.setRequestMethod("POST");
+                        conn.setDoInput(true);
+                        conn.setDoOutput(true);
+                        conn.setUseCaches(false);
+                        //String params = "uid=" + uid.getText().toString() + "&uname=" + uname.getText().toString()
+                        //+ "&gender=" + gender.getText().toString() + "&mark=" + mark + "";
+                        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                        conn.setRequestProperty("Content-Length", String.valueOf(params.getBytes().length));
+                        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+                        bw.write(params);
+                        bw.close();
+                        if (conn.getResponseCode() == 200) {
+                            InputStream is = conn.getInputStream();
+                            BufferedReader buf = new BufferedReader(new InputStreamReader(is));
+                            data = buf.readLine();
+                            buf.close();
+                            is.close();
+                            analyse(data);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    public void analyse (String data)
+    {
+        System.out.println(data);
+        try {
+            JSONObject json_data = new JSONObject(data);
+            Boolean state = json_data.getBoolean("success");
+            String msg = json_data.getString("msg");
+            //userId = msg;
+            //System.out.println(userId);
+            //Register successfully!
+            if(state)
+            {
+                Message message = new Message();
+                message.what=1;
+                Bundle temp = new Bundle();
+                temp.putString("msg", msg);
+                message.setData(temp);
+                handler.sendMessage(message);
+            }
+            //Register not successfully!
+            else
+            {
+                Message message = new Message();
+                message.what=2;
+                Bundle temp = new Bundle();
+                temp.putString("msg",msg);
+                message.setData(temp);
+                handler.sendMessage(message);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
