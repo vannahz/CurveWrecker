@@ -62,6 +62,7 @@ public class Followers extends AppCompatActivity{
     public String mark = "";
     private MyFriend myFriend;
     Intent intent;
+    private int checkResult;
 
     List<Map<String, Object>> list;
 
@@ -82,6 +83,7 @@ public class Followers extends AppCompatActivity{
         mySystem = (MySystem)tempI.getSerializableExtra("MySystem");
         myFriend = new MyFriend();
         handlerTest();
+        checkResult = 0;
 
         lv_follower = (ListView)findViewById(R.id.lv_followers);
 
@@ -99,13 +101,20 @@ public class Followers extends AppCompatActivity{
 
                 intent = new Intent(Followers.this, Friends.class);
                 intent.putExtra("MySystem", mySystem);
-                while(myFriend.getName() == "") {
+                while(checkResult == 0){
 
                 }
-                intent.putExtra("MyFriend", myFriend.copy());
-                startActivity(intent);
-                finish();
 
+
+                if(checkResult == 2){
+                //!= "duplicate addition!" || result != "insert not Successfully!") {
+                    while (myFriend.getName() == "") {
+
+                    }
+                    intent.putExtra("MyFriend", myFriend.copy());
+                    startActivity(intent);
+                    finish();
+                }
 
             }
         });
@@ -222,6 +231,7 @@ public class Followers extends AppCompatActivity{
                 result = msg;
                 //System.out.println(result);
                 getJason(result);
+                checkResult = 2;
                 myFriend = new MyFriend(Integer.parseInt(id), name, Integer.parseInt(mark));
                 //Log.d("Followers:", myFriend.toString());
                 mySystem.getMyUser().addMyFriend(myFriend.copy());
@@ -236,6 +246,7 @@ public class Followers extends AppCompatActivity{
             //Register not successfully!
             else
             {
+                checkResult = 1;
                 Message message = new Message();
                 message.what=2;
                 Bundle temp = new Bundle();

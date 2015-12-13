@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
                 mySystem.saveFile();
 
         }
+
+        mySystem.updateDate();
     /*    else
         {
             Intent tempI = getIntent();

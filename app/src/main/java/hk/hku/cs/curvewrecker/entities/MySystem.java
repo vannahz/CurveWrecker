@@ -300,13 +300,14 @@ public class MySystem implements Serializable {
     private void updateStar() {
 
         if(this.myUser.getSleepTarget().getActualTime().getTotalSeconds() > this.myUser.getSleepTarget().getTargetTime().getTotalSeconds()){
-
+            this.myUser.getSleepTarget().setStatus(1);
         }
         this.myUser.getMyTargetList().add(this.myUser.getSleepTarget().copy());
-
         this.myUser.setSleepTarget(new MyTarget(0, this.myUser.getSleepTime().copy()));
 
-
+        if(this.myUser.getStudyTarget().getActualTime().getTotalSeconds() > this.myUser.getStudyTarget().getTargetTime().getTotalSeconds()){
+            this.myUser.getStudyTarget().setStatus(1);
+        }
 
         this.myUser.getMyTargetList().add(this.myUser.getStudyTarget().copy());
         this.myUser.setStudyTarget(new MyTarget(1, this.myUser.getStudyTime().copy()));
@@ -321,7 +322,7 @@ public class MySystem implements Serializable {
                 aveSleep.resetTimeBySec(aveSleep.getTotalSeconds() + tempT.getActualTime().getTotalSeconds());
             }
         }
-        aveSleep.resetTimeBySec(aveSleep.getTotalSeconds()/this.getMyUser().getTotalDay());
+        aveSleep.resetTimeBySec(aveSleep.getTotalSeconds() / this.getMyUser().getTotalDay());
         return aveSleep;
     }
 
@@ -365,6 +366,16 @@ public class MySystem implements Serializable {
         this.getMyUser().setStudyTime(new MyTime(0,2));
         this.getMyUser().setSleepTarget(new MyTarget(0, this.myUser.getSleepTime()));
         this.getMyUser().setStudyTarget(new MyTarget(1,this.myUser.getStudyTime()));
+    }
+
+    public void updateDate() {
+        int tempTD = this.getMyUser().getTotalDay();
+        updateTotalDay();
+        if (tempTD != this.getMyUser().getTotalDay()){
+            updateStar();
+        }
+
+
     }
 
     //uid need to be signed by the system, so need to check database to get the uid value

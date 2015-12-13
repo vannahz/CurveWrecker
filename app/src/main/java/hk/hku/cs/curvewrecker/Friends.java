@@ -65,6 +65,7 @@ public class Friends extends Activity{
     {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
             Intent intent = new Intent(Friends.this, Followers.class);
+            intent.putExtra("MySystem", mySystem);
             startActivity(intent);
             finish();
         }
