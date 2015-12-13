@@ -120,8 +120,8 @@ public class MyUser implements Serializable {
         MyStar tempS = new MyStar(new MyTime(3,12,2015));
         myStarList.add(tempS);
         myFriendsList = new ArrayList<>();
-        MyFriend tempF1 = new MyFriend(2111,"friend1",1,"",1,3,3,sleepTime.copy(),studyTime.copy(),myAttributes.copy());
-        MyFriend tempF2 = new MyFriend(2112,"friend2",0,"",2,5,4,sleepTime.copy(),studyTime.copy(),myAttributes.copy());
+        MyFriend tempF1 = new MyFriend(2111,"friend1",1,"",1,3,3,sleepTime.copy(),studyTime.copy(),myAttributes.copy(),34);
+        MyFriend tempF2 = new MyFriend(2112,"friend2",0,"",2,5,4,sleepTime.copy(),studyTime.copy(),myAttributes.copy(),23);
         myFriendsList.add(tempF1);
         myFriendsList.add(tempF2);
         sleepTarget = new MyTarget(0, sleepTime.copy());

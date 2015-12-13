@@ -89,6 +89,7 @@ public class MySystem implements Serializable {
                 e.printStackTrace();
             }
 
+            updateTotalDay();
             return true;
         }
     }
@@ -233,35 +234,35 @@ public class MySystem implements Serializable {
         int preS = 0;
         int crtS = 0;
         if(myMission.getType() == 0){
-            Log.d("####MySystem:", "0");
+          //  Log.d("####MySystem:", "0");
             preS = this.getMyUser().getSleepTarget().getActualTime().getTotalSeconds();
             if(myMission.isDone()) {
-                Log.d("####MySystem:", "00");
+          //      Log.d("####MySystem:", "00");
                 crtS = myMission.getTargetTime().getTotalSeconds();
             }
             else{
-                Log.d("####MySystem:", "01");
+          //      Log.d("####MySystem:", "01");
                 crtS = myMission.getTargetTime().getTotalSeconds() - myMission.getRemainTime().getTotalSeconds();
 
             }
 
-            this.getMyUser().getSleepTarget().getActualTime().resetTimeBySec(preS+crtS);
+            this.getMyUser().getSleepTarget().getActualTime().resetTimeBySec(preS + crtS);
         }
         else{
-            Log.d("MySystem:", "1");
+         //   Log.d("MySystem:", "1");
             preS = this.getMyUser().getStudyTarget().getActualTime().getTotalSeconds();
 
             if(myMission.isDone()) {
-                Log.d("####MySystem:", "10");
+         //       Log.d("####MySystem:", "10");
                 crtS = myMission.getTargetTime().getTotalSeconds();
             }
             else{
-                Log.d("####MySystem:", "11");
+         //       Log.d("####MySystem:", "11");
                 crtS = myMission.getTargetTime().getTotalSeconds() - myMission.getRemainTime().getTotalSeconds();
             }
 
             this.getMyUser().getStudyTarget().getActualTime().resetTimeBySec(preS+crtS);
-            Log.d("####MySystem: total-", String.format("%d", this.getMyUser().getStudyTarget().getActualTime().getTotalSeconds()));
+         //   Log.d("####MySystem: total-", String.format("%d", this.getMyUser().getStudyTarget().getActualTime().getTotalSeconds()));
         }
     }
 
@@ -311,17 +312,33 @@ public class MySystem implements Serializable {
 
     public void updateTotalDay(){
         updateLoginData();
+        int tempTD = 0;
+        MyTime compareT = this.firstLoginDate.copy();
 
-        long tempD = this.getMyUser().getTotalDay();
+        //compare year
+        while(compareT.getYear() < this.lastLoginDate.getYear()) {
+            //lear year
+            if (((compareT.getYear() + 1) % 400 == 0)
+                    || (((compareT.getYear() + 1) % 4 == 0) && ((compareT.getYear() + 1) % 100 != 0))) {
+                compareT.setYear(compareT.getYear()+1);
+                tempTD += 366;
+            }
+            //normal year
+            else {
+                compareT.setYear(compareT.getYear()+1);
+                tempTD += 365;
+            }
+        }
 
-        tempD = this.lastLoginDate.getTotalSeconds() - this.firstLoginDate.getTotalSeconds();
+        tempTD -= (compareT.getDayOfYear() - this.lastLoginDate.getDayOfYear());
 
-        this.getMyUser().setTotalDay((int)tempD/(24*60*60));
+        this.getMyUser().setTotalDay(tempTD+1);
 
 
     }
 
-    public void addTotalDay(){
+
+    public void addTotalDay() {
         this.getMyUser().setTotalDay(this.getMyUser().getTotalDay()+1);
     }
 

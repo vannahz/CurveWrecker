@@ -17,6 +17,7 @@ public class MyFriend implements Serializable {
     private MyTime sleepTime;
     private MyTime studyTime;
     private MyAttributes myAttributes;
+    private int mark;
 
     public  MyFriend(){
 
@@ -30,10 +31,11 @@ public class MyFriend implements Serializable {
         targetFinished = 0;
         targetNotFinished = 0;
         myAttributes = new MyAttributes();
+        mark = 0;
 
     }
 
-    public MyFriend(int uid, String name, int gender, String imgPath, int title, int targetFinished, int targetNotFinished, MyTime sleepTime, MyTime studyTime, MyAttributes myAttributes) {
+    public MyFriend(int uid, String name, int gender, String imgPath, int title, int targetFinished, int targetNotFinished, MyTime sleepTime, MyTime studyTime, MyAttributes myAttributes, int mark) {
         this.uid = uid;
         this.name = name;
         this.gender = gender;
@@ -44,6 +46,21 @@ public class MyFriend implements Serializable {
         this.sleepTime = sleepTime;
         this.studyTime = studyTime;
         this.myAttributes = myAttributes;
+        this.mark = mark;
+    }
+
+    public MyFriend(int uid, String name, int mark){
+        this.uid = uid;
+        this.name = name;
+        this.gender = 0;
+        this.imgPath = "";
+        this.title = 0;
+        this.sleepTime = new MyTime();
+        this.studyTime = new MyTime();
+        this.targetFinished = 0;
+        this.targetNotFinished = 0;
+        this.myAttributes = new MyAttributes();
+        this.mark = mark;
     }
 
     public int getUid() {
@@ -126,27 +143,20 @@ public class MyFriend implements Serializable {
         this.myAttributes = myAttributes;
     }
 
+    public int getMark() {
+        return mark;
+    }
+
+    public void setMark(int mark) {
+        this.mark = mark;
+    }
+
     public MyFriend copy(){
         MyFriend newFriend = new MyFriend(this.uid, this.name, this.gender, this.imgPath,
                                             this.title, this.targetFinished, this.targetNotFinished,
-                                            this.sleepTime.copy(),this.studyTime.copy(),this.myAttributes.copy());
+                                            this.sleepTime.copy(),this.studyTime.copy(),this.myAttributes.copy(), this.mark);
         return newFriend;
     }
 
-    @Override
-    public String toString() {
-        return "MyFriend{" +
-                "uid=" + uid +
-                ", name='" + name + '\'' +
-                ", gender=" + gender +
-                ", imgPath='" + imgPath + '\'' +
-                ", title=" + title +
-                ", targetFinished=" + targetFinished +
-                ", targetNotFinished=" + targetNotFinished +
-                ", sleepTime=" + sleepTime +
-                ", studyTime=" + studyTime +
-                ", myAttributes=" + myAttributes +
-                '}';
-    }
 
 }
