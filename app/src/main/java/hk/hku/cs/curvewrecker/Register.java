@@ -154,6 +154,7 @@ public class Register extends AppCompatActivity {
                 else{
                     mySystem.getMyUser().setUid(0);
                 }
+                mySystem.getMyUser().setImgPath(image);
                 mySystem.saveFile();
                 Intent intent = new Intent(Register.this, MainActivity.class);
                 startActivity(intent);

@@ -11,7 +11,7 @@ public class MyUser implements Serializable {
     private int uid;
     private String name;
     private int gender;                                     // 0 for male, 1 for female
-    private String imgPath;
+    private int imgPath;
     private int title;
     private int targetFinished;
     private int targetNotFinished;
@@ -37,7 +37,7 @@ public class MyUser implements Serializable {
         uid = 0;
         name = "";
         gender = 0;
-        imgPath = "";
+        imgPath = 0;
         title = 0;
         sleepTime = new MyTime();
         studyTime = new MyTime();
@@ -58,7 +58,7 @@ public class MyUser implements Serializable {
 
     }
 
-    public MyUser(String name, String imgPath,  int sleepMin,int sleepHour) {
+    public MyUser(String name, int imgPath,  int sleepMin,int sleepHour) {
         uid = 0;
         this.name = name;
         gender = 0;
@@ -87,7 +87,7 @@ public class MyUser implements Serializable {
         uid = 1111;
         name = "testUser";
         gender = 0;
-        imgPath = "";
+        imgPath = 0;
         title = 0;
         sleepTime = new MyTime(0,8);
         studyTime = new MyTime(0,2);
@@ -236,11 +236,11 @@ public class MyUser implements Serializable {
         this.gender = gender;
     }
 
-    public String getImgPath() {
+    public int getImgPath() {
         return imgPath;
     }
 
-    public void setImgPath(String imgPath) {
+    public void setImgPath(int imgPath) {
         this.imgPath = imgPath;
     }
 

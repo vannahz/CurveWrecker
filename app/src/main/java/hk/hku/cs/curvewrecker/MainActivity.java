@@ -223,8 +223,35 @@ public class MainActivity extends AppCompatActivity {
         userID.setText(String.format("%d", mySystem.getMyUser().getUid()));
         friendNo.setText(String.format("%d", mySystem.getMyUser().getMyFriendsList().size()));
         totalHour.setText(String.format("%d", mySystem.getTotalHour()));
+        switch(mySystem.getMyUser().getImgPath()){
+            case 0:
+                avatar.setImageResource(R.drawable.image1);
+                break;
+            case 1:
+                avatar.setImageResource(R.drawable.image2);
+                break;
+            case 2:
+                avatar.setImageResource(R.drawable.image3);
+                break;
+            case 3:
+                avatar.setImageResource(R.drawable.image4);
+                break;
+            case 4:
+                avatar.setImageResource(R.drawable.image5);
+                break;
+            case 5:
+                avatar.setImageResource(R.drawable.image6);
+                break;
+            case 6:
+                avatar.setImageResource(R.drawable.image7);
+                break;
+            case 7:
+                avatar.setImageResource(R.drawable.image8);
+                break;
+        }
+
         rank.setText(String.format("%d", mySystem.getMyUser().getTitle()));
-        Log.d("######MainActivity:exp:", String.format("%d", mySystem.getMyUser().getMyAttributes().getExp()));
+     //   Log.d("######MainActivity:exp:", String.format("%d", mySystem.getMyUser().getMyAttributes().getExp()));
     }
 
     private void findViews() {
