@@ -30,6 +30,7 @@ import java.net.URL;
 import hk.hku.cs.curvewrecker.Image3D.Image3DUtil;
 import hk.hku.cs.curvewrecker.entities.MySystem;
 import hk.hku.cs.curvewrecker.ChangeSleepTimeDialog;
+import hk.hku.cs.curvewrecker.entities.MyTarget;
 import hk.hku.cs.curvewrecker.entities.MyTime;
 import hk.hku.cs.curvewrecker.entities.MyUser;
 
@@ -147,7 +148,7 @@ public class Register extends AppCompatActivity {
         next_btn_sleeptime.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 Log.d("Register: sleep-", String.format("%d:%02d", myHour,myMin));
-                mySystem.getMyUser().setSleepTime(new MyTime(myMin,myHour));
+                mySystem.getMyUser().setSleepTime(new MyTime(myMin, myHour));
                 if( userId != "") {
                     mySystem.getMyUser().setUid(Integer.parseInt(userId));
                 }
@@ -155,6 +156,13 @@ public class Register extends AppCompatActivity {
                     mySystem.getMyUser().setUid(0);
                 }
                 mySystem.getMyUser().setImgPath(image);
+                mySystem.initialMyUser();
+
+                //for test
+                mySystem.getMyUser().getSleepTarget().getActualTime().setHour(8);
+                mySystem.getMyUser().getStudyTarget().getActualTime().setHour(1);
+                //
+
                 mySystem.saveFile();
                 Intent intent = new Intent(Register.this, MainActivity.class);
                 startActivity(intent);

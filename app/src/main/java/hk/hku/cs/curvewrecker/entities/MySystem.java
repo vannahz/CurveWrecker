@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by LZ on 15/12/3.
@@ -332,7 +333,7 @@ public class MySystem implements Serializable {
 
         tempTD -= (compareT.getDayOfYear() - this.lastLoginDate.getDayOfYear());
 
-        this.getMyUser().setTotalDay(tempTD+1);
+        this.getMyUser().setTotalDay(tempTD + 1);
 
 
     }
@@ -344,6 +345,12 @@ public class MySystem implements Serializable {
 
     public boolean connectServer(){
         return false;
+    }
+
+    public void initialMyUser(){
+        this.getMyUser().setStudyTime(new MyTime(0,2));
+        this.getMyUser().setSleepTarget(new MyTarget(0, this.myUser.getSleepTime()));
+        this.getMyUser().setStudyTarget(new MyTarget(1,this.myUser.getStudyTime()));
     }
 
     //uid need to be signed by the system, so need to check database to get the uid value
