@@ -27,6 +27,7 @@ import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import hk.hku.cs.curvewrecker.Image3D.Image3DUtil;
 import hk.hku.cs.curvewrecker.entities.MySystem;
 import hk.hku.cs.curvewrecker.ChangeSleepTimeDialog;
 import hk.hku.cs.curvewrecker.entities.MyTime;
@@ -49,7 +50,8 @@ public class Register extends AppCompatActivity {
     public String userId = "";
     public String id = "";
     public int mark = 0;
-
+    Image3DUtil image3DUtil = new Image3DUtil();
+    public int image = 0;
     MySystem mySystem;
     int myHour;
     int myMin;
@@ -109,7 +111,8 @@ public class Register extends AppCompatActivity {
         next_btn_portrait = (Button)findViewById(R.id.next_btn_portrait);
         next_btn_portrait.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-
+                image = image3DUtil.getmCurrentImage();
+                System.out.println(image);
                 setSleepTime();
             }
         });

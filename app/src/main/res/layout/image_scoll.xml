@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent" >
+
+    <hk.hku.cs.curvewrecker.Image3D.Image3DSwitchView
+        android:id="@+id/image_switch_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" >
+
+        <hk.hku.cs.curvewrecker.Image3D.Image3DView
+            android:id="@+id/image1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/image1" />
+
+        <hk.hku.cs.curvewrecker.Image3D.Image3DView
+            android:id="@+id/image2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/image2" />
+
+        <hk.hku.cs.curvewrecker.Image3D.Image3DView
+            android:id="@+id/image3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/image3" />
+
+        <hk.hku.cs.curvewrecker.Image3D.Image3DView
+            android:id="@+id/image4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/image4" />
+
+        <hk.hku.cs.curvewrecker.Image3D.Image3DView
+            android:id="@+id/image5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/image5" />
+
+        <hk.hku.cs.curvewrecker.Image3D.Image3DView
+            android:id="@+id/image6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/image6" />
+
+        <hk.hku.cs.curvewrecker.Image3D.Image3DView
+            android:id="@+id/image7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/image7" />
+        <hk.hku.cs.curvewrecker.Image3D.Image3DView
+            android:id="@+id/image8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/image8" />
+    </hk.hku.cs.curvewrecker.Image3D.Image3DSwitchView>
+
+</RelativeLayout>
