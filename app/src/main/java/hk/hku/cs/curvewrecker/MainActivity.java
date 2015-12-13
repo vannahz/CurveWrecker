@@ -73,12 +73,12 @@ public class MainActivity extends AppCompatActivity {
 
         mySystem = new MySystem(this.getFilesDir());
 
-        //initial mySystem
-        if(!mySystem.loadFile()){
-            Log.d("####MainActivity:","cant find file");
-            //do a fake data initial
-       //     mySystem.initialFakeData();
-            mySystem.saveFile();
+            //initial mySystem
+            if(!mySystem.loadFile()){
+                Log.d("####MainActivity:","cant find file");
+                //do a fake data initial
+                //     mySystem.initialFakeData();
+                mySystem.saveFile();
 
         }
     /*    else
