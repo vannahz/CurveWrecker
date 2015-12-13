@@ -199,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
                         intent = new Intent(MainActivity.this, Followers.class);
                         intent.putExtra("MySystem", mySystem);
                         startActivity(intent);
+                        finish();
                         break;
                     case 3:
                         intent = new Intent(MainActivity.this, Ranking.class);

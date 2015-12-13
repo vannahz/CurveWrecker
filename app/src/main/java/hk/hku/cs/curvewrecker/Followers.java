@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -91,7 +92,6 @@ public class Followers extends AppCompatActivity{
         search_btn.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 addFriends();
-                getData();
                 adapter.notifyDataSetChanged();
             }
         });
@@ -238,7 +238,19 @@ public class Followers extends AppCompatActivity{
         id = a[0];
         name = a[1];
         mark = a[2];
-        Log.d("Followers:", String.format("%s,%s,%s", a[0],a[1],a[2]));
+        Log.d("Followers:", String.format("%s,%s,%s", a[0], a[1], a[2]));
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent tempI = new Intent(Followers.this, MainActivity.class);
+            tempI.putExtra("MySystem",mySystem);
+            startActivity(tempI);
+            finish();
+        }
+        return false;
     }
 }
