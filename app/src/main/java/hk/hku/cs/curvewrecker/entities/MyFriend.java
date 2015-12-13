@@ -10,7 +10,7 @@ public class MyFriend implements Serializable {
     private int uid;
     private String name;
     private int gender;
-    private String imgPath;
+    private int imgPath;
     private int title;
     private int targetFinished;
     private int targetNotFinished;
@@ -24,7 +24,7 @@ public class MyFriend implements Serializable {
         uid = 0;
         name = "";
         gender = 0;
-        imgPath = "";
+        imgPath = 0;
         title = 0;
         sleepTime = new MyTime();
         studyTime = new MyTime();
@@ -35,7 +35,7 @@ public class MyFriend implements Serializable {
 
     }
 
-    public MyFriend(int uid, String name, int gender, String imgPath, int title, int targetFinished, int targetNotFinished, MyTime sleepTime, MyTime studyTime, MyAttributes myAttributes, int mark) {
+    public MyFriend(int uid, String name, int gender, int imgPath, int title, int targetFinished, int targetNotFinished, MyTime sleepTime, MyTime studyTime, MyAttributes myAttributes, int mark) {
         this.uid = uid;
         this.name = name;
         this.gender = gender;
@@ -53,7 +53,7 @@ public class MyFriend implements Serializable {
         this.uid = uid;
         this.name = name;
         this.gender = 0;
-        this.imgPath = "";
+        this.imgPath = 0;
         this.title = 0;
         this.sleepTime = new MyTime();
         this.studyTime = new MyTime();
@@ -87,11 +87,11 @@ public class MyFriend implements Serializable {
         this.gender = gender;
     }
 
-    public String getImgPath() {
+    public int getImgPath() {
         return imgPath;
     }
 
-    public void setImgPath(String imgPath) {
+    public void setImgPath(int imgPath) {
         this.imgPath = imgPath;
     }
 
