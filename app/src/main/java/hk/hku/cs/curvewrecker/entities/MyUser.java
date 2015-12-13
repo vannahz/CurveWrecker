@@ -11,7 +11,7 @@ public class MyUser implements Serializable {
     private int uid;
     private String name;
     private int gender;                                     // 0 for male, 1 for female
-    private String imgPath;
+    private int imgPath;
     private int title;
     private int targetFinished;
     private int targetNotFinished;
@@ -37,7 +37,7 @@ public class MyUser implements Serializable {
         uid = 0;
         name = "";
         gender = 0;
-        imgPath = "";
+        imgPath = 0;
         title = 0;
         sleepTime = new MyTime();
         studyTime = new MyTime();
@@ -54,11 +54,11 @@ public class MyUser implements Serializable {
         sleepTarget = new MyTarget(0);
         studyTarget = new MyTarget(1);
         totalStudyTime = 0;
-        totalDay = 0;
+        totalDay = 1;
 
     }
 
-    public MyUser(String name, String imgPath,  int sleepMin,int sleepHour) {
+    public MyUser(String name, int imgPath,  int sleepMin,int sleepHour) {
         uid = 0;
         this.name = name;
         gender = 0;
@@ -79,7 +79,7 @@ public class MyUser implements Serializable {
         sleepTarget = new MyTarget(0, new MyTime(sleepMin,sleepHour));
         studyTarget = new MyTarget(1,new MyTime(0,1));
         totalStudyTime = 0;
-        totalDay = 0;
+        totalDay = 1;
     }
 
     public void initialFakeData(){
@@ -87,7 +87,7 @@ public class MyUser implements Serializable {
         uid = 1111;
         name = "testUser";
         gender = 0;
-        imgPath = "";
+        imgPath = 0;
         title = 0;
         sleepTime = new MyTime(0,8);
         studyTime = new MyTime(0,2);
@@ -120,8 +120,8 @@ public class MyUser implements Serializable {
         MyStar tempS = new MyStar(new MyTime(3,12,2015));
         myStarList.add(tempS);
         myFriendsList = new ArrayList<>();
-        MyFriend tempF1 = new MyFriend(2111,"friend1",1,"",1,3,3,sleepTime.copy(),studyTime.copy(),myAttributes.copy());
-        MyFriend tempF2 = new MyFriend(2112,"friend2",0,"",2,5,4,sleepTime.copy(),studyTime.copy(),myAttributes.copy());
+        MyFriend tempF1 = new MyFriend(2111,"friend1",1,0,1,3,3,sleepTime.copy(),studyTime.copy(),myAttributes.copy(),34);
+        MyFriend tempF2 = new MyFriend(2112,"friend2",0,0,2,5,4,sleepTime.copy(),studyTime.copy(),myAttributes.copy(),23);
         myFriendsList.add(tempF1);
         myFriendsList.add(tempF2);
         sleepTarget = new MyTarget(0, sleepTime.copy());
@@ -236,11 +236,11 @@ public class MyUser implements Serializable {
         this.gender = gender;
     }
 
-    public String getImgPath() {
+    public int getImgPath() {
         return imgPath;
     }
 
-    public void setImgPath(String imgPath) {
+    public void setImgPath(int imgPath) {
         this.imgPath = imgPath;
     }
 
@@ -398,6 +398,7 @@ public class MyUser implements Serializable {
             newUser.addMyStar(p);
         }
         newUser.setTotalStudyTime(this.totalStudyTime);
+        newUser.setTotalDay(this.totalDay);
 
         return newUser;
 

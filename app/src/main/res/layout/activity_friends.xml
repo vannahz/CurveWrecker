@@ -49,15 +49,14 @@
                 android:text="90 marks"
                 android:textColor="#f00"
                 android:textSize="30sp"/>
+            <Button android:id="@+id/add_friends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal"
+                android:layout_margin="10dp"
+                android:text="add me"
+                android:textColor="@color/colorPrimary"/>
         </LinearLayout>
     </LinearLayout>
-
-    <Button android:id="@+id/btn_friends_follow"
-        android:layout_gravity="center|center_horizontal"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_primary"
-        android:layout_marginBottom="20dp"
-        android:text="互相关注"/>
 
 </LinearLayout>

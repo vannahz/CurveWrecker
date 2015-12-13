@@ -55,6 +55,7 @@ public class MyTime implements Serializable {
 
 
     public void getCurrentTime(){
+
         DateTime newTime = new DateTime();
         this.second = newTime.getSecondOfMinute();
         this.minute = newTime.getMinuteOfHour();
@@ -65,6 +66,12 @@ public class MyTime implements Serializable {
 
     }
 
+    public int getDayOfYear(){
+
+        DateTime newTime = new DateTime(this.year,this.month,this.day,this.hour,this.minute,this.second);
+        return newTime.getDayOfYear();
+
+    }
 
     public int getSecond() {
         return second;
@@ -162,4 +169,6 @@ public class MyTime implements Serializable {
         newTime.setYear(this.year);
         return newTime;
     }
+
+
 }

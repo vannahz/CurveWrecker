@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by LZ on 15/12/3.
@@ -19,6 +20,8 @@ public class MySystem implements Serializable {
 
     private MyUser myUser;
     private MyTime lastLoginDate;
+    private File filePath;
+    private MyTime firstLoginDate;
 
     public MySystem(){
         myUser = new MyUser();
@@ -32,6 +35,14 @@ public class MySystem implements Serializable {
         lastLoginDate.getCurrentTime();
     }
 
+    public MySystem(File tempPath){
+        myUser = new MyUser();
+        lastLoginDate = new MyTime();
+        lastLoginDate.getCurrentTime();
+        this.filePath = tempPath;
+        firstLoginDate = new MyTime();
+        firstLoginDate.getCurrentTime();
+    }
 
     public void initialFakeData(){
         myUser.initialFakeData();
@@ -60,13 +71,13 @@ public class MySystem implements Serializable {
     }
 
     public boolean loadFile(){
-        File fileCheck = new File("./player/data.bin");
+        File fileCheck = new File(this.filePath+"/","data.bin");
         if(!fileCheck.exists()){
             return false;
         }
         else{
             try {
-                FileInputStream fileInputStream = new FileInputStream("./player/data.bin");
+                FileInputStream fileInputStream = new FileInputStream(fileCheck);
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                 MyUser newUser = (MyUser) objectInputStream.readObject();
                 this.myUser = newUser.copy();
@@ -79,13 +90,18 @@ public class MySystem implements Serializable {
                 e.printStackTrace();
             }
 
+            updateTotalDay();
             return true;
         }
     }
 
     public void saveFile() {
         try{
-            FileOutputStream fileOutputStream = new FileOutputStream("./player/data.bin");
+            File fileCheck = new File(this.filePath+"/","data.bin");
+            if(!fileCheck.exists()){
+                fileCheck.createNewFile();
+            }
+            FileOutputStream fileOutputStream = new FileOutputStream(fileCheck);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(this.myUser);
             objectOutputStream.close();
@@ -219,29 +235,35 @@ public class MySystem implements Serializable {
         int preS = 0;
         int crtS = 0;
         if(myMission.getType() == 0){
-
+          //  Log.d("####MySystem:", "0");
             preS = this.getMyUser().getSleepTarget().getActualTime().getTotalSeconds();
             if(myMission.isDone()) {
+          //      Log.d("####MySystem:", "00");
                 crtS = myMission.getTargetTime().getTotalSeconds();
             }
             else{
+          //      Log.d("####MySystem:", "01");
                 crtS = myMission.getTargetTime().getTotalSeconds() - myMission.getRemainTime().getTotalSeconds();
 
             }
 
-            this.getMyUser().getSleepTarget().getActualTime().resetTimeBySec(preS+crtS);
+            this.getMyUser().getSleepTarget().getActualTime().resetTimeBySec(preS + crtS);
         }
         else{
-
+         //   Log.d("MySystem:", "1");
             preS = this.getMyUser().getStudyTarget().getActualTime().getTotalSeconds();
 
             if(myMission.isDone()) {
+         //       Log.d("####MySystem:", "10");
                 crtS = myMission.getTargetTime().getTotalSeconds();
             }
             else{
+         //       Log.d("####MySystem:", "11");
                 crtS = myMission.getTargetTime().getTotalSeconds() - myMission.getRemainTime().getTotalSeconds();
             }
-            this.getMyUser().getStudyTarget().getActualTime().resetTimeBySec(preS+crtS);
+
+            this.getMyUser().getStudyTarget().getActualTime().resetTimeBySec(preS + crtS);
+         //   Log.d("####MySystem: total-", String.format("%d", this.getMyUser().getStudyTarget().getActualTime().getTotalSeconds()));
         }
     }
 
@@ -256,32 +278,104 @@ public class MySystem implements Serializable {
             addExp(newExp);
         }
         else{
+            updateStar();
             if(myMission.getType() == 0){
-                this.myUser.getMyTargetList().add(this.myUser.getSleepTarget().copy());
-                this.myUser.setSleepTarget(new MyTarget(0, this.myUser.getSleepTime().copy()));
                 convertMission(myMission);
                 crtMark = getCurrentMark();
                 int newExp = crtMark;
                 addExp(newExp);
             }
             else{
-                this.myUser.getMyTargetList().add(this.myUser.getStudyTarget().copy());
-                this.myUser.setStudyTarget(new MyTarget(1, this.myUser.getStudyTime().copy()));
+
                 convertMission(myMission);
                 crtMark = getCurrentMark();
                 int newExp = crtMark;
                 addExp(newExp);
             }
+            updateTotalDay();
 
         }
     }
 
-    public void addTotalDay(){
+    private void updateStar() {
+
+        if(this.myUser.getSleepTarget().getActualTime().getTotalSeconds() > this.myUser.getSleepTarget().getTargetTime().getTotalSeconds()){
+            this.myUser.getSleepTarget().setStatus(1);
+        }
+        this.myUser.getMyTargetList().add(this.myUser.getSleepTarget().copy());
+        this.myUser.setSleepTarget(new MyTarget(0, this.myUser.getSleepTime().copy()));
+
+        if(this.myUser.getStudyTarget().getActualTime().getTotalSeconds() > this.myUser.getStudyTarget().getTargetTime().getTotalSeconds()){
+            this.myUser.getStudyTarget().setStatus(1);
+        }
+
+        this.myUser.getMyTargetList().add(this.myUser.getStudyTarget().copy());
+        this.myUser.setStudyTarget(new MyTarget(1, this.myUser.getStudyTime().copy()));
+
+    }
+
+    public MyTime getAverageSleep(){
+        MyTime aveSleep = new MyTime();
+
+        for(MyTarget tempT: this.getMyUser().getMyTargetList()){
+            if(tempT.getType() == 0) {
+                aveSleep.resetTimeBySec(aveSleep.getTotalSeconds() + tempT.getActualTime().getTotalSeconds());
+            }
+        }
+        aveSleep.resetTimeBySec(aveSleep.getTotalSeconds() / this.getMyUser().getTotalDay());
+        return aveSleep;
+    }
+
+    public void updateTotalDay(){
+        updateLoginData();
+        int tempTD = 0;
+        MyTime compareT = this.firstLoginDate.copy();
+
+        //compare year
+        while(compareT.getYear() < this.lastLoginDate.getYear()) {
+            //lear year
+            if (((compareT.getYear() + 1) % 400 == 0)
+                    || (((compareT.getYear() + 1) % 4 == 0) && ((compareT.getYear() + 1) % 100 != 0))) {
+                compareT.setYear(compareT.getYear()+1);
+                tempTD += 366;
+            }
+            //normal year
+            else {
+                compareT.setYear(compareT.getYear()+1);
+                tempTD += 365;
+            }
+        }
+
+        tempTD -= (compareT.getDayOfYear() - this.lastLoginDate.getDayOfYear());
+
+        this.getMyUser().setTotalDay(tempTD + 1);
+
+
+    }
+
+
+    public void addTotalDay() {
         this.getMyUser().setTotalDay(this.getMyUser().getTotalDay()+1);
     }
 
     public boolean connectServer(){
         return false;
+    }
+
+    public void initialMyUser(){
+        this.getMyUser().setStudyTime(new MyTime(0,2));
+        this.getMyUser().setSleepTarget(new MyTarget(0, this.myUser.getSleepTime()));
+        this.getMyUser().setStudyTarget(new MyTarget(1,this.myUser.getStudyTime()));
+    }
+
+    public void updateDate() {
+        int tempTD = this.getMyUser().getTotalDay();
+        updateTotalDay();
+        if (tempTD != this.getMyUser().getTotalDay()){
+            updateStar();
+        }
+
+
     }
 
     //uid need to be signed by the system, so need to check database to get the uid value

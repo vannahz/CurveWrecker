@@ -51,8 +51,8 @@ public class StudySetting extends AppCompatActivity {
         crtTime = new MyTime();
 
         //initial string
-        myHour = 1;
-        myMin = 0;
+        myHour = mySystem.getMyUser().getStudyTime().getHour();
+        myMin = mySystem.getMyUser().getStudyTime().getMinute();
 
         //设置Toolbar
         toolbar_title = (TextView)findViewById(R.id.toolbar_title);
@@ -62,7 +62,9 @@ public class StudySetting extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         study_hour = (TextView)findViewById(R.id.study_hour);
+        study_hour.setText(String.format("%d", myHour));
         study_minute = (TextView)findViewById(R.id.study_minute);
+        study_minute.setText(String.format("%02d", myMin));
 
         //change time
         studySetting = (LinearLayout)findViewById(R.id.studySetting);
@@ -70,7 +72,7 @@ public class StudySetting extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ChangeTimeDialog mChangeBirthDialog = new ChangeTimeDialog(StudySetting.this);
-                mChangeBirthDialog.setDate(1, 0);
+                mChangeBirthDialog.setDate(myHour, myMin);
                 mChangeBirthDialog.show();
                 mChangeBirthDialog.setTimeListener(new ChangeTimeDialog.OnTimeListener() {
                     @Override
@@ -83,7 +85,6 @@ public class StudySetting extends AppCompatActivity {
                         if (Integer.parseInt(minute) < 10)
                             minute = "0" + minute;
                         study_minute.setText(minute);
-
 
                     }
                 });
@@ -133,6 +134,7 @@ public class StudySetting extends AppCompatActivity {
                 intent = new Intent(StudySetting.this, StudyResult.class);
                 mySystem.getMyUser().getCrtMission().getEndTime().getCurrentTime();
                 mySystem.addMissionToTarget(mySystem.getMyUser().getCrtMission());
+                mySystem.saveFile();
                 intent.putExtra("MySystem", mySystem);
                 startActivity(intent);
                 finish();
@@ -198,6 +200,8 @@ public class StudySetting extends AppCompatActivity {
     class MyCount extends CountDownTimer {
         public MyCount(int remainT) {
             super((remainT+1) * 1000, 1000);
+            //###########################
+         //   super((5) * 1000, 1000);
         }
         @Override
         public void onFinish() {
@@ -207,7 +211,12 @@ public class StudySetting extends AppCompatActivity {
            // Log.d("StudySetting: secs-", String.format("%d", mySystem.getMyUser().getCrtMission().getTargetTime().getTotalSeconds()));
             intent = new Intent(StudySetting.this, StudyResult.class);
             mySystem.getMyUser().getCrtMission().getEndTime().getCurrentTime();
+
+            //###########change it for test
+           // mySystem.getMyUser().getCrtMission().setTargetTime(new MyTime(30,4));
+
             mySystem.addMissionToTarget(mySystem.getMyUser().getCrtMission());
+            mySystem.saveFile();
             intent.putExtra("MySystem", mySystem);
             startActivity(intent);
             finish();
@@ -218,7 +227,7 @@ public class StudySetting extends AppCompatActivity {
            // Log.d("####StudySeting:secs-", String.format("%d", millisUntilFinished));
 
             //mySystem.getMyUser().getCrtMission().decreaseRemainTime();
-            mySystem.getMyUser().getCrtMission().getRemainTime().resetTimeBySec((int)(millisUntilFinished /1000)-1);
+            mySystem.getMyUser().getCrtMission().getRemainTime().resetTimeBySec((int) (millisUntilFinished /1000)-1);
             //toolbar_title.setText("Studying" + mySystem.getMyUser().getCrtMission().getRemainTime().getTotalSeconds());
             String tempS = "";
             tempS = String.format("%d:%02d:%02d",mySystem.getMyUser().getCrtMission().getRemainTime().getHour(),

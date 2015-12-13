@@ -10,30 +10,32 @@ public class MyFriend implements Serializable {
     private int uid;
     private String name;
     private int gender;
-    private String imgPath;
+    private int imgPath;
     private int title;
     private int targetFinished;
     private int targetNotFinished;
     private MyTime sleepTime;
     private MyTime studyTime;
     private MyAttributes myAttributes;
+    private int mark;
 
     public  MyFriend(){
 
         uid = 0;
         name = "";
         gender = 0;
-        imgPath = "";
+        imgPath = 0;
         title = 0;
         sleepTime = new MyTime();
         studyTime = new MyTime();
         targetFinished = 0;
         targetNotFinished = 0;
         myAttributes = new MyAttributes();
+        mark = 0;
 
     }
 
-    public MyFriend(int uid, String name, int gender, String imgPath, int title, int targetFinished, int targetNotFinished, MyTime sleepTime, MyTime studyTime, MyAttributes myAttributes) {
+    public MyFriend(int uid, String name, int gender, int imgPath, int title, int targetFinished, int targetNotFinished, MyTime sleepTime, MyTime studyTime, MyAttributes myAttributes, int mark) {
         this.uid = uid;
         this.name = name;
         this.gender = gender;
@@ -44,6 +46,21 @@ public class MyFriend implements Serializable {
         this.sleepTime = sleepTime;
         this.studyTime = studyTime;
         this.myAttributes = myAttributes;
+        this.mark = mark;
+    }
+
+    public MyFriend(int uid, String name, int mark){
+        this.uid = uid;
+        this.name = name;
+        this.gender = 0;
+        this.imgPath = 0;
+        this.title = 0;
+        this.sleepTime = new MyTime();
+        this.studyTime = new MyTime();
+        this.targetFinished = 0;
+        this.targetNotFinished = 0;
+        this.myAttributes = new MyAttributes();
+        this.mark = mark;
     }
 
     public int getUid() {
@@ -70,11 +87,11 @@ public class MyFriend implements Serializable {
         this.gender = gender;
     }
 
-    public String getImgPath() {
+    public int getImgPath() {
         return imgPath;
     }
 
-    public void setImgPath(String imgPath) {
+    public void setImgPath(int imgPath) {
         this.imgPath = imgPath;
     }
 
@@ -126,27 +143,20 @@ public class MyFriend implements Serializable {
         this.myAttributes = myAttributes;
     }
 
+    public int getMark() {
+        return mark;
+    }
+
+    public void setMark(int mark) {
+        this.mark = mark;
+    }
+
     public MyFriend copy(){
         MyFriend newFriend = new MyFriend(this.uid, this.name, this.gender, this.imgPath,
                                             this.title, this.targetFinished, this.targetNotFinished,
-                                            this.sleepTime.copy(),this.studyTime.copy(),this.myAttributes.copy());
+                                            this.sleepTime.copy(),this.studyTime.copy(),this.myAttributes.copy(), this.mark);
         return newFriend;
     }
 
-    @Override
-    public String toString() {
-        return "MyFriend{" +
-                "uid=" + uid +
-                ", name='" + name + '\'' +
-                ", gender=" + gender +
-                ", imgPath='" + imgPath + '\'' +
-                ", title=" + title +
-                ", targetFinished=" + targetFinished +
-                ", targetNotFinished=" + targetNotFinished +
-                ", sleepTime=" + sleepTime +
-                ", studyTime=" + studyTime +
-                ", myAttributes=" + myAttributes +
-                '}';
-    }
 
 }
