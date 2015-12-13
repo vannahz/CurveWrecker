@@ -2,7 +2,6 @@ package hk.hku.cs.curvewrecker;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -36,8 +34,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import hk.hku.cs.curvewrecker.Calendar;
+import hk.hku.cs.curvewrecker.Followers;
+import hk.hku.cs.curvewrecker.R;
+import hk.hku.cs.curvewrecker.Ranking;
+import hk.hku.cs.curvewrecker.RoundImageView;
+import hk.hku.cs.curvewrecker.Setting;
+import hk.hku.cs.curvewrecker.SleepSetting;
+import hk.hku.cs.curvewrecker.StudySetting;
+import hk.hku.cs.curvewrecker.entities.MyRank;
+import hk.hku.cs.curvewrecker.entities.MySubRank;
 import hk.hku.cs.curvewrecker.entities.MySystem;
-import hk.hku.cs.curvewrecker.entities.MyTime;
 
 public class MainActivity extends AppCompatActivity {
     //声明相关变量
@@ -61,9 +68,15 @@ public class MainActivity extends AppCompatActivity {
     private RoundImageView avatar;
 
     private static String url="http://i.cs.hku.hk/~jzyan/servertest/updateMark.php";
+    private static String url2="http://i.cs.hku.hk/~jzyan/servertest/ranking.php";
     public URL http_url;
     public String data;
     public Handler handler;
+    public String result = "";
+    public String id1, id2, id3, id4, id5;
+    public String name1, name2, name3, name4, name5;
+    public String mark1, mark2, mark3, mark4, mark5;
+    public String[] a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,12 +86,12 @@ public class MainActivity extends AppCompatActivity {
 
         mySystem = new MySystem(this.getFilesDir());
 
-            //initial mySystem
-            if(!mySystem.loadFile()){
-                Log.d("####MainActivity:","cant find file");
-                //do a fake data initial
-                //     mySystem.initialFakeData();
-                mySystem.saveFile();
+        //initial mySystem
+        if(!mySystem.loadFile()){
+            Log.d("####MainActivity:","cant find file");
+            //do a fake data initial
+            //     mySystem.initialFakeData();
+            mySystem.saveFile();
 
         }
 
@@ -120,27 +133,32 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent;
                 switch (v.getId()) {
                     case R.id.study_btn:
-                        intent = new Intent(MainActivity.this, StudySetting.class);
+                        intent = new Intent(hk.hku.cs.curvewrecker.MainActivity.this, StudySetting.class);
                         //passing data by this method
                         intent.putExtra("MySystem",mySystem);
                         startActivity(intent);
                         finish();
                         break;
                     case R.id.sleep_btn:
-                        intent = new Intent(MainActivity.this, SleepSetting.class);
+                        intent = new Intent(hk.hku.cs.curvewrecker.MainActivity.this, SleepSetting.class);
                         //passing data by this method
                         intent.putExtra("MySystem",mySystem);
                         startActivity(intent);
                         finish();
                         break;
                     case R.id.calendar_btn:
-                        intent = new Intent(MainActivity.this, Calendar.class);
+                        intent = new Intent(hk.hku.cs.curvewrecker.MainActivity.this, Calendar.class);
                         //passing data by this method
                         intent.putExtra("MySystem",mySystem);
                         startActivity(intent);
                         break;
                     case R.id.rank_btn:
-                        intent = new Intent(MainActivity.this, Ranking.class);
+                        mySystem.getMyUser().setMyRank(new MyRank());
+                        getRank();
+                        while(mySystem.getMyUser().getMyRank().getMySubRankList().size() <5 ){
+
+                        }
+                        intent = new Intent(hk.hku.cs.curvewrecker.MainActivity.this, Ranking.class);
                         intent.putExtra("MySystem", mySystem);
                         startActivity(intent);
                         break;
@@ -163,12 +181,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-              //  mAnimationDrawable.stop();
+                //  mAnimationDrawable.stop();
             }
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-               // mAnimationDrawable.start();
+                // mAnimationDrawable.start();
             }
         };
         mDrawerToggle.syncState();
@@ -193,23 +211,23 @@ public class MainActivity extends AppCompatActivity {
                     case 0:
                         break;
                     case 1:
-                        intent = new Intent(MainActivity.this, Calendar.class);
+                        intent = new Intent(hk.hku.cs.curvewrecker.MainActivity.this, Calendar.class);
                         intent.putExtra("MySystem", mySystem);
                         startActivity(intent);
                         break;
                     case 2:
-                        intent = new Intent(MainActivity.this, Followers.class);
+                        intent = new Intent(hk.hku.cs.curvewrecker.MainActivity.this, Followers.class);
                         intent.putExtra("MySystem", mySystem);
                         startActivity(intent);
                         finish();
                         break;
                     case 3:
-                        intent = new Intent(MainActivity.this, Ranking.class);
+                        intent = new Intent(hk.hku.cs.curvewrecker.MainActivity.this, Ranking.class);
                         intent.putExtra("MySystem", mySystem);
                         startActivity(intent);
                         break;
                     case 4:
-                        intent = new Intent(MainActivity.this, Setting.class);
+                        intent = new Intent(hk.hku.cs.curvewrecker.MainActivity.this, Setting.class);
                         intent.putExtra("MySystem", mySystem);
                         startActivity(intent);
                         break;
@@ -254,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         rank.setText(String.format("%d", mySystem.getMyUser().getTitle()));
-     //   Log.d("######MainActivity:exp:", String.format("%d", mySystem.getMyUser().getMyAttributes().getExp()));
+        //   Log.d("######MainActivity:exp:", String.format("%d", mySystem.getMyUser().getMyAttributes().getExp()));
     }
 
     private void findViews() {
@@ -318,6 +336,12 @@ public class MainActivity extends AppCompatActivity {
         postMethod(params);
     }
 
+    public void getRank()
+    {
+        String params = "uid=" + mySystem.getMyUser().getUid() + "";
+        getMethod(params);
+    }
+
     public void handlerTest()
     {
         handler = new Handler(Looper.getMainLooper())
@@ -330,12 +354,12 @@ public class MainActivity extends AppCompatActivity {
                 {
                     //Register successfully!
                     case 1:
-                        Toast.makeText(MainActivity.this, msg.getData().getString("msg"),
+                        Toast.makeText(hk.hku.cs.curvewrecker.MainActivity.this, msg.getData().getString("msg"),
                                 Toast.LENGTH_SHORT).show();
                         break;
                     //Register Failure!
                     case 2:
-                        Toast.makeText(MainActivity.this, msg.getData().getString("msg"),
+                        Toast.makeText(hk.hku.cs.curvewrecker.MainActivity.this, msg.getData().getString("msg"),
                                 Toast.LENGTH_SHORT).show();
                         break;
 
@@ -381,6 +405,88 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
+    public void getMethod(final String params)
+    {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    http_url = new URL(url2);
+                    if (http_url != null) {
+                        HttpURLConnection conn = (HttpURLConnection) http_url.openConnection();
+                        conn.setConnectTimeout(5 * 1000);
+                        conn.setRequestMethod("POST");
+                        conn.setDoInput(true);
+                        conn.setDoOutput(true);
+                        conn.setUseCaches(false);
+                        //String params = "uid=" + uid.getText().toString() + "&uname=" + uname.getText().toString()
+                        //+ "&gender=" + gender.getText().toString() + "&mark=" + mark + "";
+                        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                        conn.setRequestProperty("Content-Length", String.valueOf(params.getBytes().length));
+                        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+                        bw.write(params);
+                        bw.close();
+                        if (conn.getResponseCode() == 200) {
+                            InputStream is = conn.getInputStream();
+                            BufferedReader buf = new BufferedReader(new InputStreamReader(is));
+                            data = buf.readLine();
+                            buf.close();
+                            is.close();
+                            analyseTest(data);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    public void analyseTest (String data)
+    {
+        System.out.println(data);
+        try {
+            JSONObject json_data = new JSONObject(data);
+            Boolean state = json_data.getBoolean("success");
+            String msg = json_data.getString("msg");
+            //userId = msg;
+            //System.out.println(userId);
+            //Register successfully!
+            if(state)
+            {
+                result = msg;
+                result = result.substring(0, result.length() - 1);
+                Log.d("1!!!!",  result.substring(0,5));
+                getJason(result);
+                mySystem.getMyUser().setMyRank(new MyRank());
+                mySystem.getMyUser().getMyRank().addMyRankList(new MySubRank(Integer.parseInt(id1), name1, Integer.parseInt(mark1), 0));
+                mySystem.getMyUser().getMyRank().addMyRankList(new MySubRank(Integer.parseInt(id2), name2, Integer.parseInt(mark2), 1));
+                mySystem.getMyUser().getMyRank().addMyRankList(new MySubRank(Integer.parseInt(id3), name3, Integer.parseInt(mark3), 2));
+                mySystem.getMyUser().getMyRank().addMyRankList(new MySubRank(Integer.parseInt(id4), name4, Integer.parseInt(mark4), 3));
+                mySystem.getMyUser().getMyRank().addMyRankList(new MySubRank(Integer.parseInt(id5), name5, Integer.parseInt(mark5), 4));
+                mySystem.saveFile();
+                Message message = new Message();
+                message.what=1;
+                Bundle temp = new Bundle();
+                temp.putString("msg", msg);
+                message.setData(temp);
+                handler.sendMessage(message);
+            }
+            //Register not successfully!
+            else
+            {
+                Message message = new Message();
+                message.what=2;
+                Bundle temp = new Bundle();
+                temp.putString("msg",msg);
+                message.setData(temp);
+                handler.sendMessage(message);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void analyse (String data)
     {
         System.out.println(data);
@@ -413,5 +519,26 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void getJason(String result)
+    {
+        a = result.split("\\.");
+        id1 = a[0];
+        name1 = a[1];
+        mark1 = a[2];
+        id2 = a[3];
+        name2 = a[4];
+        mark2 = a[5];
+        id3 = a[6];
+        name3 = a[7];
+        mark3 = a[8];
+        id4 = a[9];
+        name4 = a[10];
+        mark4 = a[11];
+        id5 = a[12];
+        name5 = a[13];
+        mark5 = a[14];
+        //Log.d("Followers:", String.format("%s,%s,%s", a[0], a[1], a[2]));
     }
 }
