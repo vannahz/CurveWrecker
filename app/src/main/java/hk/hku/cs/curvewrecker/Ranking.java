@@ -1,6 +1,7 @@
 package hk.hku.cs.curvewrecker;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -10,18 +11,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import hk.hku.cs.curvewrecker.entities.MySubRank;
+import hk.hku.cs.curvewrecker.entities.MySystem;
+
 
 public class Ranking extends Activity {
 
     ListView lv_ranking;
+    MySystem mySystem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
+        //initial system;
+        Intent tempI = getIntent();
+        mySystem = (MySystem)tempI.getSerializableExtra("MySystem");
 
         lv_ranking = (ListView)findViewById(R.id.lv_ranking);
 
+
+
+        //update rank before here
         SimpleAdapter adapter = new SimpleAdapter(this,
                 getData(),
                 R.layout.item_ranking,
@@ -34,47 +45,25 @@ public class Ranking extends Activity {
     private List<Map<String,Object>> getData() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("rank", "1");
-        map.put("img", R.drawable.portrait);
-        map.put("username", "Angel");
-        map.put("time", "200min");
+        Map<String, Object> map;// = new HashMap<String, Object>();
 
-        list.add(map);
-
-        map = new HashMap<String, Object>();
-        map.put("rank", "2");
-        map.put("img", R.drawable.portrait);
-        map.put("username", "Tom");
-        map.put("time", "190min");
-
-        list.add(map);
-
-        map = new HashMap<String, Object>();
-        map.put("rank", "3");
-        map.put("img", R.drawable.portrait);
-        map.put("username", "Jane");
-        map.put("time", "170min");
-
-        list.add(map);
-
-        map = new HashMap<String, Object>();
-        map.put("rank", "4");
-        map.put("img", R.drawable.portrait);
-        map.put("username", "Kara");
-        map.put("time", "150min");
-
-        list.add(map);
-
-        map = new HashMap<String, Object>();
-        map.put("rank", "5");
-        map.put("img", R.drawable.portrait);
-        map.put("username", "Sara");
-        map.put("time", "130min");
-
-        list.add(map);
+        int rankV = 1;
+        for(MySubRank tempR: mySystem.getMyUser().getMyRank().getMySubRankList()){
+            map = new HashMap<String, Object>();
+            map.put("rank", rankV+"");
+            map.put("img", R.drawable.portrait);
+            map.put("username", tempR.getName());
+            map.put("time", tempR.getMark()+"");
+            list.add(map);
+            rankV++;
+        }
 
         return list;
+    }
+
+    private int getImageId(int index){
+
+        return 0;
     }
 
 

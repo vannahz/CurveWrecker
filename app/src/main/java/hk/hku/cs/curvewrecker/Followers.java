@@ -60,6 +60,8 @@ public class Followers extends AppCompatActivity{
     public String name = "";
     public String mark = "";
 
+    List<Map<String, Object>> list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,8 +81,9 @@ public class Followers extends AppCompatActivity{
 
         lv_follower = (ListView)findViewById(R.id.lv_followers);
 
+        getData();
         adapter = new SimpleAdapter(this,
-                getData(),
+                list,
                 R.layout.item_followers,
                 new String[] {"value"},
                 new int[] { R.id.txt_item_followers_name });
@@ -88,6 +91,8 @@ public class Followers extends AppCompatActivity{
         search_btn.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 addFriends();
+                getData();
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -109,8 +114,9 @@ public class Followers extends AppCompatActivity{
         });
     }
 
-    private List<Map<String,Object>> getData() {
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+    private void getData() {
+       // List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        list = new ArrayList<Map<String, Object>>();
 
         Map<String, Object> map;
         for(MyFriend tempF: mySystem.getMyUser().getMyFriendsList())
@@ -120,7 +126,7 @@ public class Followers extends AppCompatActivity{
             list.add(map);
         }
 
-        return list;
+      //  return list;
     }
 
     public void addFriends()
@@ -235,5 +241,7 @@ public class Followers extends AppCompatActivity{
         id = a[0];
         name = a[1];
         mark = a[2];
+        Log.d("Followers:", String.format("%s,%s,%s", a[0],a[1],a[2]));
+
     }
 }
